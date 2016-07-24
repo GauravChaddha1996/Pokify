@@ -10,17 +10,20 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
 import com.pokemonify.pokemonify.fragments.MainFragment;
+import com.pokemonify.pokemonify.fragments.PokemonListFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     Toolbar toolbar;
     MaterialSearchView searchView;
     Fragment currentFragment;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,37 +58,44 @@ public class MainActivity extends AppCompatActivity
         searchView.setOnQueryTextListener(new MaterialSearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                //  search(query);
-                return false;
+                Log.d("Asjuad","query submit");
+                searchView.closeSearch();
+                return true;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                //  search(newText);
-                return false;
+                search(newText);
+                return true;
             }
         });
 
         searchView.setOnSearchViewListener(new MaterialSearchView.SearchViewListener() {
             @Override
             public void onSearchViewShown() {
-                //Do some magic
+                changeFrag(new PokemonListFragment());
             }
 
             @Override
             public void onSearchViewClosed() {
-             /*   f1 frag= (f1) currentFragment;
-                frag.updateList();*/
             }
         });
     }
 
-    public void changeFrag(Fragment fragment){
-        currentFragment=fragment;
-        FragmentManager fragmentManager=getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.mainFrameLayout,fragment);
+    public void search(String query) {
+        if(currentFragment instanceof PokemonListFragment){
+            PokemonListFragment pokemonListFragment= (PokemonListFragment) currentFragment;
+            pokemonListFragment.search(query);
+        }
+    }
+
+    public void changeFrag(Fragment fragment) {
+        currentFragment = fragment;
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.mainFrameLayout, fragment);
         fragmentTransaction.commitAllowingStateLoss();
+        supportInvalidateOptionsMenu();
     }
 
     @Override
@@ -93,17 +103,28 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
+        }
+        if (searchView.isSearchOpen()) {
+            searchView.closeSearch();
         } else {
-            super.onBackPressed();
+            if (!(currentFragment instanceof MainFragment)) {
+                changeFrag(new MainFragment());
+            } else {
+                super.onBackPressed();
+            }
         }
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
-        getMenuInflater().inflate(R.menu.main, menu);
-        MenuItem item = menu.findItem(R.id.action_search);
-        searchView.setMenuItem(item);
+        if (currentFragment instanceof MainFragment) {
+            getMenuInflater().inflate(R.menu.main, menu);
+            MenuItem item = menu.findItem(R.id.action_search);
+            searchView.setMenuItem(item);
+        } else {
+            getMenuInflater().inflate(R.menu.other, menu);
+        }
         return true;
     }
 

@@ -33,9 +33,9 @@ public class MainFragment extends Fragment {
     public void setMyPokemon() {
         int temp= Utils.getMyPokemon(getActivity());
         if(temp==-1) {
-            currentMyPokemon=new PokemonDto(0, "HAHAHAH", 50, "", "Mouse", 18, 3, 15);
+            currentMyPokemon=new PokemonDto(0, "Snorlax", 50, "", "Mouse", 18, 3, 15);
         }else {
-            currentMyPokemon= PokemonDatabase.getInstance().getPokemonViaId(temp);
+            currentMyPokemon= PokemonDatabase.getPokemonViaId(temp);
             if(currentMyPokemon==null){
                 currentMyPokemon=new PokemonDto(1, "Raichu", 50, "", "Mouse", 18, 3, 15);
             }

@@ -7,20 +7,41 @@
     <string name="action_settings">Settings</string>
 
     <string-array name="query_suggestions">
-        <item>Android</item>
-        <item>iOS</item>
-        <item>SCALA</item>
-        <item>Ruby</item>
-        <item>JavaScript</item>
-        <item>And</item>
-        <item>And2</item>
-        <item>And3</item>
-        <item>india</item>
-        <item>scale</item>
-        <item>java</item>
-        <item>javaS</item>
-        <item>javaScr</item>
-        <item>Random</item>
-        <item>Rubyyy</item>
+        <item>Pikachu</item>
+        <item>Onix</item>
+        <item>ratata</item>
+        <item>bulbasaur</item>
+        <item>squirtle</item>
+        <item>charmandir</item>
+        <item>charlizard</item>
+        <item>eevee</item>
+        <item>snorlax</item>
+        <item>Tanmay</item>
     </string-array>
+
+    <string-array name="pokemon_name">
+        <item>Pikachu</item>
+        <item>Onix</item>
+        <item>ratata</item>
+        <item>bulbasaur</item>
+        <item>squirtle</item>
+        <item>charmandir</item>
+        <item>charlizard</item>
+        <item>eevee</item>
+        <item>snorlax</item>
+        <item>Tanmay</item>
+    </string-array>
+
+    <integer-array name="pokemon_id">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+    </integer-array>
 </resources>

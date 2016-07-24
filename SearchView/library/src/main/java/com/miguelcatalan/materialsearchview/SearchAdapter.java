@@ -55,12 +55,18 @@ public class SearchAdapter extends BaseAdapter implements Filterable {
                     List<String> searchData = new ArrayList<>();
 
                     for (String string : suggestions) {
-                        if (string.toLowerCase().startsWith(constraint.toString().toLowerCase())) {
+                        if (string.toLowerCase().contains(constraint.toString().toLowerCase())) {
                             Log.d("Search",string);
                             searchData.add(string);
                         }
                     }
-
+                    if(searchData.size()>3){
+                        List<String> list=new ArrayList<>();
+                        list.add(searchData.get(0));
+                        list.add(searchData.get(1));
+                        list.add(searchData.get(2));
+                        searchData=list;
+                    }
                     // Assign the data to the FilterResults
                     filterResults.values = searchData;
                     filterResults.count = searchData.size();
