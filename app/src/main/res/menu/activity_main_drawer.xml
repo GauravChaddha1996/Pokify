@@ -6,6 +6,10 @@
             android:id="@+id/nav_home"
             android:checkable="false"
             android:title="Home"/>
+         <item
+            android:id="@+id/nav_poke_list"
+            android:checkable="false"
+            android:title="All Pokemons"/>
         <item
             android:id="@+id/nav_change_my_pokemon"
             android:checkable="false"

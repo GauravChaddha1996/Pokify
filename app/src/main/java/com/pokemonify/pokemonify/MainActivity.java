@@ -159,7 +159,13 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_home) {
-            // Handle the camera action
+            if(!(currentFragment instanceof MainFragment)) {
+                changeFrag(new MainFragment());
+            }
+        } else if (id == R.id.nav_poke_list) {
+            if(!(currentFragment instanceof PokemonListFragment)) {
+                changeFrag(new PokemonListFragment());
+            }
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
