@@ -13,7 +13,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/searchedItem"
-            android:text="Pokemon_name"
+            android:text=""
             android:textSize="25sp"
             android:layout_gravity="center_horizontal"/>
         <android.support.v7.widget.RecyclerView

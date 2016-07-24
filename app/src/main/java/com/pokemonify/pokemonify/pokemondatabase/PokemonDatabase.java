@@ -17,16 +17,9 @@ public class PokemonDatabase {
         sPokemonIds=context.getResources().getIntArray(R.array.pokemon_id);
         sPokemonName=context.getResources().getStringArray(R.array.pokemon_name);
 
-        sPokemonDtos[0] = new PokemonDto(sPokemonIds[0], sPokemonName[0], 50, "", "Mouse", 18, 3, 15);
-        sPokemonDtos[1] = new PokemonDto(sPokemonIds[1], sPokemonName[1], 13, "", "Snake", 20, 3, 15);
-        sPokemonDtos[2] = new PokemonDto(sPokemonIds[2], sPokemonName[2], 10, "", "Mouse", 18, 3, 15);
-        sPokemonDtos[3] = new PokemonDto(sPokemonIds[3], sPokemonName[3], 50, "", "Mouse", 18, 3, 15);
-        sPokemonDtos[4] = new PokemonDto(sPokemonIds[4], sPokemonName[4], 50, "", "Mouse", 18, 3, 15);
-        sPokemonDtos[5] = new PokemonDto(sPokemonIds[5], sPokemonName[5], 50, "", "Mouse", 18, 3, 15);
-        sPokemonDtos[6] = new PokemonDto(sPokemonIds[6], sPokemonName[6], 50, "", "Mouse", 18, 3, 15);
-        sPokemonDtos[7] = new PokemonDto(sPokemonIds[7], sPokemonName[7], 50, "", "Mouse", 18, 3, 15);
-        sPokemonDtos[8] = new PokemonDto(sPokemonIds[8], sPokemonName[8], 50, "", "Mouse", 18, 3, 15);
-        sPokemonDtos[9] = new PokemonDto(sPokemonIds[9], sPokemonName[9], 50, "", "Mouse", 18, 3, 15);
+        for(int i=0;i<10;i++) {
+            sPokemonDtos[i]=new PokemonDto(sPokemonIds[i],sPokemonName[i],50,"","mouse",10,10,120);
+        }
     }
 
     public static PokemonDatabase newInstance(Context context){

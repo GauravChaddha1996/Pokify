@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity
     Toolbar toolbar;
     MaterialSearchView searchView;
     Fragment currentFragment;
+    boolean submitFlag=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,21 +52,25 @@ public class MainActivity extends AppCompatActivity
         navigationView.setItemTextAppearance(android.R.style.TextAppearance_DeviceDefault_Large);
         navigationView.setNavigationItemSelectedListener(this);
     }
-
     public void setSearch() {
+
         searchView = (MaterialSearchView) findViewById(R.id.search_view);
         searchView.setSuggestions(getResources().getStringArray(R.array.query_suggestions));
         searchView.setOnQueryTextListener(new MaterialSearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                Log.d("Asjuad","query submit");
-                searchView.closeSearch();
-                return true;
+                submitFlag=true;
+                return false;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                search(newText);
+                if(submitFlag){
+                    submitFlag=!submitFlag;
+                }else{
+                    Log.d("abad","onTextQueryChanged");
+                    search(newText);
+                }
                 return true;
             }
         });
@@ -73,7 +78,11 @@ public class MainActivity extends AppCompatActivity
         searchView.setOnSearchViewListener(new MaterialSearchView.SearchViewListener() {
             @Override
             public void onSearchViewShown() {
-                changeFrag(new PokemonListFragment());
+                if(!(currentFragment instanceof PokemonListFragment)){
+                    changeFrag(new PokemonListFragment());
+                }else{
+                    supportInvalidateOptionsMenu();
+                }
             }
 
             @Override
@@ -120,11 +129,11 @@ public class MainActivity extends AppCompatActivity
 
         if (currentFragment instanceof MainFragment) {
             getMenuInflater().inflate(R.menu.main, menu);
-            MenuItem item = menu.findItem(R.id.action_search);
-            searchView.setMenuItem(item);
         } else {
             getMenuInflater().inflate(R.menu.other, menu);
         }
+        MenuItem item = menu.findItem(R.id.action_search);
+        searchView.setMenuItem(item);
         return true;
     }
 

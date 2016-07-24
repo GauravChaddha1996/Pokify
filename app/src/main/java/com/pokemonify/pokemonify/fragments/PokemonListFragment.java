@@ -4,9 +4,11 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.pokemonify.pokemonify.R;
 import com.pokemonify.pokemonify.adapters.PokemonListAdapter;
@@ -20,6 +22,7 @@ public class PokemonListFragment extends Fragment {
     PokemonListAdapter mPokemonListAdapter;
     RecyclerView mRecyclerView;
     List<String> list;
+    TextView mSeachedText;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -30,6 +33,7 @@ public class PokemonListFragment extends Fragment {
     }
 
     private void initViews(View v) {
+        mSeachedText= (TextView) v.findViewById(R.id.searchedItem);
         mRecyclerView = (RecyclerView) v.findViewById(R.id.searchPokemonRecyclerView);
         mPokemonListAdapter = new PokemonListAdapter(getActivity(),list);
         mRecyclerView.setAdapter(mPokemonListAdapter);
@@ -37,18 +41,19 @@ public class PokemonListFragment extends Fragment {
     }
 
     public void search(String query) {
-
+        mSeachedText.setText(query);
         List<String> newlist=new ArrayList<>();
         for(String s:list) {
             if(s.toLowerCase().contains(query.toLowerCase())){
+                Log.d("asjhas",s);
                 newlist.add(s);
             }
         }
-        list=newlist;
-        mPokemonListAdapter.setList(list);
+        mPokemonListAdapter.setList(newlist);
         mPokemonListAdapter.notifyDataSetChanged();
     }
 
-
-
+    public PokemonListAdapter getPokemonListAdapter() {
+        return mPokemonListAdapter;
+    }
 }
