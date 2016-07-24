@@ -12,6 +12,8 @@ import android.widget.TextView;
 
 import com.pokemonify.pokemonify.R;
 import com.pokemonify.pokemonify.adapters.PokemonListAdapter;
+import com.pokemonify.pokemonify.pokemondatabase.PokemonDatabase;
+import com.pokemonify.pokemonify.pokemondatabase.PokemonDto;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -21,12 +23,12 @@ import java.util.List;
 public class PokemonListFragment extends Fragment {
     PokemonListAdapter mPokemonListAdapter;
     RecyclerView mRecyclerView;
-    List<String> list;
+    List<PokemonDto> list;
     TextView mSeachedText;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        list= Arrays.asList(getResources().getStringArray(R.array.pokemon_name));
+        list= Arrays.asList(PokemonDatabase.getPokemonDtos());
         View view = inflater.inflate(R.layout.fragment_pokemon_list, container, false);
         initViews(view);
         return view;
@@ -42,14 +44,14 @@ public class PokemonListFragment extends Fragment {
 
     public void search(String query) {
         mSeachedText.setText(query);
-        List<String> newlist=new ArrayList<>();
-        for(String s:list) {
-            if(s.toLowerCase().contains(query.toLowerCase())){
-                Log.d("asjhas",s);
-                newlist.add(s);
+        List<PokemonDto> newlist=new ArrayList<>();
+        for(PokemonDto p:list) {
+            if(p.getName().toLowerCase().contains(query.toLowerCase())){
+                Log.d("asjhas",p.getName());
+                newlist.add(p);
             }
         }
-        mPokemonListAdapter.setList(newlist);
+        mPokemonListAdapter.setPokeList(newlist);
         mPokemonListAdapter.notifyDataSetChanged();
     }
 
