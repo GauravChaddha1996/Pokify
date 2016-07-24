@@ -364,12 +364,7 @@ public class MaterialSearchView extends FrameLayout implements Filter.FilterList
      * Call this method to show suggestions list. This shows up when adapter is set. Call {@link #setAdapter(ListAdapter)} before calling this.
      */
     public void showSuggestions() {
-        for(int i=0;i<mAdapter.getCount();i++) {
-            Log.d("tag",mAdapter.getItem(i).toString());
-        }
         if (mAdapter != null && mAdapter.getCount() > 0 && mSuggestionsListView.getVisibility() == GONE) {
-            mSuggestionsListView.setAdapter(null);
-            mSuggestionsListView.setAdapter(mAdapter);
             mSuggestionsListView.setVisibility(VISIBLE);
         }
     }

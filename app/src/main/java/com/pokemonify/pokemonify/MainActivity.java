@@ -2,6 +2,9 @@ package com.pokemonify.pokemonify;
 
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -11,12 +14,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
+import com.pokemonify.pokemonify.fragments.MainFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     Toolbar toolbar;
     MaterialSearchView searchView;
-
+    Fragment currentFragment;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,6 +29,7 @@ public class MainActivity extends AppCompatActivity
         setToolbar();
         setNavigationView();
         setSearch();
+        changeFrag(new MainFragment());
     }
 
     private void setToolbar() {
@@ -72,6 +77,14 @@ public class MainActivity extends AppCompatActivity
                 frag.updateList();*/
             }
         });
+    }
+
+    public void changeFrag(Fragment fragment){
+        currentFragment=fragment;
+        FragmentManager fragmentManager=getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.mainFrameLayout,fragment);
+        fragmentTransaction.commitAllowingStateLoss();
     }
 
     @Override
