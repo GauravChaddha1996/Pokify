@@ -33,7 +33,12 @@ public class MainActivity extends AppCompatActivity
         setToolbar();
         setNavigationView();
         setSearch();
-        changeFrag(new MainFragment());
+        currentFragment = new MainFragment();
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.mainFrameLayout, currentFragment);
+        fragmentTransaction.commitAllowingStateLoss();
+        supportInvalidateOptionsMenu();
     }
 
     private void setToolbar() {
@@ -102,6 +107,7 @@ public class MainActivity extends AppCompatActivity
         currentFragment = fragment;
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.setCustomAnimations(R.anim.slide_right_in,R.anim.slide_left_out);
         fragmentTransaction.replace(R.id.mainFrameLayout, fragment);
         fragmentTransaction.commitAllowingStateLoss();
         supportInvalidateOptionsMenu();
