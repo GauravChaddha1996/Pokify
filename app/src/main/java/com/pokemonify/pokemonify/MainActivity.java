@@ -1,6 +1,7 @@
 package com.pokemonify.pokemonify;
 
 import android.os.Bundle;
+import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -24,7 +25,7 @@ public class MainActivity extends AppCompatActivity
     MaterialSearchView searchView;
     Fragment currentFragment;
     boolean submitFlag=false;
-
+    AppBarLayout mAppBarLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -105,6 +106,10 @@ public class MainActivity extends AppCompatActivity
 
     public void changeFrag(Fragment fragment) {
         currentFragment = fragment;
+        if(currentFragment instanceof MainFragment) {
+            mAppBarLayout= (AppBarLayout) findViewById(R.id.appbarlayout);
+            mAppBarLayout.setExpanded(true);
+        }
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.setCustomAnimations(R.anim.slide_right_in,R.anim.slide_left_out);
