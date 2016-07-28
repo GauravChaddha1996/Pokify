@@ -26,15 +26,16 @@ public class MainFragment extends Fragment {
     ImageView mMyPokemonImage;
 
     PokemonDto currentMyPokemon;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view=inflater.inflate(R.layout.fragment_main, container, false);
+        View view = inflater.inflate(R.layout.fragment_main, container, false);
         initViews(view);
         return view;
     }
 
-    private void initViews(View v){
+    private void initViews(View v) {
         mMyPokemonName = (TextView) v.findViewById(R.id.myPokemonName);
         mMyPokemonHp = (TextView) v.findViewById(R.id.myPokemonHp);
         mMyPokemonType = (TextView) v.findViewById(R.id.myPokemonType);
@@ -44,26 +45,26 @@ public class MainFragment extends Fragment {
         mMyPokemonImage = (ImageView) v.findViewById(R.id.myPokemonImage);
         setMyPokemon();
         mMyPokemonName.setText(currentMyPokemon.getName());
-        mMyPokemonHp.setText(currentMyPokemon.getHp()+"Hp");
+        mMyPokemonHp.setText(currentMyPokemon.getHp() + "Hp");
         mMyPokemonType.setText(currentMyPokemon.getType());
-        mMyPokemonLevel.setText("Lvl "+currentMyPokemon.getLevel());
-        mMyPokemonWeight.setText(currentMyPokemon.getWeight()+"lbs");
-        mMyPokemonHeight.setText(currentMyPokemon.getHeight()+"cm");
-        Bitmap bitmap = BitmapFactory.decodeResource(getResources(),getResources()
-                .getIdentifier(currentMyPokemon.getImagePath(), "drawable",getActivity().getPackageName()));
+        mMyPokemonLevel.setText("Lvl " + currentMyPokemon.getLevel());
+        mMyPokemonWeight.setText(currentMyPokemon.getWeight() + "lbs");
+        mMyPokemonHeight.setText(currentMyPokemon.getHeight() + "cm");
+        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), getResources()
+                .getIdentifier(currentMyPokemon.getImagePath(), "drawable", getActivity().getPackageName()));
         mMyPokemonImage.setImageBitmap(bitmap);
     }
 
     public void setMyPokemon() {
-        int temp= Utils.getMyPokemon(getActivity());
-        if(temp==-1) {
-            currentMyPokemon=new PokemonDto(0, "Snorlax", 50,"", "Mouse","", 18, 3, 15);
-        }else {
-            currentMyPokemon= PokemonDatabase.getPokemonViaId(temp);
-            if(currentMyPokemon==null){
-                currentMyPokemon=new PokemonDto(1, "Raichu", 50, "", "Mouse","", 18, 3, 15);
+        int temp = Utils.getMyPokemon(getActivity());
+        if (temp == -1) {
+            currentMyPokemon = new PokemonDto(0, "Snorlax", 50, "", "Mouse", "", 18, 3, 15);
+        } else {
+            currentMyPokemon = PokemonDatabase.getPokemonViaId(temp);
+            if (currentMyPokemon == null) {
+                currentMyPokemon = new PokemonDto(1, "Raichu", 50, "", "Mouse", "", 18, 3, 15);
             }
         }
-        Utils.setMyPokemon(currentMyPokemon,getActivity());
+        Utils.setMyPokemon(currentMyPokemon, getActivity());
     }
 }

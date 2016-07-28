@@ -12,14 +12,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.pokemonify.pokemonify.ItemClickSupport;
 import com.pokemonify.pokemonify.MainActivity;
-import com.pokemonify.pokemonify.PokemonDetailFragment;
 import com.pokemonify.pokemonify.R;
 import com.pokemonify.pokemonify.Utils;
-import com.pokemonify.pokemonify.adapters.PokemonListAdapter;
 import com.pokemonify.pokemonify.pokemondatabase.PokemonDatabase;
 import com.pokemonify.pokemonify.pokemondatabase.PokemonDto;
+import com.pokemonify.pokemonify.recyclerviewcomponents.ItemClickSupport;
+import com.pokemonify.pokemonify.recyclerviewcomponents.PokemonListAdapter;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -31,28 +30,29 @@ public class PokemonListFragment extends Fragment {
     RecyclerView mRecyclerView;
     List<PokemonDto> list;
     TextView mSeachedText;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        list= Arrays.asList(PokemonDatabase.getPokemonDtos());
+        list = Arrays.asList(PokemonDatabase.getPokemonDtos());
         View view = inflater.inflate(R.layout.fragment_pokemon_list, container, false);
         initViews(view);
         return view;
     }
 
     private void initViews(View v) {
-        mSeachedText= (TextView) v.findViewById(R.id.searchedItem);
+        mSeachedText = (TextView) v.findViewById(R.id.searchedItem);
         mRecyclerView = (RecyclerView) v.findViewById(R.id.searchPokemonRecyclerView);
-        mPokemonListAdapter = new PokemonListAdapter(getActivity(),list);
+        mPokemonListAdapter = new PokemonListAdapter(getActivity(), list);
         mRecyclerView.setAdapter(mPokemonListAdapter);
-        mRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL));
+        mRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
         ItemClickSupport.addTo(mRecyclerView).setOnItemLongClickListener(new ItemClickSupport.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClicked(RecyclerView recyclerView, final int position, View v) {
-                AlertDialog.Builder builder=new AlertDialog.Builder(getActivity());
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                 builder.setTitle("My Pokemon");
-                builder.setMessage("Set "+mPokemonListAdapter.getPokeList().get(position).getName()+
-                " as My pokemon?");
+                builder.setMessage("Set " + mPokemonListAdapter.getPokeList().get(position).getName() +
+                        " as My pokemon?");
                 builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
@@ -62,7 +62,7 @@ public class PokemonListFragment extends Fragment {
                 builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        Utils.setMyPokemon(mPokemonListAdapter.getPokeList().get(position),getActivity());
+                        Utils.setMyPokemon(mPokemonListAdapter.getPokeList().get(position), getActivity());
                     }
                 });
                 builder.show();
@@ -72,11 +72,11 @@ public class PokemonListFragment extends Fragment {
         ItemClickSupport.addTo(mRecyclerView).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
             @Override
             public void onItemClicked(RecyclerView recyclerView, int position, View v) {
-                PokemonDto clickedPokemon=mPokemonListAdapter.getPokeList().get(position);
-                MainActivity mainActivity= (MainActivity) getActivity();
-                Bundle bundle=new Bundle();
-                bundle.putSerializable("PokemonDto",clickedPokemon);
-                PokemonDetailFragment detailFragment=new PokemonDetailFragment();
+                PokemonDto clickedPokemon = mPokemonListAdapter.getPokeList().get(position);
+                MainActivity mainActivity = (MainActivity) getActivity();
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("PokemonDto", clickedPokemon);
+                PokemonDetailFragment detailFragment = new PokemonDetailFragment();
                 detailFragment.setArguments(bundle);
                 mainActivity.changeFrag(detailFragment);
             }
@@ -85,10 +85,10 @@ public class PokemonListFragment extends Fragment {
 
     public void search(String query) {
         mSeachedText.setText(query);
-        List<PokemonDto> newlist=new ArrayList<>();
-        for(PokemonDto p:list) {
-            if(p.getName().toLowerCase().contains(query.toLowerCase())){
-                Log.d("asjhas",p.getName());
+        List<PokemonDto> newlist = new ArrayList<>();
+        for (PokemonDto p : list) {
+            if (p.getName().toLowerCase().contains(query.toLowerCase())) {
+                Log.d("asjhas", p.getName());
                 newlist.add(p);
             }
         }

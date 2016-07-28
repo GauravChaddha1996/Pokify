@@ -22,8 +22,8 @@ public class PokemonDatabase {
         int[] sPokemonHeight = context.getResources().getIntArray(R.array.pokemon_height);
         int[] sPokemonLevel = context.getResources().getIntArray(R.array.pokemon_level);
         for (int i = 0; i < 10; i++) {
-            sPokemonDtos[i] = new PokemonDto(sPokemonIds[i], sPokemonName[i], sPokemonHp[i],sPokemonName[i],
-                    sPokemonType[i], sPokemonDesc[i],sPokemonWeight[i], sPokemonHeight[i], sPokemonLevel[i]);
+            sPokemonDtos[i] = new PokemonDto(sPokemonIds[i], sPokemonName[i], sPokemonHp[i], sPokemonName[i],
+                    sPokemonType[i], sPokemonDesc[i], sPokemonWeight[i], sPokemonHeight[i], sPokemonLevel[i]);
         }
     }
 

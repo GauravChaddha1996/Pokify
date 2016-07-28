@@ -1,7 +1,9 @@
-package com.pokemonify.pokemonify;
+package com.pokemonify.pokemonify.recyclerviewcomponents;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+
+import com.pokemonify.pokemonify.R;
 
 /**
  * Created by gaurav on 28/7/16.

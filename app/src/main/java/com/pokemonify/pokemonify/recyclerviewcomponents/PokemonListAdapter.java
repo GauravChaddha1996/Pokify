@@ -1,4 +1,4 @@
-package com.pokemonify.pokemonify.adapters;
+package com.pokemonify.pokemonify.recyclerviewcomponents;
 
 import android.content.Context;
 import android.graphics.Bitmap;

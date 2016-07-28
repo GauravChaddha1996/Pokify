@@ -24,8 +24,9 @@ public class MainActivity extends AppCompatActivity
     Toolbar toolbar;
     MaterialSearchView searchView;
     Fragment currentFragment;
-    boolean submitFlag=false;
+    boolean submitFlag = false;
     AppBarLayout mAppBarLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,6 +59,7 @@ public class MainActivity extends AppCompatActivity
         navigationView.setItemTextAppearance(android.R.style.TextAppearance_DeviceDefault_Large);
         navigationView.setNavigationItemSelectedListener(this);
     }
+
     public void setSearch() {
 
         searchView = (MaterialSearchView) findViewById(R.id.search_view);
@@ -65,16 +67,16 @@ public class MainActivity extends AppCompatActivity
         searchView.setOnQueryTextListener(new MaterialSearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                submitFlag=true;
+                submitFlag = true;
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                if(submitFlag){
-                    submitFlag=!submitFlag;
-                }else{
-                    Log.d("abad","onTextQueryChanged");
+                if (submitFlag) {
+                    submitFlag = !submitFlag;
+                } else {
+                    Log.d("abad", "onTextQueryChanged");
                     search(newText);
                 }
                 return true;
@@ -84,9 +86,9 @@ public class MainActivity extends AppCompatActivity
         searchView.setOnSearchViewListener(new MaterialSearchView.SearchViewListener() {
             @Override
             public void onSearchViewShown() {
-                if(!(currentFragment instanceof PokemonListFragment)){
+                if (!(currentFragment instanceof PokemonListFragment)) {
                     changeFrag(new PokemonListFragment());
-                }else{
+                } else {
                     supportInvalidateOptionsMenu();
                 }
             }
@@ -98,21 +100,21 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void search(String query) {
-        if(currentFragment instanceof PokemonListFragment){
-            PokemonListFragment pokemonListFragment= (PokemonListFragment) currentFragment;
+        if (currentFragment instanceof PokemonListFragment) {
+            PokemonListFragment pokemonListFragment = (PokemonListFragment) currentFragment;
             pokemonListFragment.search(query);
         }
     }
 
     public void changeFrag(Fragment fragment) {
         currentFragment = fragment;
-        if(currentFragment instanceof MainFragment) {
-            mAppBarLayout= (AppBarLayout) findViewById(R.id.appbarlayout);
+        if (currentFragment instanceof MainFragment) {
+            mAppBarLayout = (AppBarLayout) findViewById(R.id.appbarlayout);
             mAppBarLayout.setExpanded(true);
         }
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.setCustomAnimations(R.anim.slide_right_in,R.anim.slide_left_out);
+        fragmentTransaction.setCustomAnimations(R.anim.slide_right_in, R.anim.slide_left_out);
         fragmentTransaction.replace(R.id.mainFrameLayout, fragment);
         fragmentTransaction.commitAllowingStateLoss();
         supportInvalidateOptionsMenu();
@@ -170,11 +172,11 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_home) {
-            if(!(currentFragment instanceof MainFragment)) {
+            if (!(currentFragment instanceof MainFragment)) {
                 changeFrag(new MainFragment());
             }
         } else if (id == R.id.nav_poke_list) {
-            if(!(currentFragment instanceof PokemonListFragment)) {
+            if (!(currentFragment instanceof PokemonListFragment)) {
                 changeFrag(new PokemonListFragment());
             }
         }

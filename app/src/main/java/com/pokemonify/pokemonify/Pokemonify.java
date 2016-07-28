@@ -11,7 +11,7 @@ public class Pokemonify extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        PokemonDatabase database=PokemonDatabase.newInstance(getApplicationContext());
+        PokemonDatabase database = PokemonDatabase.newInstance(getApplicationContext());
     }
 
 }
