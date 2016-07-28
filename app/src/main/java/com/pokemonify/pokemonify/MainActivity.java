@@ -173,6 +173,14 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.action_share) {
             PokemonDetailFragment pokemonDetailFragment= (PokemonDetailFragment) currentFragment;
             pokemonDetailFragment.shareThisPokemon();
+        } else if (id == R.id.action_edit) {
+            PokemonDetailFragment pokemonDetailFragment= (PokemonDetailFragment) currentFragment;
+            if(pokemonDetailFragment.getEditing()){
+                item.setIcon(android.R.drawable.ic_menu_edit);
+            }else{
+                item.setIcon(android.R.drawable.ic_menu_camera);
+            }
+            pokemonDetailFragment.toggleShouldEdit();
         }
 
         return super.onOptionsItemSelected(item);

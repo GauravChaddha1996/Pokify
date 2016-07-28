@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.pokemonify.pokemonify.R;
+import com.pokemonify.pokemonify.UIComponents.MaterialDialogCreator;
 import com.pokemonify.pokemonify.Utils;
 import com.pokemonify.pokemonify.pokemondatabase.PokemonDto;
 
@@ -40,6 +41,7 @@ public class PokemonDetailFragment extends Fragment {
     ImageView pokemonImage;
     View detailScreen;
     Bitmap savedScreen;
+    MaterialDialogCreator materialDialogCreator;
 
     public PokemonDetailFragment() {
 
@@ -73,6 +75,47 @@ public class PokemonDetailFragment extends Fragment {
         getActivity().getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
         pokemonImage.getLayoutParams().height = (int) (displaymetrics.heightPixels * 0.50);
         setPokemonData();
+        setOnClick();
+    }
+
+    private void setOnClick() {
+        materialDialogCreator=new MaterialDialogCreator(getActivity(), new MaterialDialogCreator.OnClickCallBack() {
+            @Override
+            public void onPress(View v,String s) {
+                switch (v.getId()){
+                    case R.id.pokemon_name:
+                        pokemonName.setText(s);
+                        break;
+                    case R.id.pokemon_hp:
+                        pokemonHp.setText(s+" Hp");
+                        break;
+                    case R.id.pokemon_type:
+                        pokemonType.setText(s);
+                        break;
+                    case R.id.pokemon_weight:
+                        pokemonWeight.setText(s+" g");
+                        break;
+                    case R.id.pokemon_height:
+                        pokemonHeight.setText(s+" cm");
+                        break;
+                    case R.id.pokemon_desc:
+                        pokemonDesc.setText(s);
+                        break;
+                    case R.id.pokemon_level:
+                        pokemonLvl.setText(s+" Lvl");
+                        break;
+                }
+
+
+            }
+        });
+        pokemonName.setOnClickListener(materialDialogCreator);
+        pokemonHp.setOnClickListener(materialDialogCreator);
+        pokemonType.setOnClickListener(materialDialogCreator);
+        pokemonWeight.setOnClickListener(materialDialogCreator);
+        pokemonHeight.setOnClickListener(materialDialogCreator);
+        pokemonDesc.setOnClickListener(materialDialogCreator);
+        pokemonLvl.setOnClickListener(materialDialogCreator);
     }
 
     private void setPokemonData() {
@@ -108,6 +151,14 @@ public class PokemonDetailFragment extends Fragment {
         share.setType("image/jpeg");
         share.putExtra(Intent.EXTRA_STREAM, Uri.parse(f.getAbsolutePath()));
         startActivity(Intent.createChooser(share, "Share Pokemon"));
+    }
+
+    public void toggleShouldEdit() {
+        materialDialogCreator.setShouldEdit();
+    }
+
+    public Boolean getEditing() {
+        return materialDialogCreator.getShouldEdit();
     }
 
     public void setThisAsCurrentPokemon() {
