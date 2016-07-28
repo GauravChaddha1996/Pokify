@@ -1,7 +1,10 @@
 package com.pokemonify.pokemonify;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 
 import com.pokemonify.pokemonify.pokemondatabase.PokemonDto;
 
@@ -20,5 +23,9 @@ public class Utils {
         SharedPreferences sharedPreferences = context.getSharedPreferences("myPokemon", Context.MODE_PRIVATE);
         return sharedPreferences.getInt("myPokemonId", -1);
     }
-
+    public static void hideKeyboard(Activity activity) {
+        View view=activity.getCurrentFocus();
+        InputMethodManager methodManager= (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
+        methodManager.hideSoftInputFromWindow(view.getWindowToken(),0);
+    }
 }

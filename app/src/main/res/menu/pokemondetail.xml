@@ -2,11 +2,8 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
       xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/action_settings"
-        android:orderInCategory="100"
-        android:title="Share"
-        android:icon="@android:drawable/ic_menu_share"
-        app:showAsAction="ifRoom"/>
+        android:id="@+id/action_make_current_pokemon"
+        android:title="Make this my pokemon"/>
     <item
         android:id="@+id/action_search"
         android:icon="@android:drawable/ic_menu_search"

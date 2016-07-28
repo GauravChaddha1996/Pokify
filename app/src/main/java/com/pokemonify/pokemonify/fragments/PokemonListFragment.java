@@ -78,6 +78,8 @@ public class PokemonListFragment extends Fragment {
                 bundle.putSerializable("PokemonDto", clickedPokemon);
                 PokemonDetailFragment detailFragment = new PokemonDetailFragment();
                 detailFragment.setArguments(bundle);
+                Utils.hideKeyboard(mainActivity);
+                mainActivity.hideSearch();
                 mainActivity.changeFrag(detailFragment);
             }
         });

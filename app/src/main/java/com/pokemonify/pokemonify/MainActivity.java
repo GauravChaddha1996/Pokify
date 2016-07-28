@@ -17,6 +17,7 @@ import android.view.MenuItem;
 
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
 import com.pokemonify.pokemonify.fragments.MainFragment;
+import com.pokemonify.pokemonify.fragments.PokemonDetailFragment;
 import com.pokemonify.pokemonify.fragments.PokemonListFragment;
 
 public class MainActivity extends AppCompatActivity
@@ -106,6 +107,10 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
+    public void hideSearch() {
+        searchView.closeSearch();
+    }
+
     public void changeFrag(Fragment fragment) {
         currentFragment = fragment;
         if (currentFragment instanceof MainFragment) {
@@ -142,6 +147,8 @@ public class MainActivity extends AppCompatActivity
 
         if (currentFragment instanceof MainFragment) {
             getMenuInflater().inflate(R.menu.main, menu);
+        } else if (currentFragment instanceof PokemonDetailFragment) {
+            getMenuInflater().inflate(R.menu.pokemondetail, menu);
         } else {
             getMenuInflater().inflate(R.menu.other, menu);
         }
@@ -160,6 +167,9 @@ public class MainActivity extends AppCompatActivity
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
+        } else if (id == R.id.action_make_current_pokemon) {
+            PokemonDetailFragment pokemonDetailFragment= (PokemonDetailFragment) currentFragment;
+            pokemonDetailFragment.setThisAsCurrentPokemon();
         }
 
         return super.onOptionsItemSelected(item);

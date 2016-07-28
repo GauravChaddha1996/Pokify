@@ -4,6 +4,6 @@
     <item
         android:id="@+id/action_search"
         android:icon="@android:drawable/ic_menu_search"
-        android:title="Search Waste Items"
+        android:title="Search Items"
         app:showAsAction="ifRoom|collapseActionView"/>
 </menu>

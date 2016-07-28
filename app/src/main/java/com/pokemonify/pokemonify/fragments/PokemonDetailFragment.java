@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.pokemonify.pokemonify.R;
+import com.pokemonify.pokemonify.Utils;
 import com.pokemonify.pokemonify.pokemondatabase.PokemonDto;
 
 /**
@@ -74,5 +75,9 @@ public class PokemonDetailFragment extends Fragment {
         Bitmap bitmap = BitmapFactory.decodeResource(getResources(), getResources()
                 .getIdentifier(mPokemonDto.getImagePath(), "drawable", getActivity().getPackageName()));
         pokemonImage.setImageBitmap(bitmap);
+    }
+
+    public void setThisAsCurrentPokemon() {
+        Utils.setMyPokemon(mPokemonDto,getActivity());
     }
 }

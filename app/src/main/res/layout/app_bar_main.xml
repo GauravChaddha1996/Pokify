@@ -5,11 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
     tools:context="com.pokemonify.pokemonify.MainActivity">
-
-
-    <!--<include layout="@layout/content_main"/>-->
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appbarlayout"
@@ -20,8 +16,7 @@
 
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_scrollFlags="scroll|enterAlways">
+            android:layout_height="wrap_content">
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
@@ -40,18 +35,10 @@
     </android.support.design.widget.AppBarLayout>
 
     <FrameLayout
+        android:id="@+id/mainFrameLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="?attr/actionBarSize">
-
-        <FrameLayout
-            android:id="@+id/mainFrameLayout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
-
-    </FrameLayout>
-
+        android:layout_marginTop="?attr/actionBarSize"/>
 
 
 </android.support.design.widget.CoordinatorLayout>

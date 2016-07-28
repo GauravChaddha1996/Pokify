@@ -2,26 +2,40 @@
              xmlns:tools="http://schemas.android.com/tools"
              android:layout_width="match_parent"
              android:layout_height="match_parent"
+             xmlns:app="http://schemas.android.com/apk/res-auto"
              tools:context=".fragments.PokemonListFragment">
 
-    <LinearLayout
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/searchedItem"
-            android:text=""
-            android:textSize="25sp"
-            android:layout_gravity="center_horizontal"/>
-        <android.support.v7.widget.RecyclerView
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/searchPokemonRecyclerView"
-            />
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/searchedItem"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text=""
+                    android:visibility="gone"
+                    android:textSize="25sp"/>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/searchPokemonRecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+
+                    />
+            </LinearLayout>
+        </RelativeLayout>
+    </RelativeLayout>
 
 
-    </LinearLayout>
 </FrameLayout>
