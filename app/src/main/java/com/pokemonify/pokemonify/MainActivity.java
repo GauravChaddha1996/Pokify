@@ -165,11 +165,14 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_share_myPokemon) {
             return true;
         } else if (id == R.id.action_make_current_pokemon) {
             PokemonDetailFragment pokemonDetailFragment= (PokemonDetailFragment) currentFragment;
             pokemonDetailFragment.setThisAsCurrentPokemon();
+        } else if (id == R.id.action_share) {
+            PokemonDetailFragment pokemonDetailFragment= (PokemonDetailFragment) currentFragment;
+            pokemonDetailFragment.shareThisPokemon();
         }
 
         return super.onOptionsItemSelected(item);

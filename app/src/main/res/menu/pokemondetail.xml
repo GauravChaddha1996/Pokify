@@ -7,6 +7,11 @@
     <item
         android:id="@+id/action_search"
         android:icon="@android:drawable/ic_menu_search"
-        android:title="Search Items"
-        app:showAsAction="ifRoom|collapseActionView"/>
+        android:title="Search Items"/>
+    <item
+        android:id="@+id/action_share"
+        android:orderInCategory="100"
+        android:title="Share"
+        android:icon="@android:drawable/ic_menu_share"
+        app:showAsAction="ifRoom"/>
 </menu>
