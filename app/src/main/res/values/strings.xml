@@ -7,6 +7,14 @@
     <string name="action_settings">Settings</string>
 
     <string-array name="query_suggestions">
+        <item>happy</item>
+        <item>angry</item>
+        <item>strong</item>
+        <item>cute</item>
+        <item>calm</item>
+        <item>lazy</item>
+        <item>fat</item>
+        <item>long</item>
         <item>Pikachu</item>
         <item>Onix</item>
         <item>ratata</item>
@@ -17,6 +25,16 @@
         <item>eevee</item>
         <item>snorlax</item>
         <item>gaurav</item>
+    </string-array>
+    <string-array name="adjectives">
+        <item>happy</item>
+        <item>angry</item>
+        <item>strong</item>
+        <item>cute</item>
+        <item>calm</item>
+        <item>lazy</item>
+        <item>fat</item>
+        <item>long</item>
     </string-array>
 
     <string-array name="pokemon_name">
@@ -31,7 +49,18 @@
         <item>snorlax</item>
         <item>gaurav</item>
     </string-array>
-
+    <string-array name="pokemon_adjectives">
+        <item>happy,cute</item>
+        <item>angry,strong,long</item>
+        <item>angry</item>
+        <item>strong</item>
+        <item>calm</item>
+        <item>strong</item>
+        <item>strong</item>
+        <item>cute</item>
+        <item>lazy,fat</item>
+        <item>lazy,fat</item>
+    </string-array>
     <integer-array name="pokemon_id">
         <item>0</item>
         <item>1</item>

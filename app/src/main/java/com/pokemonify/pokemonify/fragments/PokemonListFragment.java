@@ -22,19 +22,23 @@ import com.pokemonify.pokemonify.recyclerviewcomponents.PokemonListAdapter;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 
 public class PokemonListFragment extends Fragment {
     PokemonListAdapter mPokemonListAdapter;
     RecyclerView mRecyclerView;
-    List<PokemonDto> list;
+    List<PokemonDto> nameList;
+    String[] adjectiveList;
     TextView mSeachedText;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        list = Arrays.asList(PokemonDatabase.getPokemonDtos());
+        nameList = Arrays.asList(PokemonDatabase.getPokemonDtos());
+        adjectiveList = getResources().getStringArray(R.array.adjectives);
         View view = inflater.inflate(R.layout.fragment_pokemon_list, container, false);
         initViews(view);
         return view;
@@ -43,7 +47,7 @@ public class PokemonListFragment extends Fragment {
     private void initViews(View v) {
         mSeachedText = (TextView) v.findViewById(R.id.searchedItem);
         mRecyclerView = (RecyclerView) v.findViewById(R.id.searchPokemonRecyclerView);
-        mPokemonListAdapter = new PokemonListAdapter(getActivity(), list);
+        mPokemonListAdapter = new PokemonListAdapter(getActivity(), nameList);
         mRecyclerView.setAdapter(mPokemonListAdapter);
         mRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
         ItemClickSupport.addTo(mRecyclerView).setOnItemLongClickListener(new ItemClickSupport.OnItemLongClickListener() {
@@ -87,14 +91,24 @@ public class PokemonListFragment extends Fragment {
 
     public void search(String query) {
         mSeachedText.setText(query);
-        List<PokemonDto> newlist = new ArrayList<>();
-        for (PokemonDto p : list) {
-            if (p.getName().toLowerCase().contains(query.toLowerCase())) {
-                Log.d("asjhas", p.getName());
-                newlist.add(p);
+        Set<PokemonDto> newSet = new HashSet<>();
+        String[] strings = query.toString().split(",");
+        for(String s:strings){
+            for (PokemonDto p : nameList) {
+                if (p.getName().toLowerCase().contains(s.toLowerCase())) {
+                    Log.d("asjhas", p.getName());
+                    newSet.add(p);
+                }
+            }
+            for(String tmp:adjectiveList) {
+                if(tmp.equals(s)) {
+                    for(PokemonDto p:PokemonDatabase.getPokemonViaAdjective(s)){
+                        newSet.add(p);
+                    }
+                }
             }
         }
-        mPokemonListAdapter.setPokeList(newlist);
+        mPokemonListAdapter.setPokeList(new ArrayList<PokemonDto>(newSet));
         mPokemonListAdapter.notifyDataSetChanged();
     }
 

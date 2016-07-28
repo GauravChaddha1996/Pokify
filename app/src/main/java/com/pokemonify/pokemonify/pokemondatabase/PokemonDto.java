@@ -12,6 +12,7 @@ public class PokemonDto implements Serializable {
     private String imagePath;
     private String type;
     private String desc;
+    private String adjectives;
     private int weight;
     private int height;
     private int level;
@@ -19,13 +20,14 @@ public class PokemonDto implements Serializable {
     public PokemonDto() {
     }
 
-    public PokemonDto(int id, String name, int hp, String imagePath, String type, String desc, int weight, int height, int level) {
+    public PokemonDto(int id, String name, int hp, String imagePath, String type, String desc, String adjectives, int weight, int height, int level) {
         this.id = id;
         this.name = name;
         this.hp = hp;
         this.imagePath = imagePath;
         this.type = type;
         this.desc = desc;
+        this.adjectives = adjectives;
         this.weight = weight;
         this.height = height;
         this.level = level;
@@ -77,6 +79,14 @@ public class PokemonDto implements Serializable {
 
     public void setDesc(String desc) {
         this.desc = desc;
+    }
+
+    public String getAdjectives() {
+        return adjectives;
+    }
+
+    public void setAdjectives(String adjectives) {
+        this.adjectives = adjectives;
     }
 
     public int getWeight() {

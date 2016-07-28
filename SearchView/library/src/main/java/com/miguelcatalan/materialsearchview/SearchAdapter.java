@@ -50,14 +50,15 @@ public class SearchAdapter extends BaseAdapter implements Filterable {
             protected FilterResults performFiltering(CharSequence constraint) {
                 FilterResults filterResults = new FilterResults();
                 if (!TextUtils.isEmpty(constraint)) {
-
-                    // Retrieve the autocomplete results.
+                    Log.d("typed searched", constraint.toString());
                     List<String> searchData = new ArrayList<>();
-
-                    for (String string : suggestions) {
-                        if (string.toLowerCase().contains(constraint.toString().toLowerCase())) {
-                            Log.d("Search",string);
-                            searchData.add(string);
+                    String[] strings = constraint.toString().split(",");
+                    if (strings.length != 0) {
+                        for (String string : suggestions) {
+                            if (string.toLowerCase().contains(strings[strings.length-1].toLowerCase())) {
+                                Log.d("ashbad",string);
+                                searchData.add(string);
+                            }
                         }
                     }
                     if(searchData.size()>3){

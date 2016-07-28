@@ -4,6 +4,9 @@ import android.content.Context;
 
 import com.pokemonify.pokemonify.R;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by gaurav on 24/7/16.
  */
@@ -17,13 +20,14 @@ public class PokemonDatabase {
         String[] sPokemonName = context.getResources().getStringArray(R.array.pokemon_name);
         String[] sPokemonType = context.getResources().getStringArray(R.array.pokemon_type);
         String[] sPokemonDesc = context.getResources().getStringArray(R.array.pokemon_desc);
+        String[] sPokemonAdjectives = context.getResources().getStringArray(R.array.pokemon_adjectives);
         int[] sPokemonHp = context.getResources().getIntArray(R.array.pokemon_hp);
         int[] sPokemonWeight = context.getResources().getIntArray(R.array.pokemon_weight);
         int[] sPokemonHeight = context.getResources().getIntArray(R.array.pokemon_height);
         int[] sPokemonLevel = context.getResources().getIntArray(R.array.pokemon_level);
         for (int i = 0; i < 10; i++) {
             sPokemonDtos[i] = new PokemonDto(sPokemonIds[i], sPokemonName[i], sPokemonHp[i], sPokemonName[i],
-                    sPokemonType[i], sPokemonDesc[i], sPokemonWeight[i], sPokemonHeight[i], sPokemonLevel[i]);
+                    sPokemonType[i], sPokemonDesc[i], sPokemonAdjectives[i], sPokemonWeight[i], sPokemonHeight[i], sPokemonLevel[i]);
         }
     }
 
@@ -42,5 +46,19 @@ public class PokemonDatabase {
             }
         }
         return null;
+    }
+
+    public static List<PokemonDto> getPokemonViaAdjective(String s) {
+        List<PokemonDto> pokemonDtoList=new ArrayList<>();
+        String[] arr;
+        for(PokemonDto p: sPokemonDtos) {
+            arr=p.getAdjectives().split(",");
+            for(String tmp:arr) {
+                if(tmp.equals(s)) {
+                    pokemonDtoList.add(p);
+                }
+            }
+        }
+        return pokemonDtoList;
     }
 }
