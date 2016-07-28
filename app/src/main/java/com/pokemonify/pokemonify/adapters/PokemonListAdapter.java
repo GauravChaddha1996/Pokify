@@ -63,8 +63,8 @@ public class PokemonListAdapter extends RecyclerView.Adapter<PokemonListAdapter.
 
         public MyViewHolder(View itemView) {
             super(itemView);
-            name = (TextView) itemView.findViewById(R.id.pokemon_name);
-            image = (ImageView) itemView.findViewById(R.id.pokemon_image);
+            name = (TextView) itemView.findViewById(R.id.pokemonItemName);
+            image = (ImageView) itemView.findViewById(R.id.pokemonItemImage);
         }
     }
 }

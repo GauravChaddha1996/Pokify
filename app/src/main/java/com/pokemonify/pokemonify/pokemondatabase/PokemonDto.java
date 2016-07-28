@@ -1,14 +1,17 @@
 package com.pokemonify.pokemonify.pokemondatabase;
 
+import java.io.Serializable;
+
 /**
  * Created by gaurav on 24/7/16.
  */
-public class PokemonDto {
+public class PokemonDto implements Serializable {
     private int id;
     private String name;
     private int hp;
     private String imagePath;
     private String type;
+    private String desc;
     private int weight;
     private int height;
     private int level;
@@ -16,12 +19,13 @@ public class PokemonDto {
     public PokemonDto() {
     }
 
-    public PokemonDto(int id, String name, int hp, String imagePath, String type, int weight, int height, int level) {
+    public PokemonDto(int id, String name, int hp, String imagePath, String type, String desc, int weight, int height, int level) {
         this.id = id;
         this.name = name;
         this.hp = hp;
         this.imagePath = imagePath;
         this.type = type;
+        this.desc = desc;
         this.weight = weight;
         this.height = height;
         this.level = level;
@@ -65,6 +69,14 @@ public class PokemonDto {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public String getDesc() {
+        return desc;
+    }
+
+    public void setDesc(String desc) {
+        this.desc = desc;
     }
 
     public int getWeight() {

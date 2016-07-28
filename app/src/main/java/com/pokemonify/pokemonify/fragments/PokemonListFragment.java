@@ -13,6 +13,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.pokemonify.pokemonify.ItemClickSupport;
+import com.pokemonify.pokemonify.MainActivity;
+import com.pokemonify.pokemonify.PokemonDetailFragment;
 import com.pokemonify.pokemonify.R;
 import com.pokemonify.pokemonify.Utils;
 import com.pokemonify.pokemonify.adapters.PokemonListAdapter;
@@ -65,6 +67,18 @@ public class PokemonListFragment extends Fragment {
                 });
                 builder.show();
                 return true;
+            }
+        });
+        ItemClickSupport.addTo(mRecyclerView).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
+            @Override
+            public void onItemClicked(RecyclerView recyclerView, int position, View v) {
+                PokemonDto clickedPokemon=mPokemonListAdapter.getPokeList().get(position);
+                MainActivity mainActivity= (MainActivity) getActivity();
+                Bundle bundle=new Bundle();
+                bundle.putSerializable("PokemonDto",clickedPokemon);
+                PokemonDetailFragment detailFragment=new PokemonDetailFragment();
+                detailFragment.setArguments(bundle);
+                mainActivity.changeFrag(detailFragment);
             }
         });
     }

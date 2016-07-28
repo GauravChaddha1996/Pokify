@@ -18,18 +18,18 @@
             android:layout_height="match_parent">
 
             <ImageView
-                android:id="@+id/pokemon_image"
+                android:id="@+id/pokemonItemImage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:src="@drawable/background"/>
 
             <TextView
-                android:id="@+id/pokemon_name"
+                android:id="@+id/pokemonItemName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:layout_below="@+id/pokemon_image"
+                android:layout_below="@+id/pokemonItemImage"
                 android:ellipsize="end"
                 android:maxLines="1"
                 android:padding="8dp"

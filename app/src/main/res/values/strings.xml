@@ -68,6 +68,18 @@
         <item>Dog</item>
         <item>Human</item>
     </string-array>
+    <string-array name="pokemon_desc">
+        <item>It is a famous pokemon</item>
+        <item>This one is very long and angry</item>
+        <item>The angriest mouse on this planet</item>
+        <item>The number 1 guy</item>
+        <item>This is a cute pokemon</item>
+        <item>Considered a legendary guy</item>
+        <item>Is mix of fire and cuteness</item>
+        <item>She is silent and deadly</item>
+        <item>He is just so lazy</item>
+        <item>He is a good guy too</item>
+    </string-array>
     <integer-array name="pokemon_weight">
         <item>24</item>
         <item>43</item>
