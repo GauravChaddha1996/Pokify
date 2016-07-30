@@ -7,6 +7,7 @@ import android.text.InputFilter;
 import android.text.InputType;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.pokemonify.pokemonify.R;
 
@@ -29,6 +30,7 @@ public class MaterialDialogCreator implements View.OnClickListener {
         if (shouldEdit) {
             AlertDialog.Builder alert = new AlertDialog.Builder(mContext);
             final EditText edittext = new EditText(mContext);
+            edittext.setText(((TextView)view).getText().toString());
             switch (view.getId()) {
                 case R.id.pokemon_name:
                     alert.setTitle("Enter your pokemon name");
