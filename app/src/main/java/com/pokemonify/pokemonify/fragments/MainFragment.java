@@ -53,7 +53,7 @@ public class MainFragment extends Fragment {
         mMyPokemonWeight.setText(currentMyPokemon.getWeight() + "lbs");
         mMyPokemonHeight.setText(currentMyPokemon.getHeight() + "cm");
         mMyPokemonDesc.setText(currentMyPokemon.getDesc());
-        mMyPokemonImage.getLayoutParams().height= (int) (Utils.getDisplayHeight(getActivity())*0.50);
+        mMyPokemonImage.getLayoutParams().height= (int) (Utils.getDisplayHeight(getActivity())*0.40);
         Bitmap bitmap = BitmapFactory.decodeResource(getResources(), getResources()
                 .getIdentifier(currentMyPokemon.getImagePath(), "drawable", getActivity().getPackageName()));
         mMyPokemonImage.setImageBitmap(bitmap);

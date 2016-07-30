@@ -71,7 +71,7 @@ public class PokemonDetailFragment extends Fragment {
         pokemonLvl = (TextView) v.findViewById(R.id.pokemon_level);
         pokemonImage = (ImageView) v.findViewById(R.id.pokemon_image);
         detailScreen = v.findViewById(R.id.detailScreen);
-        pokemonImage.getLayoutParams().height = (int) (Utils.getDisplayHeight(getActivity()) * 0.50);
+        pokemonImage.getLayoutParams().height = (int) (Utils.getDisplayHeight(getActivity()) * 0.40);
         setPokemonData();
         setOnClick();
     }
