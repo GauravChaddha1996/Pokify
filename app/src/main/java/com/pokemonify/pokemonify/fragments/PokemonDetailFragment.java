@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.pokemonify.pokemonify.MainActivity;
 import com.pokemonify.pokemonify.R;
 import com.pokemonify.pokemonify.UIComponents.MaterialDialogCreator;
 import com.pokemonify.pokemonify.Utils;
@@ -116,6 +117,17 @@ public class PokemonDetailFragment extends Fragment {
         pokemonHeight.setOnClickListener(materialDialogCreator);
         pokemonDesc.setOnClickListener(materialDialogCreator);
         pokemonLvl.setOnClickListener(materialDialogCreator);
+        final MainActivity mainActivity= (MainActivity) getActivity();
+        pokemonImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mainActivity.startPokeImagePicker();
+            }
+        });
+    }
+
+    public void setPokemonImage(Bitmap bitmap){
+        pokemonImage.setImageBitmap(bitmap);
     }
 
     private void setPokemonData() {

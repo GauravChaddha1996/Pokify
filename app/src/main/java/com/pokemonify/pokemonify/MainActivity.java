@@ -1,6 +1,12 @@
 package com.pokemonify.pokemonify;
 
+import android.content.ContentValues;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -9,25 +15,36 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
+import com.pokemonify.pokemonify.UIComponents.CommonAdapter;
 import com.pokemonify.pokemonify.fragments.MainFragment;
 import com.pokemonify.pokemonify.fragments.PokemonDetailFragment;
 import com.pokemonify.pokemonify.fragments.PokemonListFragment;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener,CommonAdapter.OnGetViewListener<String> {
     Toolbar toolbar;
     MaterialSearchView searchView;
     Fragment currentFragment;
     boolean submitFlag = false;
     AppBarLayout mAppBarLayout;
-
+    Uri imageUri;
+    ContentValues values;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -123,6 +140,91 @@ public class MainActivity extends AppCompatActivity
         fragmentTransaction.replace(R.id.mainFrameLayout, fragment);
         fragmentTransaction.commitAllowingStateLoss();
         supportInvalidateOptionsMenu();
+    }
+
+    public void startPokeImagePicker() {
+        AlertDialog.Builder builder=new AlertDialog.Builder(this);
+        builder.setTitle("Select source");
+        final CommonAdapter<String> commonAdapter=new CommonAdapter<>(this);
+        List<String> list=new ArrayList<>();
+        list.add("Camera");
+        list.add("Gallery");
+        commonAdapter.setList(list);
+        builder.setAdapter(commonAdapter, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                    if("Camera".equals(commonAdapter.getItem(i))){
+                        values = new ContentValues();
+                        values.put(MediaStore.Images.Media.TITLE, "New Picture");
+                        values.put(MediaStore.Images.Media.DESCRIPTION, "From your Camera");
+                        imageUri = getContentResolver().insert(
+                                MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
+                        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                        intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
+                        startActivityForResult(intent, 23);
+                    }else{
+                        Intent intent = new Intent();
+                        intent.setType("image/*");
+                        intent.setAction(Intent.ACTION_GET_CONTENT);
+                        startActivityForResult(Intent.createChooser(intent, "Select Picture"), 22);
+                    }
+            }
+        });
+        builder.show();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == 22 && resultCode == RESULT_OK && data != null && data.getData() != null) {
+
+            Uri uri = data.getData();
+
+            try {
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), uri);
+                PokemonDetailFragment pokemonDetailFragment= (PokemonDetailFragment) currentFragment;
+                pokemonDetailFragment.setPokemonImage(bitmap);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        if (requestCode == 23 && resultCode == RESULT_OK) {
+            try {
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageUri);
+                PokemonDetailFragment pokemonDetailFragment= (PokemonDetailFragment) currentFragment;
+                pokemonDetailFragment.setPokemonImage(bitmap);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    @Override
+    public View getView(View convertView, String item, int position) {
+        MyDialogViewHolder myDialogViewHolder;
+        if(convertView==null){
+            myDialogViewHolder=new MyDialogViewHolder();
+            convertView= LayoutInflater.from(this).inflate(R.layout.activity_imagepicker,null);
+            myDialogViewHolder.mTextView= (TextView) convertView.findViewById(R.id.dialogListText);
+            myDialogViewHolder.mImageView= (ImageView) convertView.findViewById(R.id.dialogListImage);
+            convertView.setTag(myDialogViewHolder);
+        }else{
+            myDialogViewHolder= (MyDialogViewHolder) convertView.getTag();
+        }
+        if(item.equals("Camera")){
+            myDialogViewHolder.mTextView.setText("Camera");
+            myDialogViewHolder.mImageView.setImageDrawable(getResources().getDrawable(android.R.drawable.ic_menu_camera));
+        }else{
+            myDialogViewHolder.mTextView.setText("Gallery");
+            myDialogViewHolder.mImageView.setImageDrawable(getResources().getDrawable(android.R.drawable.ic_menu_gallery));
+        }
+        return convertView;
+    }
+
+    private class MyDialogViewHolder {
+        TextView mTextView;
+        ImageView mImageView;
     }
 
     @Override
