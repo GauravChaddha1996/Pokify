@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -72,9 +71,7 @@ public class PokemonDetailFragment extends Fragment {
         pokemonLvl = (TextView) v.findViewById(R.id.pokemon_level);
         pokemonImage = (ImageView) v.findViewById(R.id.pokemon_image);
         detailScreen = v.findViewById(R.id.detailScreen);
-        DisplayMetrics displaymetrics = new DisplayMetrics();
-        getActivity().getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
-        pokemonImage.getLayoutParams().height = (int) (displaymetrics.heightPixels * 0.50);
+        pokemonImage.getLayoutParams().height = (int) (Utils.getDisplayHeight(getActivity()) * 0.50);
         setPokemonData();
         setOnClick();
     }

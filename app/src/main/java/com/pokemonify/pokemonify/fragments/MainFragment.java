@@ -23,6 +23,7 @@ public class MainFragment extends Fragment {
     TextView mMyPokemonLevel;
     TextView mMyPokemonWeight;
     TextView mMyPokemonHeight;
+    TextView mMyPokemonDesc;
     ImageView mMyPokemonImage;
 
     PokemonDto currentMyPokemon;
@@ -36,13 +37,14 @@ public class MainFragment extends Fragment {
     }
 
     private void initViews(View v) {
-        mMyPokemonName = (TextView) v.findViewById(R.id.myPokemonName);
-        mMyPokemonHp = (TextView) v.findViewById(R.id.myPokemonHp);
-        mMyPokemonType = (TextView) v.findViewById(R.id.myPokemonType);
-        mMyPokemonLevel = (TextView) v.findViewById(R.id.myPokemonLevel);
-        mMyPokemonWeight = (TextView) v.findViewById(R.id.myPokemonWeight);
-        mMyPokemonHeight = (TextView) v.findViewById(R.id.myPokemonHeight);
-        mMyPokemonImage = (ImageView) v.findViewById(R.id.myPokemonImage);
+        mMyPokemonName = (TextView) v.findViewById(R.id.my_pokemon_name);
+        mMyPokemonHp = (TextView) v.findViewById(R.id.my_pokemon_hp);
+        mMyPokemonType = (TextView) v.findViewById(R.id.my_pokemon_type);
+        mMyPokemonLevel = (TextView) v.findViewById(R.id.my_pokemon_level);
+        mMyPokemonWeight = (TextView) v.findViewById(R.id.my_pokemon_weight);
+        mMyPokemonHeight = (TextView) v.findViewById(R.id.my_pokemon_height);
+        mMyPokemonDesc = (TextView) v.findViewById(R.id.my_pokemon_desc);
+        mMyPokemonImage = (ImageView) v.findViewById(R.id.my_pokemon_image);
         setMyPokemon();
         mMyPokemonName.setText(currentMyPokemon.getName());
         mMyPokemonHp.setText(currentMyPokemon.getHp() + "Hp");
@@ -50,6 +52,8 @@ public class MainFragment extends Fragment {
         mMyPokemonLevel.setText("Lvl " + currentMyPokemon.getLevel());
         mMyPokemonWeight.setText(currentMyPokemon.getWeight() + "lbs");
         mMyPokemonHeight.setText(currentMyPokemon.getHeight() + "cm");
+        mMyPokemonDesc.setText(currentMyPokemon.getDesc());
+        mMyPokemonImage.getLayoutParams().height= (int) (Utils.getDisplayHeight(getActivity())*0.50);
         Bitmap bitmap = BitmapFactory.decodeResource(getResources(), getResources()
                 .getIdentifier(currentMyPokemon.getImagePath(), "drawable", getActivity().getPackageName()));
         mMyPokemonImage.setImageBitmap(bitmap);
