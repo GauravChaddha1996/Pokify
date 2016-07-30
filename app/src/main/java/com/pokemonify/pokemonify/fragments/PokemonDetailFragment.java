@@ -80,30 +80,30 @@ public class PokemonDetailFragment extends Fragment {
     }
 
     private void setOnClick() {
-        materialDialogCreator=new MaterialDialogCreator(getActivity(), new MaterialDialogCreator.OnClickCallBack() {
+        materialDialogCreator = new MaterialDialogCreator(getActivity(), new MaterialDialogCreator.OnClickCallBack() {
             @Override
-            public void onPress(View v,String s) {
-                switch (v.getId()){
+            public void onPress(View v, String s) {
+                switch (v.getId()) {
                     case R.id.pokemon_name:
                         pokemonName.setText(s);
                         break;
                     case R.id.pokemon_hp:
-                        pokemonHp.setText(s+" Hp");
+                        pokemonHp.setText(s + " Hp");
                         break;
                     case R.id.pokemon_type:
                         pokemonType.setText(s);
                         break;
                     case R.id.pokemon_weight:
-                        pokemonWeight.setText(s+" g");
+                        pokemonWeight.setText(s + " g");
                         break;
                     case R.id.pokemon_height:
-                        pokemonHeight.setText(s+" cm");
+                        pokemonHeight.setText(s + " cm");
                         break;
                     case R.id.pokemon_desc:
                         pokemonDesc.setText(s);
                         break;
                     case R.id.pokemon_level:
-                        pokemonLvl.setText(s+" Lvl");
+                        pokemonLvl.setText(s + " Lvl");
                         break;
                 }
 
@@ -117,16 +117,18 @@ public class PokemonDetailFragment extends Fragment {
         pokemonHeight.setOnClickListener(materialDialogCreator);
         pokemonDesc.setOnClickListener(materialDialogCreator);
         pokemonLvl.setOnClickListener(materialDialogCreator);
-        final MainActivity mainActivity= (MainActivity) getActivity();
+        final MainActivity mainActivity = (MainActivity) getActivity();
         pokemonImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mainActivity.startPokeImagePicker();
+                if (materialDialogCreator.getShouldEdit()) {
+                    mainActivity.startPokeImagePicker();
+                }
             }
         });
     }
 
-    public void setPokemonImage(Bitmap bitmap){
+    public void setPokemonImage(Bitmap bitmap) {
         pokemonImage.setImageBitmap(bitmap);
     }
 
@@ -155,7 +157,7 @@ public class PokemonDetailFragment extends Fragment {
             FileOutputStream fo = new FileOutputStream(f);
             fo.write(bytes.toByteArray());
             fo.close();
-        }catch (IOException e) {
+        } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }

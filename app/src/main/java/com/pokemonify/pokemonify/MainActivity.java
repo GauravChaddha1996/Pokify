@@ -37,7 +37,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener,CommonAdapter.OnGetViewListener<String> {
+        implements NavigationView.OnNavigationItemSelectedListener, CommonAdapter.OnGetViewListener<String> {
     Toolbar toolbar;
     MaterialSearchView searchView;
     Fragment currentFragment;
@@ -45,6 +45,7 @@ public class MainActivity extends AppCompatActivity
     AppBarLayout mAppBarLayout;
     Uri imageUri;
     ContentValues values;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -143,31 +144,31 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void startPokeImagePicker() {
-        AlertDialog.Builder builder=new AlertDialog.Builder(this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Select source");
-        final CommonAdapter<String> commonAdapter=new CommonAdapter<>(this);
-        List<String> list=new ArrayList<>();
+        final CommonAdapter<String> commonAdapter = new CommonAdapter<>(this);
+        List<String> list = new ArrayList<>();
         list.add("Camera");
         list.add("Gallery");
         commonAdapter.setList(list);
         builder.setAdapter(commonAdapter, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                    if("Camera".equals(commonAdapter.getItem(i))){
-                        values = new ContentValues();
-                        values.put(MediaStore.Images.Media.TITLE, "New Picture");
-                        values.put(MediaStore.Images.Media.DESCRIPTION, "From your Camera");
-                        imageUri = getContentResolver().insert(
-                                MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
-                        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                        intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
-                        startActivityForResult(intent, 23);
-                    }else{
-                        Intent intent = new Intent();
-                        intent.setType("image/*");
-                        intent.setAction(Intent.ACTION_GET_CONTENT);
-                        startActivityForResult(Intent.createChooser(intent, "Select Picture"), 22);
-                    }
+                if ("Camera".equals(commonAdapter.getItem(i))) {
+                    values = new ContentValues();
+                    values.put(MediaStore.Images.Media.TITLE, "New Picture");
+                    values.put(MediaStore.Images.Media.DESCRIPTION, "From your Camera");
+                    imageUri = getContentResolver().insert(
+                            MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
+                    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                    intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
+                    startActivityForResult(intent, 23);
+                } else {
+                    Intent intent = new Intent();
+                    intent.setType("image/*");
+                    intent.setAction(Intent.ACTION_GET_CONTENT);
+                    startActivityForResult(Intent.createChooser(intent, "Select Picture"), 22);
+                }
             }
         });
         builder.show();
@@ -183,7 +184,7 @@ public class MainActivity extends AppCompatActivity
 
             try {
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), uri);
-                PokemonDetailFragment pokemonDetailFragment= (PokemonDetailFragment) currentFragment;
+                PokemonDetailFragment pokemonDetailFragment = (PokemonDetailFragment) currentFragment;
                 pokemonDetailFragment.setPokemonImage(bitmap);
             } catch (IOException e) {
                 e.printStackTrace();
@@ -192,7 +193,7 @@ public class MainActivity extends AppCompatActivity
         if (requestCode == 23 && resultCode == RESULT_OK) {
             try {
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageUri);
-                PokemonDetailFragment pokemonDetailFragment= (PokemonDetailFragment) currentFragment;
+                PokemonDetailFragment pokemonDetailFragment = (PokemonDetailFragment) currentFragment;
                 pokemonDetailFragment.setPokemonImage(bitmap);
             } catch (IOException e) {
                 e.printStackTrace();
@@ -203,19 +204,19 @@ public class MainActivity extends AppCompatActivity
     @Override
     public View getView(View convertView, String item, int position) {
         MyDialogViewHolder myDialogViewHolder;
-        if(convertView==null){
-            myDialogViewHolder=new MyDialogViewHolder();
-            convertView= LayoutInflater.from(this).inflate(R.layout.activity_imagepicker,null);
-            myDialogViewHolder.mTextView= (TextView) convertView.findViewById(R.id.dialogListText);
-            myDialogViewHolder.mImageView= (ImageView) convertView.findViewById(R.id.dialogListImage);
+        if (convertView == null) {
+            myDialogViewHolder = new MyDialogViewHolder();
+            convertView = LayoutInflater.from(this).inflate(R.layout.activity_imagepicker, null);
+            myDialogViewHolder.mTextView = (TextView) convertView.findViewById(R.id.dialogListText);
+            myDialogViewHolder.mImageView = (ImageView) convertView.findViewById(R.id.dialogListImage);
             convertView.setTag(myDialogViewHolder);
-        }else{
-            myDialogViewHolder= (MyDialogViewHolder) convertView.getTag();
+        } else {
+            myDialogViewHolder = (MyDialogViewHolder) convertView.getTag();
         }
-        if(item.equals("Camera")){
+        if (item.equals("Camera")) {
             myDialogViewHolder.mTextView.setText("Camera");
             myDialogViewHolder.mImageView.setImageDrawable(getResources().getDrawable(android.R.drawable.ic_menu_camera));
-        }else{
+        } else {
             myDialogViewHolder.mTextView.setText("Gallery");
             myDialogViewHolder.mImageView.setImageDrawable(getResources().getDrawable(android.R.drawable.ic_menu_gallery));
         }
@@ -270,16 +271,16 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.action_share_myPokemon) {
             return true;
         } else if (id == R.id.action_make_current_pokemon) {
-            PokemonDetailFragment pokemonDetailFragment= (PokemonDetailFragment) currentFragment;
+            PokemonDetailFragment pokemonDetailFragment = (PokemonDetailFragment) currentFragment;
             pokemonDetailFragment.setThisAsCurrentPokemon();
         } else if (id == R.id.action_share) {
-            PokemonDetailFragment pokemonDetailFragment= (PokemonDetailFragment) currentFragment;
+            PokemonDetailFragment pokemonDetailFragment = (PokemonDetailFragment) currentFragment;
             pokemonDetailFragment.shareThisPokemon();
         } else if (id == R.id.action_edit) {
-            PokemonDetailFragment pokemonDetailFragment= (PokemonDetailFragment) currentFragment;
-            if(pokemonDetailFragment.getEditing()){
+            PokemonDetailFragment pokemonDetailFragment = (PokemonDetailFragment) currentFragment;
+            if (pokemonDetailFragment.getEditing()) {
                 item.setIcon(android.R.drawable.ic_menu_edit);
-            }else{
+            } else {
                 item.setIcon(android.R.drawable.ic_menu_camera);
             }
             pokemonDetailFragment.toggleShouldEdit();

@@ -58,11 +58,11 @@ public class MainFragment extends Fragment {
     public void setMyPokemon() {
         int temp = Utils.getMyPokemon(getActivity());
         if (temp == -1) {
-            currentMyPokemon = new PokemonDto(0, "Snorlax", 50, "", "Mouse", "","lazy,fat", 18, 3, 15);
+            currentMyPokemon = new PokemonDto(0, "Snorlax", 50, "", "Mouse", "", "lazy,fat", 18, 3, 15);
         } else {
             currentMyPokemon = PokemonDatabase.getPokemonViaId(temp);
             if (currentMyPokemon == null) {
-                currentMyPokemon = new PokemonDto(1, "Raichu", 50, "", "Mouse", "","angry,strong", 18, 3, 15);
+                currentMyPokemon = new PokemonDto(1, "Raichu", 50, "", "Mouse", "", "angry,strong", 18, 3, 15);
             }
         }
         Utils.setMyPokemon(currentMyPokemon, getActivity());

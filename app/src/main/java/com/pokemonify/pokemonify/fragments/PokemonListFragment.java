@@ -93,16 +93,16 @@ public class PokemonListFragment extends Fragment {
         mSeachedText.setText(query);
         Set<PokemonDto> newSet = new HashSet<>();
         String[] strings = query.toString().split(",");
-        for(String s:strings){
+        for (String s : strings) {
             for (PokemonDto p : nameList) {
                 if (p.getName().toLowerCase().contains(s.toLowerCase())) {
                     Log.d("asjhas", p.getName());
                     newSet.add(p);
                 }
             }
-            for(String tmp:adjectiveList) {
-                if(tmp.equals(s)) {
-                    for(PokemonDto p:PokemonDatabase.getPokemonViaAdjective(s)){
+            for (String tmp : adjectiveList) {
+                if (tmp.equals(s)) {
+                    for (PokemonDto p : PokemonDatabase.getPokemonViaAdjective(s)) {
                         newSet.add(p);
                     }
                 }

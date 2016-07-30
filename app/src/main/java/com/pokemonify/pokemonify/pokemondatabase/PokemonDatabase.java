@@ -49,12 +49,12 @@ public class PokemonDatabase {
     }
 
     public static List<PokemonDto> getPokemonViaAdjective(String s) {
-        List<PokemonDto> pokemonDtoList=new ArrayList<>();
+        List<PokemonDto> pokemonDtoList = new ArrayList<>();
         String[] arr;
-        for(PokemonDto p: sPokemonDtos) {
-            arr=p.getAdjectives().split(",");
-            for(String tmp:arr) {
-                if(tmp.equals(s)) {
+        for (PokemonDto p : sPokemonDtos) {
+            arr = p.getAdjectives().split(",");
+            for (String tmp : arr) {
+                if (tmp.equals(s)) {
                     pokemonDtoList.add(p);
                 }
             }
