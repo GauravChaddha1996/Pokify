@@ -31,6 +31,8 @@ import com.pokemonify.pokemonify.UIComponents.CommonAdapter;
 import com.pokemonify.pokemonify.fragments.MainFragment;
 import com.pokemonify.pokemonify.fragments.PokemonDetailFragment;
 import com.pokemonify.pokemonify.fragments.PokemonListFragment;
+import com.theartofdev.edmodo.cropper.CropImage;
+import com.theartofdev.edmodo.cropper.CropImageView;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -43,7 +45,7 @@ public class MainActivity extends AppCompatActivity
     Fragment currentFragment;
     boolean submitFlag = false;
     AppBarLayout mAppBarLayout;
-    Uri imageUri;
+    Uri cameraUri;
     ContentValues values;
 
     @Override
@@ -158,10 +160,10 @@ public class MainActivity extends AppCompatActivity
                     values = new ContentValues();
                     values.put(MediaStore.Images.Media.TITLE, "New Picture");
                     values.put(MediaStore.Images.Media.DESCRIPTION, "From your Camera");
-                    imageUri = getContentResolver().insert(
+                    cameraUri = getContentResolver().insert(
                             MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
                     Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                    intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
+                    intent.putExtra(MediaStore.EXTRA_OUTPUT, cameraUri);
                     startActivityForResult(intent, 23);
                 } else {
                     Intent intent = new Intent();
@@ -181,22 +183,30 @@ public class MainActivity extends AppCompatActivity
         if (requestCode == 22 && resultCode == RESULT_OK && data != null && data.getData() != null) {
 
             Uri uri = data.getData();
-
-            try {
-                Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), uri);
-                PokemonDetailFragment pokemonDetailFragment = (PokemonDetailFragment) currentFragment;
-                pokemonDetailFragment.setPokemonImage(bitmap);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            CropImage.activity(uri)
+                    .setGuidelines(CropImageView.Guidelines.ON)
+                    .setAspectRatio(1,1)
+                    .start(this);
         }
         if (requestCode == 23 && resultCode == RESULT_OK) {
-            try {
-                Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageUri);
-                PokemonDetailFragment pokemonDetailFragment = (PokemonDetailFragment) currentFragment;
-                pokemonDetailFragment.setPokemonImage(bitmap);
-            } catch (IOException e) {
-                e.printStackTrace();
+            CropImage.activity(cameraUri)
+                    .setGuidelines(CropImageView.Guidelines.ON)
+                    .setAspectRatio(1,1)
+                    .start(this);
+        }
+        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
+            CropImage.ActivityResult result = CropImage.getActivityResult(data);
+            if (resultCode == RESULT_OK) {
+                Bitmap bitmap = null;
+                try {
+                    bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(),result.getUri());
+                    PokemonDetailFragment pokemonDetailFragment = (PokemonDetailFragment) currentFragment;
+                    pokemonDetailFragment.setPokemonImage(bitmap);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
+                Exception error = result.getError();
             }
         }
     }

@@ -22,10 +22,10 @@ android {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
-    //  compile 'com.miguelcatalan:materialsearchview:1.4.0'
     compile project(':SearchView:library')
     compile 'com.android.support:appcompat-v7:24.1.1'
     compile 'com.android.support:support-v4:24.1.1'
     compile 'com.android.support:design:24.1.1'
     compile 'com.android.support:cardview-v7:24.1.1'
+    compile 'com.theartofdev.edmodo:android-image-cropper:2.2.5'
 }
