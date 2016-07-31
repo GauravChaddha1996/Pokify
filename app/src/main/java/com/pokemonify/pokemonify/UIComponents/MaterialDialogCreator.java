@@ -30,38 +30,45 @@ public class MaterialDialogCreator implements View.OnClickListener {
         if (shouldEdit) {
             AlertDialog.Builder alert = new AlertDialog.Builder(mContext);
             final EditText edittext = new EditText(mContext);
-            edittext.setText(((TextView)view).getText().toString());
+            TextView temp = (TextView) view;
             switch (view.getId()) {
                 case R.id.pokemon_name:
                     alert.setTitle("Enter your pokemon name");
+                    edittext.setText(temp.getText().toString());
                     edittext.setFilters(new InputFilter[]{new InputFilter.LengthFilter(30)});
                     break;
                 case R.id.pokemon_hp:
                     alert.setTitle("Enter your pokemon hp");
+                    edittext.setText(temp.getText().toString().substring(0, temp.getText().length() - 2));
                     edittext.setInputType(InputType.TYPE_CLASS_NUMBER);
                     edittext.setFilters(new InputFilter[]{new InputFilter.LengthFilter(8)});
                     break;
                 case R.id.pokemon_type:
                     alert.setTitle("Enter your pokemon type");
+                    edittext.setText(temp.getText().toString());
                     edittext.setFilters(new InputFilter[]{new InputFilter.LengthFilter(30)});
                     break;
                 case R.id.pokemon_weight:
                     alert.setTitle("Enter your pokemon weight");
+                    edittext.setText(temp.getText().toString().substring(0, temp.getText().length() - 1));
                     edittext.setInputType(InputType.TYPE_CLASS_NUMBER);
                     edittext.setFilters(new InputFilter[]{new InputFilter.LengthFilter(8)});
                     break;
                 case R.id.pokemon_height:
                     alert.setTitle("Enter your pokemon height");
+                    edittext.setText(temp.getText().toString().substring(0, temp.getText().length() - 2));
                     edittext.setInputType(InputType.TYPE_CLASS_NUMBER);
                     edittext.setFilters(new InputFilter[]{new InputFilter.LengthFilter(8)});
                     break;
                 case R.id.pokemon_desc:
                     alert.setTitle("Enter your pokemon description");
                     edittext.setSingleLine(false);
-                    edittext.setFilters(new InputFilter[]{new InputFilter.LengthFilter(120)});
+                    edittext.setText(temp.getText().toString());
+                    edittext.setFilters(new InputFilter[]{new InputFilter.LengthFilter(150)});
                     break;
                 case R.id.pokemon_level:
                     alert.setTitle("Enter your pokemon level");
+                    edittext.setText(temp.getText().toString().substring(4));
                     edittext.setInputType(InputType.TYPE_CLASS_NUMBER);
                     edittext.setFilters(new InputFilter[]{new InputFilter.LengthFilter(8)});
                     break;

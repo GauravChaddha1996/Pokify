@@ -100,7 +100,7 @@ public class PokemonDetailFragment extends Fragment {
                         pokemonDesc.setText(s);
                         break;
                     case R.id.pokemon_level:
-                        pokemonLvl.setText(s + " Lvl");
+                        pokemonLvl.setText("Lvl "+s);
                         break;
                 }
 
@@ -136,7 +136,7 @@ public class PokemonDetailFragment extends Fragment {
         pokemonWeight.setText(mPokemonDto.getWeight() + " g");
         pokemonHeight.setText(mPokemonDto.getHeight() + " cm");
         pokemonDesc.setText(mPokemonDto.getDesc());
-        pokemonLvl.setText(mPokemonDto.getLevel() + " Lvl");
+        pokemonLvl.setText("Lvl "+mPokemonDto.getLevel());
         Bitmap bitmap = BitmapFactory.decodeResource(getResources(), getResources()
                 .getIdentifier(mPokemonDto.getImagePath(), "drawable", getActivity().getPackageName()));
         pokemonImage.setImageBitmap(bitmap);
@@ -145,9 +145,11 @@ public class PokemonDetailFragment extends Fragment {
     public void shareThisPokemon() {
         detailScreen.setDrawingCacheEnabled(true);
         savedScreen = Bitmap.createBitmap(detailScreen.getDrawingCache());
+        detailScreen.destroyDrawingCache();
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
         savedScreen.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
         File f = new File(Environment.getExternalStorageDirectory() + File.separator + "tmp.jpg");
+        if(f.exists())f.delete();
         try {
             f.createNewFile();
             // write the bytes in file

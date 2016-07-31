@@ -93,7 +93,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentLeft="true"
-                android:text="9 lvl"
+                android:text="Lvl 9"
                 android:textSize="20dp"/>
 
             <TextView
