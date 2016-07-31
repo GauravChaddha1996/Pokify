@@ -34,6 +34,9 @@ import com.pokemonify.pokemonify.fragments.PokemonListFragment;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -176,6 +179,26 @@ public class MainActivity extends AppCompatActivity
         builder.show();
     }
 
+    public void shareImage(Bitmap bitmap) {
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+        File tempFile = null;
+        try {
+            tempFile = File.createTempFile("tmp" + System.currentTimeMillis(), ".jpg", this.getExternalCacheDir());
+            // write the bytes in file
+            FileOutputStream fo = new FileOutputStream(tempFile);
+            fo.write(bytes.toByteArray());
+            fo.close();
+            Intent share = new Intent(Intent.ACTION_SEND);
+            share.setType("image/jpeg");
+            share.putExtra(Intent.EXTRA_STREAM, Uri.parse(tempFile.getAbsolutePath()));
+            startActivity(Intent.createChooser(share, "Share Pokemon"));
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -185,13 +208,13 @@ public class MainActivity extends AppCompatActivity
             Uri uri = data.getData();
             CropImage.activity(uri)
                     .setGuidelines(CropImageView.Guidelines.ON)
-                    .setAspectRatio(1,1)
+                    .setAspectRatio(1, 1)
                     .start(this);
         }
         if (requestCode == 23 && resultCode == RESULT_OK) {
             CropImage.activity(cameraUri)
                     .setGuidelines(CropImageView.Guidelines.ON)
-                    .setAspectRatio(1,1)
+                    .setAspectRatio(1, 1)
                     .start(this);
         }
         if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
@@ -199,7 +222,7 @@ public class MainActivity extends AppCompatActivity
             if (resultCode == RESULT_OK) {
                 Bitmap bitmap = null;
                 try {
-                    bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(),result.getUri());
+                    bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), result.getUri());
                     PokemonDetailFragment pokemonDetailFragment = (PokemonDetailFragment) currentFragment;
                     pokemonDetailFragment.setPokemonImage(bitmap);
                 } catch (IOException e) {
@@ -279,7 +302,8 @@ public class MainActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_share_myPokemon) {
-            return true;
+            MainFragment mainFragment = (MainFragment) currentFragment;
+            mainFragment.shareMyPokemon();
         } else if (id == R.id.action_make_current_pokemon) {
             PokemonDetailFragment pokemonDetailFragment = (PokemonDetailFragment) currentFragment;
             pokemonDetailFragment.setThisAsCurrentPokemon();
@@ -296,7 +320,7 @@ public class MainActivity extends AppCompatActivity
             pokemonDetailFragment.toggleShouldEdit();
         }
 
-        return super.onOptionsItemSelected(item);
+        return true;
     }
 
     @SuppressWarnings("StatementWithEmptyBody")

@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.pokemonify.pokemonify.MainActivity;
 import com.pokemonify.pokemonify.R;
 import com.pokemonify.pokemonify.Utils;
 import com.pokemonify.pokemonify.pokemondatabase.PokemonDatabase;
@@ -25,7 +26,7 @@ public class MainFragment extends Fragment {
     TextView mMyPokemonHeight;
     TextView mMyPokemonDesc;
     ImageView mMyPokemonImage;
-
+    View mMyPokemonScreen;
     PokemonDto currentMyPokemon;
 
     @Override
@@ -45,6 +46,7 @@ public class MainFragment extends Fragment {
         mMyPokemonHeight = (TextView) v.findViewById(R.id.my_pokemon_height);
         mMyPokemonDesc = (TextView) v.findViewById(R.id.my_pokemon_desc);
         mMyPokemonImage = (ImageView) v.findViewById(R.id.my_pokemon_image);
+        mMyPokemonScreen = v.findViewById(R.id.my_pokemon_screen);
         setMyPokemon();
         mMyPokemonName.setText(currentMyPokemon.getName());
         mMyPokemonHp.setText(currentMyPokemon.getHp() + "Hp");
@@ -57,6 +59,13 @@ public class MainFragment extends Fragment {
         Bitmap bitmap = BitmapFactory.decodeResource(getResources(), getResources()
                 .getIdentifier(currentMyPokemon.getImagePath(), "drawable", getActivity().getPackageName()));
         mMyPokemonImage.setImageBitmap(bitmap);
+    }
+
+    public void shareMyPokemon(){
+        mMyPokemonScreen.setDrawingCacheEnabled(true);
+        Bitmap bitmap=Bitmap.createBitmap(mMyPokemonScreen.getDrawingCache());
+        mMyPokemonScreen.destroyDrawingCache();
+        ((MainActivity)getActivity()).shareImage(bitmap);
     }
 
     public void setMyPokemon() {

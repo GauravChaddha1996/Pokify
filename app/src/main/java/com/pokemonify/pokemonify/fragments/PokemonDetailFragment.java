@@ -1,9 +1,7 @@
 package com.pokemonify.pokemonify.fragments;
 
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -18,10 +16,6 @@ import com.pokemonify.pokemonify.R;
 import com.pokemonify.pokemonify.UIComponents.MaterialDialogCreator;
 import com.pokemonify.pokemonify.Utils;
 import com.pokemonify.pokemonify.pokemondatabase.PokemonDto;
-
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
 
 /**
  * Created by gaurav on 25/7/16.
@@ -144,23 +138,7 @@ public class PokemonDetailFragment extends Fragment {
         detailScreen.setDrawingCacheEnabled(true);
         savedScreen = Bitmap.createBitmap(detailScreen.getDrawingCache());
         detailScreen.destroyDrawingCache();
-        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-        savedScreen.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
-        File tempFile = null;
-        try {
-            tempFile = File.createTempFile("tmp"+System.currentTimeMillis(),".jpg",getActivity().getExternalCacheDir());
-            // write the bytes in file
-            FileOutputStream fo = new FileOutputStream(tempFile);
-            fo.write(bytes.toByteArray());
-            fo.close();
-            Intent share = new Intent(Intent.ACTION_SEND);
-            share.setType("image/jpeg");
-            share.putExtra(Intent.EXTRA_STREAM,Uri.parse(tempFile.getAbsolutePath()));
-            startActivity(Intent.createChooser(share, "Share Pokemon"));
-        } catch (Exception e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+        ((MainActivity)getActivity()).shareImage(savedScreen);
     }
 
     public void toggleShouldEdit() {
