@@ -31,6 +31,7 @@ import com.pokemonify.pokemonify.UIComponents.CommonAdapter;
 import com.pokemonify.pokemonify.fragments.MainFragment;
 import com.pokemonify.pokemonify.fragments.PokemonDetailFragment;
 import com.pokemonify.pokemonify.fragments.PokemonListFragment;
+import com.pokemonify.pokemonify.pokemondatabase.PokemonDto;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
@@ -135,6 +136,19 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void changeFrag(Fragment fragment) {
+        if (currentFragment instanceof PokemonDetailFragment) {
+            PokemonDetailFragment pokemonDetailFragment = (PokemonDetailFragment) currentFragment;
+            if (pokemonDetailFragment.getEditing()) {
+                checkAndSaveCard(fragment);
+            }else {
+               doFragTransaction(fragment);
+            }
+        } else {
+           doFragTransaction(fragment);
+        }
+    }
+
+    private void doFragTransaction(Fragment fragment){
         currentFragment = fragment;
         if (currentFragment instanceof MainFragment) {
             mAppBarLayout = (AppBarLayout) findViewById(R.id.appbarlayout);
@@ -146,6 +160,25 @@ public class MainActivity extends AppCompatActivity
         fragmentTransaction.replace(R.id.mainFrameLayout, fragment);
         fragmentTransaction.commitAllowingStateLoss();
         supportInvalidateOptionsMenu();
+    }
+
+    private void checkAndSaveCard(final Fragment fragment) {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Do you want to save the card?");
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                //@// TODO: 31/7/16 Save the card here
+                ((PokemonDetailFragment)currentFragment).toggleAndChange(fragment);
+            }
+        });
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                ((PokemonDetailFragment)currentFragment).toggleAndChange(fragment);
+            }
+        });
+        builder.show();
     }
 
     public void startPokeImagePicker() {
@@ -285,6 +318,10 @@ public class MainActivity extends AppCompatActivity
             getMenuInflater().inflate(R.menu.main, menu);
         } else if (currentFragment instanceof PokemonDetailFragment) {
             getMenuInflater().inflate(R.menu.pokemondetail, menu);
+            MenuItem item = menu.findItem(R.id.action_edit);
+            if (((PokemonDetailFragment) currentFragment).getPreEdit()) {
+                item.setIcon(android.R.drawable.ic_menu_save);
+            }
         } else {
             getMenuInflater().inflate(R.menu.other, menu);
         }
@@ -315,7 +352,7 @@ public class MainActivity extends AppCompatActivity
             if (pokemonDetailFragment.getEditing()) {
                 item.setIcon(android.R.drawable.ic_menu_edit);
             } else {
-                item.setIcon(android.R.drawable.ic_menu_camera);
+                item.setIcon(android.R.drawable.ic_menu_save);
             }
             pokemonDetailFragment.toggleShouldEdit();
         }
@@ -336,6 +373,17 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_poke_list) {
             if (!(currentFragment instanceof PokemonListFragment)) {
                 changeFrag(new PokemonListFragment());
+            }
+        } else if (id == R.id.nav_create_card) {
+            if (!(currentFragment instanceof PokemonDetailFragment)) {
+                PokemonDetailFragment pokemonDetailFragment = new PokemonDetailFragment();
+                PokemonDto pokemonDto = new PokemonDto(System.currentTimeMillis(), "Pokemon name", 0, "pikachu",
+                        "Pokemon Type", "Pokemon's Description", "", 20, 50, 5);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("PokemonDto", pokemonDto);
+                pokemonDetailFragment.setArguments(bundle);
+                pokemonDetailFragment.setPreEdit(true);
+                changeFrag(pokemonDetailFragment);
             }
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

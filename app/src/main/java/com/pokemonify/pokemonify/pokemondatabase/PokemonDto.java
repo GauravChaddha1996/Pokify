@@ -6,7 +6,7 @@ import java.io.Serializable;
  * Created by gaurav on 24/7/16.
  */
 public class PokemonDto implements Serializable {
-    private int id;
+    private long id;
     private String name;
     private int hp;
     private String imagePath;
@@ -20,7 +20,7 @@ public class PokemonDto implements Serializable {
     public PokemonDto() {
     }
 
-    public PokemonDto(int id, String name, int hp, String imagePath, String type, String desc, String adjectives, int weight, int height, int level) {
+    public PokemonDto(long id, String name, int hp, String imagePath, String type, String desc, String adjectives, int weight, int height, int level) {
         this.id = id;
         this.name = name;
         this.hp = hp;
@@ -33,11 +33,11 @@ public class PokemonDto implements Serializable {
         this.level = level;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

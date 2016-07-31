@@ -16,13 +16,13 @@ public class Utils {
     public static void setMyPokemon(PokemonDto pokemonDto, Context context) {
         SharedPreferences sharedPreferences = context.getSharedPreferences("myPokemon", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putInt("myPokemonId", pokemonDto.getId());
+        editor.putLong("myPokemonId", pokemonDto.getId());
         editor.commit();
     }
 
-    public static int getMyPokemon(Context context) {
+    public static long getMyPokemon(Context context) {
         SharedPreferences sharedPreferences = context.getSharedPreferences("myPokemon", Context.MODE_PRIVATE);
-        return sharedPreferences.getInt("myPokemonId", -1);
+        return sharedPreferences.getLong("myPokemonId", -1);
     }
 
     public static void hideKeyboard(Activity activity) {

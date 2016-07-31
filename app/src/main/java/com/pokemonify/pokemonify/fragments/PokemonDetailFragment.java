@@ -34,7 +34,7 @@ public class PokemonDetailFragment extends Fragment {
     View detailScreen;
     Bitmap savedScreen;
     MaterialDialogCreator materialDialogCreator;
-
+    Boolean preEdit=false;
     public PokemonDetailFragment() {
 
     }
@@ -66,6 +66,14 @@ public class PokemonDetailFragment extends Fragment {
         pokemonImage.getLayoutParams().height = (int) (Utils.getDisplayHeight(getActivity()) * 0.40);
         setPokemonData();
         setOnClick();
+    }
+
+    public Boolean getPreEdit() {
+        return preEdit;
+    }
+
+    public void setPreEdit(Boolean preEdit) {
+        this.preEdit = preEdit;
     }
 
     private void setOnClick() {
@@ -115,6 +123,9 @@ public class PokemonDetailFragment extends Fragment {
                 }
             }
         });
+        if(preEdit){
+            materialDialogCreator.setShouldEdit();
+        }
     }
 
     public void setPokemonImage(Bitmap bitmap) {
@@ -139,6 +150,11 @@ public class PokemonDetailFragment extends Fragment {
         savedScreen = Bitmap.createBitmap(detailScreen.getDrawingCache());
         detailScreen.destroyDrawingCache();
         ((MainActivity)getActivity()).shareImage(savedScreen);
+    }
+
+    public void toggleAndChange(Fragment fragment){
+        toggleShouldEdit();
+        ((MainActivity)getActivity()).changeFrag(fragment);
     }
 
     public void toggleShouldEdit() {

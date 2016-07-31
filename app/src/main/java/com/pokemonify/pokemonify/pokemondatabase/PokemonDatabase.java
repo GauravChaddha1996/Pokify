@@ -39,7 +39,7 @@ public class PokemonDatabase {
         return sPokemonDtos;
     }
 
-    public static PokemonDto getPokemonViaId(int id) {
+    public static PokemonDto getPokemonViaId(long id) {
         for (int i = 0; i < 10; i++) {
             if (id == sPokemonIds[i]) {
                 return sPokemonDtos[i];
