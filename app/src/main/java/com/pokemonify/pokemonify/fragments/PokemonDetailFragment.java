@@ -5,7 +5,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -23,7 +22,6 @@ import com.pokemonify.pokemonify.pokemondatabase.PokemonDto;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.IOException;
 
 /**
  * Created by gaurav on 25/7/16.
@@ -100,7 +98,7 @@ public class PokemonDetailFragment extends Fragment {
                         pokemonDesc.setText(s);
                         break;
                     case R.id.pokemon_level:
-                        pokemonLvl.setText("Lvl "+s);
+                        pokemonLvl.setText("Lvl " + s);
                         break;
                 }
 
@@ -136,7 +134,7 @@ public class PokemonDetailFragment extends Fragment {
         pokemonWeight.setText(mPokemonDto.getWeight() + " g");
         pokemonHeight.setText(mPokemonDto.getHeight() + " cm");
         pokemonDesc.setText(mPokemonDto.getDesc());
-        pokemonLvl.setText("Lvl "+mPokemonDto.getLevel());
+        pokemonLvl.setText("Lvl " + mPokemonDto.getLevel());
         Bitmap bitmap = BitmapFactory.decodeResource(getResources(), getResources()
                 .getIdentifier(mPokemonDto.getImagePath(), "drawable", getActivity().getPackageName()));
         pokemonImage.setImageBitmap(bitmap);
@@ -148,22 +146,21 @@ public class PokemonDetailFragment extends Fragment {
         detailScreen.destroyDrawingCache();
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
         savedScreen.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
-        File f = new File(Environment.getExternalStorageDirectory() + File.separator + "tmp.jpg");
-        if(f.exists())f.delete();
+        File tempFile = null;
         try {
-            f.createNewFile();
+            tempFile = File.createTempFile("tmp"+System.currentTimeMillis(),".jpg",getActivity().getExternalCacheDir());
             // write the bytes in file
-            FileOutputStream fo = new FileOutputStream(f);
+            FileOutputStream fo = new FileOutputStream(tempFile);
             fo.write(bytes.toByteArray());
             fo.close();
-        } catch (IOException e) {
+            Intent share = new Intent(Intent.ACTION_SEND);
+            share.setType("image/jpeg");
+            share.putExtra(Intent.EXTRA_STREAM,Uri.parse(tempFile.getAbsolutePath()));
+            startActivity(Intent.createChooser(share, "Share Pokemon"));
+        } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        Intent share = new Intent(Intent.ACTION_SEND);
-        share.setType("image/jpeg");
-        share.putExtra(Intent.EXTRA_STREAM, Uri.parse(f.getAbsolutePath()));
-        startActivity(Intent.createChooser(share, "Share Pokemon"));
     }
 
     public void toggleShouldEdit() {
