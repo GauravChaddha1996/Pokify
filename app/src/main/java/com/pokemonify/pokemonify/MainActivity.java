@@ -168,14 +168,14 @@ public class MainActivity extends AppCompatActivity
         builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                //@// TODO: 31/7/16 Save the card here
-                ((PokemonDetailFragment)currentFragment).toggleAndChange(fragment);
+
+                ((PokemonDetailFragment)currentFragment).saveToggleAndChange(fragment);
             }
         });
         builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                ((PokemonDetailFragment)currentFragment).toggleAndChange(fragment);
+                ((PokemonDetailFragment)currentFragment).saveToggleAndChange(fragment);
             }
         });
         builder.show();
@@ -227,7 +227,6 @@ public class MainActivity extends AppCompatActivity
             share.putExtra(Intent.EXTRA_STREAM, Uri.parse(tempFile.getAbsolutePath()));
             startActivity(Intent.createChooser(share, "Share Pokemon"));
         } catch (Exception e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }
