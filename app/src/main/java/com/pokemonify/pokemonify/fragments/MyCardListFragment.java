@@ -70,7 +70,7 @@ public class MyCardListFragment extends Fragment {
                 MainActivity mainActivity = (MainActivity) getActivity();
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("PokemonDto", clickedPokemon);
-                PokemonDetailFragment detailFragment = new PokemonDetailFragment();
+                MyCardDetailFragment detailFragment = new MyCardDetailFragment();
                 detailFragment.setArguments(bundle);
                 Utils.hideKeyboard(mainActivity);
                 mainActivity.hideSearch();

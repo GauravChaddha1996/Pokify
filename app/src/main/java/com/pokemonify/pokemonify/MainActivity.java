@@ -29,6 +29,7 @@ import android.widget.TextView;
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
 import com.pokemonify.pokemonify.UIComponents.CommonAdapter;
 import com.pokemonify.pokemonify.fragments.MainFragment;
+import com.pokemonify.pokemonify.fragments.MyCardDetailFragment;
 import com.pokemonify.pokemonify.fragments.MyCardListFragment;
 import com.pokemonify.pokemonify.fragments.PokemonDetailFragment;
 import com.pokemonify.pokemonify.fragments.PokemonListFragment;
@@ -304,10 +305,14 @@ public class MainActivity extends AppCompatActivity
         if (searchView.isSearchOpen()) {
             searchView.closeSearch();
         } else {
-            if (!(currentFragment instanceof MainFragment)) {
-                changeFrag(new MainFragment());
-            } else {
-                super.onBackPressed();
+            if(currentFragment instanceof MyCardDetailFragment){
+                changeFrag(new MyCardListFragment());
+            }else{
+                if (!(currentFragment instanceof MainFragment)) {
+                    changeFrag(new MainFragment());
+                } else {
+                    super.onBackPressed();
+                }
             }
         }
     }
@@ -317,17 +322,24 @@ public class MainActivity extends AppCompatActivity
 
         if (currentFragment instanceof MainFragment) {
             getMenuInflater().inflate(R.menu.main, menu);
+            MenuItem item = menu.findItem(R.id.action_search);
+            searchView.setMenuItem(item);
         } else if (currentFragment instanceof PokemonDetailFragment) {
             getMenuInflater().inflate(R.menu.pokemondetail, menu);
             MenuItem item = menu.findItem(R.id.action_edit);
             if (((PokemonDetailFragment) currentFragment).getPreEdit()) {
                 item.setIcon(android.R.drawable.ic_menu_save);
             }
-        } else {
-            getMenuInflater().inflate(R.menu.other, menu);
+            MenuItem item2 = menu.findItem(R.id.action_search);
+            searchView.setMenuItem(item2);
+        } else if (currentFragment instanceof MyCardDetailFragment) {
+            getMenuInflater().inflate(R.menu.mycardetial,menu);
         }
-        MenuItem item = menu.findItem(R.id.action_search);
-        searchView.setMenuItem(item);
+        else {
+            getMenuInflater().inflate(R.menu.other, menu);
+            MenuItem item = menu.findItem(R.id.action_search);
+            searchView.setMenuItem(item);
+        }
         return true;
     }
 
@@ -356,6 +368,21 @@ public class MainActivity extends AppCompatActivity
             } else {
                 item.setIcon(android.R.drawable.ic_menu_save);
                 pokemonDetailFragment.toggleShouldEdit();
+            }
+        } else if( id == R.id.action_mycard_make_current_pokemon) {
+            MyCardDetailFragment myCardDetailFragment = (MyCardDetailFragment) currentFragment;
+            myCardDetailFragment.setThisAsCurrentPokemon();
+        } else if( id == R.id.action_mycard_share) {
+            MyCardDetailFragment myCardDetailFragment = (MyCardDetailFragment) currentFragment;
+            myCardDetailFragment.shareThisPokemon();
+        } else if( id == R.id.action_mycard_edit) {
+            MyCardDetailFragment myCardDetailFragment = (MyCardDetailFragment) currentFragment;
+            if (myCardDetailFragment.getEditing()) {
+                myCardDetailFragment.saveAndToggle();
+                item.setIcon(android.R.drawable.ic_menu_edit);
+            } else {
+                item.setIcon(android.R.drawable.ic_menu_save);
+                myCardDetailFragment.toggleShouldEdit();
             }
         }
 
