@@ -28,7 +28,7 @@
                     android:textSize="25sp"/>
 
                 <android.support.v7.widget.RecyclerView
-                    android:id="@+id/searchPokemonRecyclerView"
+                    android:id="@+id/pokemonRecyclerView"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
 

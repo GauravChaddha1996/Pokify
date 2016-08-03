@@ -29,6 +29,7 @@ import android.widget.TextView;
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
 import com.pokemonify.pokemonify.UIComponents.CommonAdapter;
 import com.pokemonify.pokemonify.fragments.MainFragment;
+import com.pokemonify.pokemonify.fragments.MyCardListFragment;
 import com.pokemonify.pokemonify.fragments.PokemonDetailFragment;
 import com.pokemonify.pokemonify.fragments.PokemonListFragment;
 import com.pokemonify.pokemonify.pokemondatabase.PokemonDto;
@@ -175,7 +176,8 @@ public class MainActivity extends AppCompatActivity
         builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                ((PokemonDetailFragment)currentFragment).saveToggleAndChange(fragment);
+                ((PokemonDetailFragment)currentFragment).toggleShouldEdit();
+                changeFrag(fragment);
             }
         });
         builder.show();
@@ -349,11 +351,12 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.action_edit) {
             PokemonDetailFragment pokemonDetailFragment = (PokemonDetailFragment) currentFragment;
             if (pokemonDetailFragment.getEditing()) {
+                pokemonDetailFragment.saveAndToggle();
                 item.setIcon(android.R.drawable.ic_menu_edit);
             } else {
                 item.setIcon(android.R.drawable.ic_menu_save);
+                pokemonDetailFragment.toggleShouldEdit();
             }
-            pokemonDetailFragment.toggleShouldEdit();
         }
 
         return true;
@@ -372,6 +375,10 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_poke_list) {
             if (!(currentFragment instanceof PokemonListFragment)) {
                 changeFrag(new PokemonListFragment());
+            }
+        }else if (id == R.id.nav_my_cards) {
+            if (!(currentFragment instanceof MyCardListFragment)) {
+                changeFrag(new MyCardListFragment());
             }
         } else if (id == R.id.nav_create_card) {
             if (!(currentFragment instanceof PokemonDetailFragment)) {

@@ -46,7 +46,7 @@ public class PokemonListFragment extends Fragment {
 
     private void initViews(View v) {
         mSeachedText = (TextView) v.findViewById(R.id.searchedItem);
-        mRecyclerView = (RecyclerView) v.findViewById(R.id.searchPokemonRecyclerView);
+        mRecyclerView = (RecyclerView) v.findViewById(R.id.pokemonRecyclerView);
         mPokemonListAdapter = new PokemonListAdapter(getActivity(), nameList);
         mRecyclerView.setAdapter(mPokemonListAdapter);
         mRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));

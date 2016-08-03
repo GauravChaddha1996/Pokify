@@ -1,5 +1,7 @@
 package com.pokemonify.pokemonify.pokemondatabase;
 
+import android.graphics.Bitmap;
+
 import java.io.Serializable;
 
 /**
@@ -9,13 +11,14 @@ public class PokemonDto implements Serializable {
     private long id;
     private String name;
     private int hp;
-    private String imagePath;
+    private String imagePath="-1";
     private String type;
     private String desc;
     private String adjectives;
     private int weight;
     private int height;
     private int level;
+    private Bitmap mBitmap=null;
 
     public PokemonDto() {
     }
@@ -111,5 +114,13 @@ public class PokemonDto implements Serializable {
 
     public void setLevel(int level) {
         this.level = level;
+    }
+
+    public Bitmap getBitmap() {
+        return mBitmap;
+    }
+
+    public void setBitmap(Bitmap bitmap) {
+        mBitmap = bitmap;
     }
 }

@@ -2,11 +2,11 @@ package com.pokemonify.pokemonify;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
+import com.pokemonify.pokemonify.pokemondatabase.DbHelper;
 import com.pokemonify.pokemonify.pokemondatabase.PokemonDto;
 
 /**
@@ -14,15 +14,11 @@ import com.pokemonify.pokemonify.pokemondatabase.PokemonDto;
  */
 public class Utils {
     public static void setMyPokemon(PokemonDto pokemonDto, Context context) {
-        SharedPreferences sharedPreferences = context.getSharedPreferences("myPokemon", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putLong("myPokemonId", pokemonDto.getId());
-        editor.commit();
+        new DbHelper(context).saveMyPokemon(pokemonDto);
     }
 
-    public static long getMyPokemon(Context context) {
-        SharedPreferences sharedPreferences = context.getSharedPreferences("myPokemon", Context.MODE_PRIVATE);
-        return sharedPreferences.getLong("myPokemonId", -1);
+    public static PokemonDto getMyPokemon(Context context) {
+        return new DbHelper(context).getMyPokemon();
     }
 
     public static void hideKeyboard(Activity activity) {

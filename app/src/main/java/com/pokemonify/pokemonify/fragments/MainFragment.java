@@ -13,7 +13,6 @@ import android.widget.TextView;
 import com.pokemonify.pokemonify.MainActivity;
 import com.pokemonify.pokemonify.R;
 import com.pokemonify.pokemonify.Utils;
-import com.pokemonify.pokemonify.pokemondatabase.PokemonDatabase;
 import com.pokemonify.pokemonify.pokemondatabase.PokemonDto;
 
 public class MainFragment extends Fragment {
@@ -56,8 +55,13 @@ public class MainFragment extends Fragment {
         mMyPokemonHeight.setText(currentMyPokemon.getHeight() + "cm");
         mMyPokemonDesc.setText(currentMyPokemon.getDesc());
         mMyPokemonImage.getLayoutParams().height= (int) (Utils.getDisplayHeight(getActivity())*0.40);
-        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), getResources()
-                .getIdentifier(currentMyPokemon.getImagePath(), "drawable", getActivity().getPackageName()));
+        Bitmap bitmap=null;
+        if(currentMyPokemon.getImagePath().equals("-1")) {
+            bitmap=currentMyPokemon.getBitmap();
+        } else {
+            bitmap = BitmapFactory.decodeResource(getResources(), getResources()
+                    .getIdentifier(currentMyPokemon.getImagePath(), "drawable", getActivity().getPackageName()));
+        }
         mMyPokemonImage.setImageBitmap(bitmap);
     }
 
@@ -69,15 +73,9 @@ public class MainFragment extends Fragment {
     }
 
     public void setMyPokemon() {
-        long temp = Utils.getMyPokemon(getActivity());
-        if (temp == -1) {
-            currentMyPokemon = new PokemonDto(0, "Snorlax", 50, "", "Mouse", "", "lazy,fat", 18, 3, 15);
-        } else {
-            currentMyPokemon = PokemonDatabase.getPokemonViaId(temp);
-            if (currentMyPokemon == null) {
-                currentMyPokemon = new PokemonDto(1, "Raichu", 50, "", "Mouse", "", "angry,strong", 18, 3, 15);
-            }
+        currentMyPokemon=Utils.getMyPokemon(getActivity());
+        if (currentMyPokemon == null) {
+            currentMyPokemon = new PokemonDto(1, "Raichu", 50, "", "Mouse", "", "angry,strong", 18, 3, 15);
         }
-        Utils.setMyPokemon(currentMyPokemon, getActivity());
     }
 }

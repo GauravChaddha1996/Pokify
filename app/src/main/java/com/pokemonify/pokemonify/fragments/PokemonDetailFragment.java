@@ -5,6 +5,7 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +17,6 @@ import com.pokemonify.pokemonify.R;
 import com.pokemonify.pokemonify.UIComponents.MaterialDialogCreator;
 import com.pokemonify.pokemonify.Utils;
 import com.pokemonify.pokemonify.pokemondatabase.DbHelper;
-import com.pokemonify.pokemonify.pokemondatabase.MyCardsDto;
 import com.pokemonify.pokemonify.pokemondatabase.PokemonDto;
 
 /**
@@ -142,8 +142,13 @@ public class PokemonDetailFragment extends Fragment {
         pokemonHeight.setText(mPokemonDto.getHeight() + " cm");
         pokemonDesc.setText(mPokemonDto.getDesc());
         pokemonLvl.setText("Lvl " + mPokemonDto.getLevel());
-        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), getResources()
+        Bitmap bitmap=null;
+        if(mPokemonDto.getImagePath().equals("-1")) {
+            bitmap=mPokemonDto.getBitmap();
+        } else {
+        bitmap = BitmapFactory.decodeResource(getResources(), getResources()
                 .getIdentifier(mPokemonDto.getImagePath(), "drawable", getActivity().getPackageName()));
+        }
         pokemonImage.setImageBitmap(bitmap);
     }
 
@@ -155,7 +160,7 @@ public class PokemonDetailFragment extends Fragment {
     }
 
     private void saveMyCard() {
-        MyCardsDto dto=new MyCardsDto();
+        PokemonDto dto=new PokemonDto();
         dto.setId(System.currentTimeMillis());
         dto.setName(pokemonName.getText().toString());
         dto.setHp(Integer.parseInt((pokemonHp.getText().toString().substring(0,pokemonHp.getText().toString().length()-2)).trim()));
@@ -163,12 +168,19 @@ public class PokemonDetailFragment extends Fragment {
         dto.setWeight(Integer.parseInt((pokemonWeight.getText().toString().substring(0,pokemonWeight.getText().toString().length()-1)).trim()));
         dto.setHeight(Integer.parseInt((pokemonHeight.getText().toString().substring(0,pokemonHeight.getText().toString().length()-2)).trim()));
         dto.setDesc(pokemonDesc.getText().toString());
-        dto.setLevel(Integer.parseInt((pokemonLvl.getText().toString().substring(3,pokemonHeight.getText().toString().length())).trim()));
+        Log.d("ahb",pokemonLvl.getText().toString());
+        dto.setLevel(Integer.parseInt((pokemonLvl.getText().toString().substring(3)).trim()));
         pokemonImage.setDrawingCacheEnabled(true);
-        dto.setImage(Bitmap.createBitmap(pokemonImage.getDrawingCache()));
+        dto.setBitmap(Bitmap.createBitmap(pokemonImage.getDrawingCache()));
         pokemonImage.destroyDrawingCache();
+        dto.setImagePath("-1");
         final DbHelper dbHelper=new DbHelper(getActivity());
         dbHelper.saveMyCard(dto);
+    }
+
+    public void saveAndToggle() {
+        saveMyCard();
+        toggleShouldEdit();
     }
 
     public void saveToggleAndChange(Fragment fragment){
