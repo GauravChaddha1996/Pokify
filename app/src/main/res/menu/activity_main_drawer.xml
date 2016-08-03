@@ -11,10 +11,6 @@
             android:checkable="false"
             android:title="Pokedex"/>
         <item
-            android:id="@+id/nav_change_my_pokemon"
-            android:checkable="false"
-            android:title="Change my pokemon"/>
-        <item
             android:id="@+id/nav_create_card"
             android:checkable="false"
             android:title="Create Card"/>
