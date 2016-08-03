@@ -181,7 +181,7 @@ public class MyCardDetailFragment extends Fragment {
     }
 
     public void deleteCard() {
-        if((DbHelper.getInstance().deleteCard(mPokemonDto.getName()))==0) {
+        if((DbHelper.getInstance().deleteCard(mPokemonDto.getId()))==0) {
             Toast.makeText(getActivity(),"Oops we couldn't delete the pokemon.",Toast.LENGTH_SHORT).show();
         } else {
             getActivity().onBackPressed();
