@@ -13,8 +13,8 @@ import com.pokemonify.pokemonify.pokemondatabase.PokemonDto;
  * Created by gaurav on 24/7/16.
  */
 public class Utils {
-    public static void setMyPokemon(PokemonDto pokemonDto, Context context) {
-        DbHelper.getInstance().saveMyPokemon(pokemonDto);
+    public static boolean setMyPokemon(PokemonDto pokemonDto, Context context) {
+        return DbHelper.getInstance().saveMyPokemon(pokemonDto);
     }
 
     public static PokemonDto getMyPokemon(Context context) {

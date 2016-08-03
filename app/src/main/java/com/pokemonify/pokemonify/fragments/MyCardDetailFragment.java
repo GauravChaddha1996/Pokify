@@ -1,5 +1,7 @@
 package com.pokemonify.pokemonify.fragments;
 
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -42,6 +44,8 @@ public class MyCardDetailFragment extends Fragment {
     Bitmap savedScreen;
     MaterialDialogCreator materialDialogCreator;
     Boolean preEdit = false;
+    int temp=0;
+    ProgressDialog progressDialog;
 
     public MyCardDetailFragment() {
 
@@ -169,12 +173,15 @@ public class MyCardDetailFragment extends Fragment {
     }
 
     private void saveMyCard() {
+        startProgressDialog("Saving your pokemon");
         ExecutorService executorService= Executors.newSingleThreadExecutor();
         executorService.execute(new Runnable() {
             @Override
             public void run() {
-                Log.d("time start",System.currentTimeMillis()+"");
-                DbHelper.getInstance().saveMyCard(getDtoOfScreenData());
+                Log.d("saving start",System.currentTimeMillis()+"");
+                if(DbHelper.getInstance().saveMyCard(getDtoOfScreenData())){
+                    progressDialog.dismiss();
+                }
             }
         });
         executorService.shutdown();
@@ -196,11 +203,41 @@ public class MyCardDetailFragment extends Fragment {
     }
 
     public void deleteCard() {
-        if ((DbHelper.getInstance().deleteCard(mPokemonDto.getId())) == 0) {
+        startProgressDialog("Deleting the pokemon");
+
+        ExecutorService executorService= Executors.newSingleThreadExecutor();
+        executorService.execute(new Runnable() {
+            @Override
+            public void run() {
+                progressDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                    @Override
+                    public void onDismiss(DialogInterface dialogInterface) {
+                        dismissListener();
+                    }
+                });
+                temp = DbHelper.getInstance().deleteCard(mPokemonDto.getId());
+                Log.d("temp",temp+"");
+                progressDialog.dismiss();
+            }
+        });
+        executorService.shutdown();
+
+    }
+
+    private void dismissListener() {
+        if (temp == 0) {
             Toast.makeText(getActivity(), "Oops we couldn't delete the pokemon.", Toast.LENGTH_SHORT).show();
         } else {
             getActivity().onBackPressed();
         }
+    }
+
+    private void startProgressDialog(String title) {
+        progressDialog=new ProgressDialog(getActivity());
+        progressDialog.setTitle(title);
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.setCancelable(false);
+        progressDialog.show();
     }
 
     public void saveAndToggle() {
@@ -217,6 +254,16 @@ public class MyCardDetailFragment extends Fragment {
     }
 
     public void setThisAsCurrentPokemon() {
-        Utils.setMyPokemon(getDtoOfScreenData(), getActivity());
+        startProgressDialog("Making this your current pokemon");
+        ExecutorService executorService= Executors.newSingleThreadExecutor();
+        executorService.execute(new Runnable() {
+            @Override
+            public void run() {
+                if(Utils.setMyPokemon(getDtoOfScreenData(), getActivity())){
+                    progressDialog.dismiss();
+                }
+            }
+        });
+        executorService.shutdown();
     }
 }

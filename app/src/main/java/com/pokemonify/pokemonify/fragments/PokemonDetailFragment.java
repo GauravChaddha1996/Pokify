@@ -1,5 +1,6 @@
 package com.pokemonify.pokemonify.fragments;
 
+import android.app.ProgressDialog;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -41,6 +42,7 @@ public class PokemonDetailFragment extends Fragment {
     Bitmap savedScreen;
     MaterialDialogCreator materialDialogCreator;
     Boolean preEdit = false;
+    ProgressDialog progressDialog;
 
     public PokemonDetailFragment() {
 
@@ -167,12 +169,19 @@ public class PokemonDetailFragment extends Fragment {
     }
 
     private void saveMyCard() {
+        progressDialog=new ProgressDialog(getActivity());
+        progressDialog.setTitle("Saving the pokemon");
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.setCancelable(false);
+        progressDialog.show();
         ExecutorService executorService= Executors.newSingleThreadExecutor();
         executorService.execute(new Runnable() {
             @Override
             public void run() {
                 Log.d("time start",System.currentTimeMillis()+"");
-                DbHelper.getInstance().saveMyCard(getDtoOfScreen());
+                if(DbHelper.getInstance().saveMyCard(getDtoOfScreen())) {
+                    progressDialog.dismiss();
+                }
             }
         });
         executorService.shutdown();
@@ -213,6 +222,20 @@ public class PokemonDetailFragment extends Fragment {
     }
 
     public void setThisAsCurrentPokemon() {
-        Utils.setMyPokemon(getDtoOfScreen(), getActivity());
+        final ProgressDialog progressDialog=new ProgressDialog(getActivity());
+        progressDialog.setTitle("Making this your current pokemon");
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.setCancelable(false);
+        progressDialog.show();
+        ExecutorService executorService= Executors.newSingleThreadExecutor();
+        executorService.execute(new Runnable() {
+            @Override
+            public void run() {
+                if(Utils.setMyPokemon(getDtoOfScreen(), getActivity())) {
+                    progressDialog.dismiss();
+                }
+            }
+        });
+        executorService.shutdown();
     }
 }

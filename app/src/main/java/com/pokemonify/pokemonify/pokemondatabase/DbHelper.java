@@ -87,10 +87,12 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL(CREATE_TABLE_MYPOKEMON);
     }
 
-    private void execInThread(Runnable r) {
+    private boolean execInThread(Runnable r) {
         ExecutorService service = Executors.newSingleThreadExecutor();
         service.execute(r);
         service.shutdown();
+        Log.d("pokemon saved",System.currentTimeMillis()+"");
+        return true;
     }
 
     @Override
@@ -102,7 +104,7 @@ public class DbHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public void saveMyCard(PokemonDto cardsDto) {
+    public boolean saveMyCard(PokemonDto cardsDto) {
         myCardsList.add(cardsDto);
         mPokemonDto=new PokemonDto();
         mPokemonDto = cardsDto;
@@ -129,10 +131,10 @@ public class DbHelper extends SQLiteOpenHelper {
                 closeDB();
             }
         };
-        execInThread(runnable);
+        return execInThread(runnable);
     }
 
-    public void saveMyPokemon(final PokemonDto pokemonDto) {
+    public boolean saveMyPokemon(final PokemonDto pokemonDto) {
 
         myCurrentPokemon = pokemonDto;
         Runnable runnable = new Runnable() {
@@ -162,7 +164,7 @@ public class DbHelper extends SQLiteOpenHelper {
 
             }
         };
-        execInThread(runnable);
+        return execInThread(runnable);
     }
 
     public List<PokemonDto> getAllMyCards() {
@@ -267,8 +269,8 @@ public class DbHelper extends SQLiteOpenHelper {
     }
 
     public void closeDB() {
-        SQLiteDatabase db = this.getReadableDatabase();
+       /* SQLiteDatabase db = this.getReadableDatabase();
         if (db != null && db.isOpen())
-            db.close();
+            db.close();*/
     }
 }

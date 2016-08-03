@@ -1,6 +1,7 @@
 package com.pokemonify.pokemonify.fragments;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -56,7 +57,14 @@ public class MyCardListFragment extends Fragment {
                 builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        Utils.setMyPokemon(mPokemonListAdapter.getPokeList().get(position), getActivity());
+                        ProgressDialog progressDialog=new ProgressDialog(getActivity());
+                        progressDialog.setTitle("Making this your current pokemon");
+                        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                        progressDialog.setCancelable(false);
+                        progressDialog.show();
+                        if(Utils.setMyPokemon(mPokemonListAdapter.getPokeList().get(position), getActivity())) {
+                            progressDialog.dismiss();
+                        }
                     }
                 });
                 builder.show();

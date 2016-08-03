@@ -243,13 +243,17 @@ public class MainActivity extends AppCompatActivity
             Uri uri = data.getData();
             CropImage.activity(uri)
                     .setGuidelines(CropImageView.Guidelines.ON)
-                    .setAspectRatio(1, 1)
+                    .setAspectRatio(4,3)
+                    .setFixAspectRatio(true)
+                    .setOutputCompressQuality(30)
                     .start(this);
         }
         if (requestCode == 23 && resultCode == RESULT_OK) {
             CropImage.activity(cameraUri)
                     .setGuidelines(CropImageView.Guidelines.ON)
-                    .setAspectRatio(1, 1)
+                    .setAspectRatio(4,3)
+                    .setFixAspectRatio(true)
+                    .setOutputCompressQuality(30)
                     .start(this);
         }
         if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
