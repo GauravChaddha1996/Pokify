@@ -174,8 +174,7 @@ public class PokemonDetailFragment extends Fragment {
         dto.setBitmap(Bitmap.createBitmap(pokemonImage.getDrawingCache()));
         pokemonImage.destroyDrawingCache();
         dto.setImagePath("-1");
-        final DbHelper dbHelper=new DbHelper(getActivity());
-        dbHelper.saveMyCard(dto);
+        DbHelper.getInstance().saveMyCard(dto);
     }
 
     public void saveAndToggle() {

@@ -12,11 +12,14 @@ import android.util.Log;
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * Created by gaurav on 2/8/16.
  */
 public class DbHelper extends SQLiteOpenHelper {
+    public static final DbHelper mDbHelper = null;
     private static final int DATABASE_VERSION = 5;
 
     // Database Name
@@ -63,16 +66,27 @@ public class DbHelper extends SQLiteOpenHelper {
             KEY_LEVEL + " INTEGER " +
             ")";
 
+    private PokemonDto myCurrentPokemon = null;
+
     public DbHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
+    public static DbHelper getInstance() {
+        return mDbHelper;
+    }
     @Override
     public void onCreate(SQLiteDatabase db) {
 
         // creating required tables
         db.execSQL(CREATE_TABLE_MYCARD);
         db.execSQL(CREATE_TABLE_MYPOKEMON);
+    }
+
+    private void execInThread(Runnable r) {
+        ExecutorService service=Executors.newSingleThreadExecutor();
+        service.execute(r);
+        service.shutdown();
     }
 
     @Override
@@ -163,31 +177,30 @@ public class DbHelper extends SQLiteOpenHelper {
     }
 
     public PokemonDto getMyPokemon() {
-        SQLiteDatabase db = this.getReadableDatabase();
+        SQLiteDatabase db = DbHelper.this.getReadableDatabase();
 
         Cursor c = db.rawQuery("SELECT * FROM "+TABLE_MYPOKEMON, null);
-        PokemonDto dto = null;
         // looping through all rows and adding to list
         if (c.moveToFirst()) {
-                dto=new PokemonDto();
-                dto.setId(c.getInt(c.getColumnIndex(KEY_ID)));
-                dto.setName(c.getString(c.getColumnIndex(KEY_NAME)));
-                dto.setHp(c.getInt(c.getColumnIndex(KEY_HP)));
-                dto.setImagePath(c.getString(c.getColumnIndex(KEY_IMAGE_PATH)));
-                if(dto.getImagePath().equals("-1")) {
-                    byte[] a = c.getBlob(c.getColumnIndex(KEY_IMAGE));
-                    dto.setBitmap(BitmapFactory.decodeByteArray(a, 0, a.length));
-                }else{
-                    dto.setBitmap(null);
-                }
-                dto.setType(c.getString(c.getColumnIndex(KEY_TYPE)));
-                dto.setDesc(c.getString(c.getColumnIndex(KEY_DESC)));
-                dto.setWeight(c.getInt(c.getColumnIndex(KEY_WEIGHT)));
-                dto.setHeight(c.getInt(c.getColumnIndex(KEY_HEIGHT)));
-                dto.setLevel(c.getInt(c.getColumnIndex(KEY_LEVEL)));
+            myCurrentPokemon =new PokemonDto();
+            myCurrentPokemon.setId(c.getInt(c.getColumnIndex(KEY_ID)));
+            myCurrentPokemon.setName(c.getString(c.getColumnIndex(KEY_NAME)));
+            myCurrentPokemon.setHp(c.getInt(c.getColumnIndex(KEY_HP)));
+            myCurrentPokemon.setImagePath(c.getString(c.getColumnIndex(KEY_IMAGE_PATH)));
+            if(myCurrentPokemon.getImagePath().equals("-1")) {
+                byte[] a = c.getBlob(c.getColumnIndex(KEY_IMAGE));
+                myCurrentPokemon.setBitmap(BitmapFactory.decodeByteArray(a, 0, a.length));
+            }else{
+                myCurrentPokemon.setBitmap(null);
+            }
+            myCurrentPokemon.setType(c.getString(c.getColumnIndex(KEY_TYPE)));
+            myCurrentPokemon.setDesc(c.getString(c.getColumnIndex(KEY_DESC)));
+            myCurrentPokemon.setWeight(c.getInt(c.getColumnIndex(KEY_WEIGHT)));
+            myCurrentPokemon.setHeight(c.getInt(c.getColumnIndex(KEY_HEIGHT)));
+            myCurrentPokemon.setLevel(c.getInt(c.getColumnIndex(KEY_LEVEL)));
         }
         closeDB();
-        return dto;
+        return  myCurrentPokemon;
     }
 
     public int deleteCard(String name) {

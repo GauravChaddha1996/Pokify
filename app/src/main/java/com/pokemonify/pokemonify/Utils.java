@@ -14,11 +14,11 @@ import com.pokemonify.pokemonify.pokemondatabase.PokemonDto;
  */
 public class Utils {
     public static void setMyPokemon(PokemonDto pokemonDto, Context context) {
-        new DbHelper(context).saveMyPokemon(pokemonDto);
+        DbHelper.getInstance().saveMyPokemon(pokemonDto);
     }
 
     public static PokemonDto getMyPokemon(Context context) {
-        return new DbHelper(context).getMyPokemon();
+        return DbHelper.getInstance().getMyPokemon();
     }
 
     public static void hideKeyboard(Activity activity) {

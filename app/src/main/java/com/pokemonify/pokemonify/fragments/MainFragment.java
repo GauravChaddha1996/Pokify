@@ -31,6 +31,7 @@ public class MainFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        setMyPokemon();
         View view = inflater.inflate(R.layout.fragment_main, container, false);
         initViews(view);
         return view;
@@ -46,7 +47,6 @@ public class MainFragment extends Fragment {
         mMyPokemonDesc = (TextView) v.findViewById(R.id.my_pokemon_desc);
         mMyPokemonImage = (ImageView) v.findViewById(R.id.my_pokemon_image);
         mMyPokemonScreen = v.findViewById(R.id.my_pokemon_screen);
-        setMyPokemon();
         mMyPokemonName.setText(currentMyPokemon.getName());
         mMyPokemonHp.setText(currentMyPokemon.getHp() + "Hp");
         mMyPokemonType.setText(currentMyPokemon.getType());

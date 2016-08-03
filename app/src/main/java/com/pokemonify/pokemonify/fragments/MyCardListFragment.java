@@ -29,7 +29,7 @@ public class MyCardListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        nameList = new DbHelper(getActivity()).getAllMyCards();
+        nameList = DbHelper.getInstance().getAllMyCards();
         View view = inflater.inflate(R.layout.fragment_pokemon_list, container, false);
         initViews(view);
         return view;

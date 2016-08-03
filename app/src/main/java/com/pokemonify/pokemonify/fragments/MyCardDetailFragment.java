@@ -160,8 +160,7 @@ public class MyCardDetailFragment extends Fragment {
     }
 
     private void saveMyCard() {
-        final DbHelper dbHelper=new DbHelper(getActivity());
-        dbHelper.saveMyCard(getDtoOfScreenData());
+        DbHelper.getInstance().saveMyCard(getDtoOfScreenData());
     }
 
     private PokemonDto getDtoOfScreenData() {
@@ -182,7 +181,7 @@ public class MyCardDetailFragment extends Fragment {
     }
 
     public void deleteCard() {
-        if((new DbHelper(getActivity()).deleteCard(mPokemonDto.getName()))==0) {
+        if((DbHelper.getInstance().deleteCard(mPokemonDto.getName()))==0) {
             Toast.makeText(getActivity(),"Oops we couldn't delete the pokemon.",Toast.LENGTH_SHORT).show();
         } else {
             getActivity().onBackPressed();

@@ -2,6 +2,7 @@ package com.pokemonify.pokemonify;
 
 import android.app.Application;
 
+import com.pokemonify.pokemonify.pokemondatabase.DbHelper;
 import com.pokemonify.pokemonify.pokemondatabase.PokemonDatabase;
 
 /**
@@ -12,6 +13,7 @@ public class Pokemonify extends Application {
     public void onCreate() {
         super.onCreate();
         PokemonDatabase database = PokemonDatabase.newInstance(getApplicationContext());
+        DbHelper dbHelper=new DbHelper(getApplicationContext());
     }
 
 }
