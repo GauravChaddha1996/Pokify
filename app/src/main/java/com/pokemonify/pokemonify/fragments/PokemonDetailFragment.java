@@ -5,7 +5,6 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -160,21 +159,24 @@ public class PokemonDetailFragment extends Fragment {
     }
 
     private void saveMyCard() {
-        PokemonDto dto=new PokemonDto();
-        dto.setId(System.currentTimeMillis());
-        dto.setName(pokemonName.getText().toString());
-        dto.setHp(Integer.parseInt((pokemonHp.getText().toString().substring(0,pokemonHp.getText().toString().length()-2)).trim()));
-        dto.setType(pokemonType.getText().toString());
-        dto.setWeight(Integer.parseInt((pokemonWeight.getText().toString().substring(0,pokemonWeight.getText().toString().length()-1)).trim()));
-        dto.setHeight(Integer.parseInt((pokemonHeight.getText().toString().substring(0,pokemonHeight.getText().toString().length()-2)).trim()));
-        dto.setDesc(pokemonDesc.getText().toString());
-        Log.d("ahb",pokemonLvl.getText().toString());
-        dto.setLevel(Integer.parseInt((pokemonLvl.getText().toString().substring(3)).trim()));
+        DbHelper.getInstance().saveMyCard(getDtoOfScreen());
+    }
+
+    private PokemonDto getDtoOfScreen() {
+        mPokemonDto=new PokemonDto();
+        mPokemonDto.setId(System.currentTimeMillis());
+        mPokemonDto.setName(pokemonName.getText().toString());
+        mPokemonDto.setHp(Integer.parseInt((pokemonHp.getText().toString().substring(0,pokemonHp.getText().toString().length()-2)).trim()));
+        mPokemonDto.setType(pokemonType.getText().toString());
+        mPokemonDto.setWeight(Integer.parseInt((pokemonWeight.getText().toString().substring(0,pokemonWeight.getText().toString().length()-1)).trim()));
+        mPokemonDto.setHeight(Integer.parseInt((pokemonHeight.getText().toString().substring(0,pokemonHeight.getText().toString().length()-2)).trim()));
+        mPokemonDto.setDesc(pokemonDesc.getText().toString());
+        mPokemonDto.setLevel(Integer.parseInt((pokemonLvl.getText().toString().substring(3)).trim()));
         pokemonImage.setDrawingCacheEnabled(true);
-        dto.setBitmap(Bitmap.createBitmap(pokemonImage.getDrawingCache()));
+        mPokemonDto.setBitmap(Bitmap.createBitmap(pokemonImage.getDrawingCache()));
         pokemonImage.destroyDrawingCache();
-        dto.setImagePath("-1");
-        DbHelper.getInstance().saveMyCard(dto);
+        mPokemonDto.setImagePath("-1");
+        return mPokemonDto;
     }
 
     public void saveAndToggle() {
@@ -197,6 +199,6 @@ public class PokemonDetailFragment extends Fragment {
     }
 
     public void setThisAsCurrentPokemon() {
-        Utils.setMyPokemon(mPokemonDto, getActivity());
+        Utils.setMyPokemon(getDtoOfScreen(), getActivity());
     }
 }
