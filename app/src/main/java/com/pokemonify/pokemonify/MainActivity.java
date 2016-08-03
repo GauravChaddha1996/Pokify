@@ -384,6 +384,9 @@ public class MainActivity extends AppCompatActivity
                 item.setIcon(android.R.drawable.ic_menu_save);
                 myCardDetailFragment.toggleShouldEdit();
             }
+        } else if( id == R.id.action_mycard_delete) {
+            MyCardDetailFragment myCardDetailFragment = (MyCardDetailFragment) currentFragment;
+            myCardDetailFragment.deleteCard();
         }
 
         return true;

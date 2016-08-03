@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.pokemonify.pokemonify.MainActivity;
 import com.pokemonify.pokemonify.R;
@@ -178,6 +179,14 @@ public class MyCardDetailFragment extends Fragment {
         pokemonImage.destroyDrawingCache();
         dto.setImagePath("-1");
         return dto;
+    }
+
+    public void deleteCard() {
+        if((new DbHelper(getActivity()).deleteCard(mPokemonDto.getName()))==0) {
+            Toast.makeText(getActivity(),"Oops we couldn't delete the pokemon.",Toast.LENGTH_SHORT).show();
+        } else {
+            getActivity().onBackPressed();
+        }
     }
 
     public void saveAndToggle() {

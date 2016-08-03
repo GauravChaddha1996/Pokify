@@ -190,6 +190,13 @@ public class DbHelper extends SQLiteOpenHelper {
         return dto;
     }
 
+    public int deleteCard(String name) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        int temp=db.delete(TABLE_MYCARDS,KEY_NAME+" = ?",new String[]{name});
+        closeDB();
+        return temp;
+    }
+
     public void closeDB() {
         SQLiteDatabase db = this.getReadableDatabase();
         if (db != null && db.isOpen())

@@ -11,6 +11,12 @@
         android:icon="@android:drawable/ic_menu_share"
         app:showAsAction="ifRoom"/>
     <item
+        android:id="@+id/action_mycard_delete"
+        android:orderInCategory="100"
+        android:title="Delete"
+        android:icon="@android:drawable/ic_menu_delete"
+        app:showAsAction="always"/>
+    <item
         android:id="@+id/action_mycard_edit"
         android:orderInCategory="100"
         android:title="Share"
