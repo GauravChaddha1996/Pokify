@@ -27,7 +27,7 @@ public class Utils {
         methodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 
-    public static int getDisplayHeight(Activity activity){
+    public static int getDisplayHeight(Activity activity) {
         DisplayMetrics displaymetrics = new DisplayMetrics();
         activity.getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
         return displaymetrics.heightPixels;

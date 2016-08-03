@@ -37,7 +37,8 @@ public class MyCardDetailFragment extends Fragment {
     View detailScreen;
     Bitmap savedScreen;
     MaterialDialogCreator materialDialogCreator;
-    Boolean preEdit=false;
+    Boolean preEdit = false;
+
     public MyCardDetailFragment() {
 
     }
@@ -46,7 +47,7 @@ public class MyCardDetailFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mPokemonDto = (PokemonDto) getArguments().getSerializable("PokemonDto");
-        Log.d("id is:",mPokemonDto.getId()+"");
+        Log.d("id is:", mPokemonDto.getId() + "");
     }
 
     @Nullable
@@ -127,7 +128,7 @@ public class MyCardDetailFragment extends Fragment {
                 }
             }
         });
-        if(preEdit){
+        if (preEdit) {
             materialDialogCreator.setShouldEdit();
         }
     }
@@ -144,12 +145,12 @@ public class MyCardDetailFragment extends Fragment {
         pokemonHeight.setText(mPokemonDto.getHeight() + " cm");
         pokemonDesc.setText(mPokemonDto.getDesc());
         pokemonLvl.setText("Lvl " + mPokemonDto.getLevel());
-        Bitmap bitmap=null;
-        if(mPokemonDto.getImagePath().equals("-1")) {
-            bitmap=mPokemonDto.getBitmap();
+        Bitmap bitmap = null;
+        if (mPokemonDto.getImagePath().equals("-1")) {
+            bitmap = mPokemonDto.getBitmap();
         } else {
-        bitmap = BitmapFactory.decodeResource(getResources(), getResources()
-                .getIdentifier(mPokemonDto.getImagePath(), "drawable", getActivity().getPackageName()));
+            bitmap = BitmapFactory.decodeResource(getResources(), getResources()
+                    .getIdentifier(mPokemonDto.getImagePath(), "drawable", getActivity().getPackageName()));
         }
         pokemonImage.setImageBitmap(bitmap);
     }
@@ -158,7 +159,7 @@ public class MyCardDetailFragment extends Fragment {
         detailScreen.setDrawingCacheEnabled(true);
         savedScreen = Bitmap.createBitmap(detailScreen.getDrawingCache());
         detailScreen.destroyDrawingCache();
-        ((MainActivity)getActivity()).shareImage(savedScreen);
+        ((MainActivity) getActivity()).shareImage(savedScreen);
     }
 
     private void saveMyCard() {
@@ -166,14 +167,14 @@ public class MyCardDetailFragment extends Fragment {
     }
 
     private PokemonDto getDtoOfScreenData() {
-        mPokemonDto=new PokemonDto();
+        mPokemonDto = new PokemonDto();
         mPokemonDto.setId(System.currentTimeMillis());
-        Log.d("atat",mPokemonDto.getId()+"");
+        Log.d("atat", mPokemonDto.getId() + "");
         mPokemonDto.setName(pokemonName.getText().toString());
-        mPokemonDto.setHp(Integer.parseInt((pokemonHp.getText().toString().substring(0,pokemonHp.getText().toString().length()-2)).trim()));
+        mPokemonDto.setHp(Integer.parseInt((pokemonHp.getText().toString().substring(0, pokemonHp.getText().toString().length() - 2)).trim()));
         mPokemonDto.setType(pokemonType.getText().toString());
-        mPokemonDto.setWeight(Integer.parseInt((pokemonWeight.getText().toString().substring(0,pokemonWeight.getText().toString().length()-1)).trim()));
-        mPokemonDto.setHeight(Integer.parseInt((pokemonHeight.getText().toString().substring(0,pokemonHeight.getText().toString().length()-2)).trim()));
+        mPokemonDto.setWeight(Integer.parseInt((pokemonWeight.getText().toString().substring(0, pokemonWeight.getText().toString().length() - 1)).trim()));
+        mPokemonDto.setHeight(Integer.parseInt((pokemonHeight.getText().toString().substring(0, pokemonHeight.getText().toString().length() - 2)).trim()));
         mPokemonDto.setDesc(pokemonDesc.getText().toString());
         mPokemonDto.setLevel(Integer.parseInt((pokemonLvl.getText().toString().substring(3)).trim()));
         pokemonImage.setDrawingCacheEnabled(true);
@@ -184,8 +185,8 @@ public class MyCardDetailFragment extends Fragment {
     }
 
     public void deleteCard() {
-        if((DbHelper.getInstance().deleteCard(mPokemonDto.getId()))==0) {
-            Toast.makeText(getActivity(),"Oops we couldn't delete the pokemon.",Toast.LENGTH_SHORT).show();
+        if ((DbHelper.getInstance().deleteCard(mPokemonDto.getId())) == 0) {
+            Toast.makeText(getActivity(), "Oops we couldn't delete the pokemon.", Toast.LENGTH_SHORT).show();
         } else {
             getActivity().onBackPressed();
         }

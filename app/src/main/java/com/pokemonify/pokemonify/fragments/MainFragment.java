@@ -73,7 +73,7 @@ public class MainFragment extends Fragment {
     }
 
     public void setMyPokemon() {
-        currentMyPokemon=Utils.getMyPokemon(getActivity());
+        currentMyPokemon = Utils.getMyPokemon(getActivity());
         if (currentMyPokemon == null) {
             currentMyPokemon = new PokemonDto(1, "Raichu", 50, "", "Mouse", "", "angry,strong", 18, 3, 15);
         }

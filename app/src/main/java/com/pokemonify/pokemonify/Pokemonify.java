@@ -13,7 +13,7 @@ public class Pokemonify extends Application {
     public void onCreate() {
         super.onCreate();
         PokemonDatabase database = PokemonDatabase.newInstance(getApplicationContext());
-        DbHelper dbHelper=new DbHelper(getApplicationContext());
+        DbHelper dbHelper = new DbHelper(getApplicationContext());
         dbHelper.setMyCurrentPokemon();
         dbHelper.setMyCardsList();
     }

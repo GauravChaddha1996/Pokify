@@ -68,16 +68,17 @@ public class DbHelper extends SQLiteOpenHelper {
 
     private PokemonDto myCurrentPokemon = null;
     private PokemonDto mPokemonDto = null;
-    private List<PokemonDto> myCardsList =new ArrayList<PokemonDto>();
+    private List<PokemonDto> myCardsList = new ArrayList<PokemonDto>();
 
     public DbHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
-        mDbHelper=this;
+        mDbHelper = this;
     }
 
     public static DbHelper getInstance() {
         return mDbHelper;
     }
+
     @Override
     public void onCreate(SQLiteDatabase db) {
 
@@ -87,7 +88,7 @@ public class DbHelper extends SQLiteOpenHelper {
     }
 
     private void execInThread(Runnable r) {
-        ExecutorService service=Executors.newSingleThreadExecutor();
+        ExecutorService service = Executors.newSingleThreadExecutor();
         service.execute(r);
         service.shutdown();
     }
@@ -103,11 +104,11 @@ public class DbHelper extends SQLiteOpenHelper {
 
     public void saveMyCard(PokemonDto cardsDto) {
         myCardsList.add(cardsDto);
-        for(PokemonDto dto:myCardsList) {
-            Log.d("id",dto.getId()+"");
+        for (PokemonDto dto : myCardsList) {
+            Log.d("id", dto.getId() + "");
         }
-        mPokemonDto=cardsDto;
-        Runnable runnable=new Runnable() {
+        mPokemonDto = cardsDto;
+        Runnable runnable = new Runnable() {
             @Override
             public void run() {
                 SQLiteDatabase db = DbHelper.this.getWritableDatabase();
@@ -135,8 +136,8 @@ public class DbHelper extends SQLiteOpenHelper {
 
     public void saveMyPokemon(final PokemonDto pokemonDto) {
 
-        myCurrentPokemon=pokemonDto;
-        Runnable runnable=new Runnable() {
+        myCurrentPokemon = pokemonDto;
+        Runnable runnable = new Runnable() {
             @Override
             public void run() {
                 ContentValues values = new ContentValues();
@@ -145,7 +146,7 @@ public class DbHelper extends SQLiteOpenHelper {
                 values.put(KEY_HP, pokemonDto.getHp());
                 values.put(KEY_IMAGE_PATH, pokemonDto.getImagePath());
                 ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-                if(pokemonDto.getImagePath().equals("-1")) {
+                if (pokemonDto.getImagePath().equals("-1")) {
                     pokemonDto.getBitmap().compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
                 }
                 values.put(KEY_IMAGE, byteArrayOutputStream.toByteArray());
@@ -156,7 +157,7 @@ public class DbHelper extends SQLiteOpenHelper {
                 values.put(KEY_LEVEL, pokemonDto.getLevel());
 
                 SQLiteDatabase db = DbHelper.this.getWritableDatabase();
-                db.delete(TABLE_MYPOKEMON,null,null);
+                db.delete(TABLE_MYPOKEMON, null, null);
                 db.insert(TABLE_MYPOKEMON, null, values);
 
                 closeDB();
@@ -167,7 +168,7 @@ public class DbHelper extends SQLiteOpenHelper {
     }
 
     public List<PokemonDto> getAllMyCards() {
-        if(myCardsList == null ) {
+        if (myCardsList == null) {
             return setMyCardsList();
         } else {
             return myCardsList;
@@ -175,7 +176,7 @@ public class DbHelper extends SQLiteOpenHelper {
     }
 
     public List<PokemonDto> setMyCardsList() {
-        Runnable runnable=new Runnable() {
+        Runnable runnable = new Runnable() {
             @Override
             public void run() {
                 myCardsList.clear();
@@ -192,9 +193,9 @@ public class DbHelper extends SQLiteOpenHelper {
                         dto.setHp(c.getInt(c.getColumnIndex(KEY_HP)));
                         byte[] a = c.getBlob(c.getColumnIndex(KEY_IMAGE));
                         dto.setImagePath(c.getString(c.getColumnIndex(KEY_IMAGE_PATH)));
-                        if(dto.getImagePath().equals("-1")){
+                        if (dto.getImagePath().equals("-1")) {
                             dto.setBitmap(BitmapFactory.decodeByteArray(a, 0, a.length));
-                        }else{
+                        } else {
                             dto.setBitmap(null);
                         }
                         dto.setType(c.getString(c.getColumnIndex(KEY_TYPE)));
@@ -202,7 +203,7 @@ public class DbHelper extends SQLiteOpenHelper {
                         dto.setWeight(c.getInt(c.getColumnIndex(KEY_WEIGHT)));
                         dto.setHeight(c.getInt(c.getColumnIndex(KEY_HEIGHT)));
                         dto.setLevel(c.getInt(c.getColumnIndex(KEY_LEVEL)));
-                        Log.d("obj name is",dto.getName());
+                        Log.d("obj name is", dto.getName());
                         myCardsList.add(dto);
                     } while (c.moveToNext());
                 }
@@ -210,33 +211,33 @@ public class DbHelper extends SQLiteOpenHelper {
             }
         };
         execInThread(runnable);
-        return  myCardsList;
+        return myCardsList;
     }
 
     public PokemonDto getMyPokemon() {
 
-        if(myCurrentPokemon==null) {
+        if (myCurrentPokemon == null) {
             return setMyCurrentPokemon();
-        }else{
-            return  myCurrentPokemon;
+        } else {
+            return myCurrentPokemon;
         }
     }
 
     public PokemonDto setMyCurrentPokemon() {
         SQLiteDatabase db = DbHelper.this.getReadableDatabase();
 
-        Cursor c = db.rawQuery("SELECT * FROM "+TABLE_MYPOKEMON, null);
+        Cursor c = db.rawQuery("SELECT * FROM " + TABLE_MYPOKEMON, null);
         // looping through all rows and adding to list
         if (c.moveToFirst()) {
-            myCurrentPokemon =new PokemonDto();
+            myCurrentPokemon = new PokemonDto();
             myCurrentPokemon.setId(c.getInt(c.getColumnIndex(KEY_ID)));
             myCurrentPokemon.setName(c.getString(c.getColumnIndex(KEY_NAME)));
             myCurrentPokemon.setHp(c.getInt(c.getColumnIndex(KEY_HP)));
             myCurrentPokemon.setImagePath(c.getString(c.getColumnIndex(KEY_IMAGE_PATH)));
-            if(myCurrentPokemon.getImagePath().equals("-1")) {
+            if (myCurrentPokemon.getImagePath().equals("-1")) {
                 byte[] a = c.getBlob(c.getColumnIndex(KEY_IMAGE));
                 myCurrentPokemon.setBitmap(BitmapFactory.decodeByteArray(a, 0, a.length));
-            }else{
+            } else {
                 myCurrentPokemon.setBitmap(null);
             }
             myCurrentPokemon.setType(c.getString(c.getColumnIndex(KEY_TYPE)));
@@ -250,15 +251,15 @@ public class DbHelper extends SQLiteOpenHelper {
     }
 
     public int deleteCard(long id) {
-        Log.d("Deleting ",id+"");
+        Log.d("Deleting ", id + "");
         SQLiteDatabase db = this.getReadableDatabase();
-        int temp=db.delete(TABLE_MYCARDS,KEY_ID+" = ?",new String[]{String.valueOf(id)});
+        int temp = db.delete(TABLE_MYCARDS, KEY_ID + " = ?", new String[]{String.valueOf(id)});
         closeDB();
-        if(temp!=0) {
-            PokemonDto tempDto=new PokemonDto();
-            for(PokemonDto dto:myCardsList) {
-                if(dto.getId()==id) {
-                    tempDto =dto;
+        if (temp != 0) {
+            PokemonDto tempDto = new PokemonDto();
+            for (PokemonDto dto : myCardsList) {
+                if (dto.getId() == id) {
+                    tempDto = dto;
                     break;
                 }
             }

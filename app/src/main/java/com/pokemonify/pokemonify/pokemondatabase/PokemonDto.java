@@ -13,14 +13,14 @@ public class PokemonDto implements Serializable {
     private long id;
     private String name;
     private int hp;
-    private String imagePath="-1";
+    private String imagePath = "-1";
     private String type;
     private String desc;
     private String adjectives;
     private int weight;
     private int height;
     private int level;
-    private byte[] mBitmap=null;
+    private byte[] mBitmap = null;
 
     public PokemonDto() {
     }
@@ -119,20 +119,20 @@ public class PokemonDto implements Serializable {
     }
 
     public Bitmap getBitmap() {
-        if(mBitmap==null){
+        if (mBitmap == null) {
             return null;
-        }else{
-            return BitmapFactory.decodeByteArray(mBitmap,0,mBitmap.length);
+        } else {
+            return BitmapFactory.decodeByteArray(mBitmap, 0, mBitmap.length);
         }
     }
 
     public void setBitmap(Bitmap bitmap) {
-        if(bitmap!=null){
-            ByteArrayOutputStream stream=new ByteArrayOutputStream();
-            bitmap.compress(Bitmap.CompressFormat.PNG,100,stream);
-            mBitmap=stream.toByteArray();
-        }else{
-            mBitmap=null;
+        if (bitmap != null) {
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+            mBitmap = stream.toByteArray();
+        } else {
+            mBitmap = null;
         }
     }
 }
