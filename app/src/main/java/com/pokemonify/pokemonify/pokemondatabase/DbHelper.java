@@ -101,6 +101,8 @@ public class DbHelper extends SQLiteOpenHelper {
         values.put(KEY_HEIGHT, cardsDto.getHeight());
         values.put(KEY_LEVEL, cardsDto.getLevel());
         db.insert(TABLE_MYCARDS, null, values);
+
+        closeDB();
     }
 
     public void saveMyPokemon(PokemonDto pokemonDto) {
@@ -123,6 +125,8 @@ public class DbHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_MYPOKEMON,null,null);
         db.insert(TABLE_MYPOKEMON, null, values);
+
+        closeDB();
     }
 
     public List<PokemonDto> getAllMyCards() {
@@ -154,7 +158,7 @@ public class DbHelper extends SQLiteOpenHelper {
                 cardsDtos.add(dto);
             } while (c.moveToNext());
         }
-
+        closeDB();
         return cardsDtos;
     }
 
@@ -182,6 +186,7 @@ public class DbHelper extends SQLiteOpenHelper {
                 dto.setHeight(c.getInt(c.getColumnIndex(KEY_HEIGHT)));
                 dto.setLevel(c.getInt(c.getColumnIndex(KEY_LEVEL)));
         }
+        closeDB();
         return dto;
     }
 
