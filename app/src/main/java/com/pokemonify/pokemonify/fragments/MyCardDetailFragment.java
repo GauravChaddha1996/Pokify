@@ -20,6 +20,9 @@ import com.pokemonify.pokemonify.Utils;
 import com.pokemonify.pokemonify.pokemondatabase.DbHelper;
 import com.pokemonify.pokemonify.pokemondatabase.PokemonDto;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 /**
  * Created by gaurav on 25/7/16.
  */
@@ -166,7 +169,15 @@ public class MyCardDetailFragment extends Fragment {
     }
 
     private void saveMyCard() {
-        DbHelper.getInstance().saveMyCard(getDtoOfScreenData());
+        ExecutorService executorService= Executors.newSingleThreadExecutor();
+        executorService.execute(new Runnable() {
+            @Override
+            public void run() {
+                Log.d("time start",System.currentTimeMillis()+"");
+                DbHelper.getInstance().saveMyCard(getDtoOfScreenData());
+            }
+        });
+        executorService.shutdown();
     }
 
     private PokemonDto getDtoOfScreenData() {

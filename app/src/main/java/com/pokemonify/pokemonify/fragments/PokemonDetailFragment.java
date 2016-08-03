@@ -5,6 +5,7 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,9 @@ import com.pokemonify.pokemonify.UIComponents.MaterialDialogCreator;
 import com.pokemonify.pokemonify.Utils;
 import com.pokemonify.pokemonify.pokemondatabase.DbHelper;
 import com.pokemonify.pokemonify.pokemondatabase.PokemonDto;
+
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * Created by gaurav on 25/7/16.
@@ -163,7 +167,15 @@ public class PokemonDetailFragment extends Fragment {
     }
 
     private void saveMyCard() {
-        DbHelper.getInstance().saveMyCard(getDtoOfScreen());
+        ExecutorService executorService= Executors.newSingleThreadExecutor();
+        executorService.execute(new Runnable() {
+            @Override
+            public void run() {
+                Log.d("time start",System.currentTimeMillis()+"");
+                DbHelper.getInstance().saveMyCard(getDtoOfScreen());
+            }
+        });
+        executorService.shutdown();
     }
 
     private PokemonDto getDtoOfScreen() {
