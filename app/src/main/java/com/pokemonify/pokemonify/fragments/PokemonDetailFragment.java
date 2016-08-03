@@ -32,6 +32,7 @@ public class PokemonDetailFragment extends Fragment {
     TextView pokemonDesc;
     TextView pokemonLvl;
     ImageView pokemonImage;
+    Bitmap pokemonImageBitmap;
     View detailScreen;
     Bitmap savedScreen;
     MaterialDialogCreator materialDialogCreator;
@@ -131,7 +132,8 @@ public class PokemonDetailFragment extends Fragment {
     }
 
     public void setPokemonImage(Bitmap bitmap) {
-        pokemonImage.setImageBitmap(bitmap);
+        pokemonImageBitmap=bitmap;
+        pokemonImage.setImageBitmap(pokemonImageBitmap);
     }
 
     private void setPokemonData() {
@@ -149,7 +151,8 @@ public class PokemonDetailFragment extends Fragment {
             bitmap = BitmapFactory.decodeResource(getResources(), getResources()
                     .getIdentifier(mPokemonDto.getImagePath(), "drawable", getActivity().getPackageName()));
         }
-        pokemonImage.setImageBitmap(bitmap);
+        pokemonImageBitmap=bitmap;
+        pokemonImage.setImageBitmap(pokemonImageBitmap);
     }
 
     public void shareThisPokemon() {
@@ -173,9 +176,7 @@ public class PokemonDetailFragment extends Fragment {
         mPokemonDto.setHeight(Integer.parseInt((pokemonHeight.getText().toString().substring(0, pokemonHeight.getText().toString().length() - 2)).trim()));
         mPokemonDto.setDesc(pokemonDesc.getText().toString());
         mPokemonDto.setLevel(Integer.parseInt((pokemonLvl.getText().toString().substring(3)).trim()));
-        pokemonImage.setDrawingCacheEnabled(true);
-        mPokemonDto.setBitmap(Bitmap.createBitmap(pokemonImage.getDrawingCache()));
-        pokemonImage.destroyDrawingCache();
+        mPokemonDto.setBitmap(pokemonImageBitmap);
         mPokemonDto.setImagePath("-1");
         return mPokemonDto;
     }

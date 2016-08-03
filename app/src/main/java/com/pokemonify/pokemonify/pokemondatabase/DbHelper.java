@@ -104,9 +104,7 @@ public class DbHelper extends SQLiteOpenHelper {
 
     public void saveMyCard(PokemonDto cardsDto) {
         myCardsList.add(cardsDto);
-        for (PokemonDto dto : myCardsList) {
-            Log.d("id", dto.getId() + "");
-        }
+        mPokemonDto=new PokemonDto();
         mPokemonDto = cardsDto;
         Runnable runnable = new Runnable() {
             @Override
