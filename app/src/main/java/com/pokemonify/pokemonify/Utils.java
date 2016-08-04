@@ -9,6 +9,8 @@ import android.view.inputmethod.InputMethodManager;
 import com.pokemonify.pokemonify.pokemondatabase.DbHelper;
 import com.pokemonify.pokemonify.pokemondatabase.PokemonDto;
 
+import java.util.Random;
+
 /**
  * Created by gaurav on 24/7/16.
  */
@@ -31,5 +33,9 @@ public class Utils {
         DisplayMetrics displaymetrics = new DisplayMetrics();
         activity.getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
         return displaymetrics.heightPixels;
+    }
+
+    public static int getRandomId() {
+        return new Random().nextInt();
     }
 }

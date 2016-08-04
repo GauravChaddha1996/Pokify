@@ -181,7 +181,7 @@ public class PokemonDetailFragment extends Fragment {
         executorService.execute(new Runnable() {
             @Override
             public void run() {
-                Log.d("time start",System.currentTimeMillis()+"");
+                Log.d("TAG","time start:"+System.currentTimeMillis()+"");
                 if(DbHelper.getInstance().saveMyCard(getDtoOfScreen())) {
                     progressDialog.dismiss();
                 }
@@ -192,7 +192,7 @@ public class PokemonDetailFragment extends Fragment {
 
     private PokemonDto getDtoOfScreen() {
         mPokemonDto = new PokemonDto();
-        mPokemonDto.setId(System.currentTimeMillis());
+        mPokemonDto.setId(Utils.getRandomId());
         mPokemonDto.setName(pokemonName.getText().toString());
         mPokemonDto.setHp(Integer.parseInt((pokemonHp.getText().toString().substring(0, pokemonHp.getText().toString().length() - 2)).trim()));
         mPokemonDto.setType(pokemonType.getText().toString());

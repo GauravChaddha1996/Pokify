@@ -18,7 +18,7 @@ import java.util.concurrent.Executors;
  */
 public class DbHelper extends SQLiteOpenHelper {
     public static DbHelper mDbHelper = null;
-    private static final int DATABASE_VERSION = 6;
+    private static final int DATABASE_VERSION = 8;
     private Context mContext;
 
     // Database Name
@@ -68,6 +68,7 @@ public class DbHelper extends SQLiteOpenHelper {
     private PokemonDto myCurrentPokemon = null;
     private PokemonDto mPokemonDto = null;
     private List<PokemonDto> myCardsList = new ArrayList<PokemonDto>();
+    private Runnable setMyCardsListRunnable;
 
     public DbHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -91,7 +92,7 @@ public class DbHelper extends SQLiteOpenHelper {
         ExecutorService service = Executors.newSingleThreadExecutor();
         service.execute(r);
         service.shutdown();
-        Log.d("pokemon saved",System.currentTimeMillis()+"");
+        Log.d("TAG","end time"+System.currentTimeMillis()+"");
         return true;
     }
 
@@ -170,7 +171,7 @@ public class DbHelper extends SQLiteOpenHelper {
     }
 
     public List<PokemonDto> setMyCardsList() {
-        Runnable runnable = new Runnable() {
+         setMyCardsListRunnable = new Runnable() {
             @Override
             public void run() {
                 myCardsList.clear();
@@ -191,14 +192,13 @@ public class DbHelper extends SQLiteOpenHelper {
                         dto.setWeight(c.getInt(c.getColumnIndex(KEY_WEIGHT)));
                         dto.setHeight(c.getInt(c.getColumnIndex(KEY_HEIGHT)));
                         dto.setLevel(c.getInt(c.getColumnIndex(KEY_LEVEL)));
-                        Log.d("obj name is", dto.getName());
                         myCardsList.add(dto);
                     } while (c.moveToNext());
                 }
                 closeDB();
             }
         };
-        execInThread(runnable);
+        execInThread(setMyCardsListRunnable);
         return myCardsList;
     }
 
@@ -234,7 +234,7 @@ public class DbHelper extends SQLiteOpenHelper {
     }
 
     public int deleteCard(long id) {
-        Log.d("Deleting ", id + "");
+        Log.d("TAG","deleting"+ id + "");
         SQLiteDatabase db = this.getReadableDatabase();
         try{
             File file=new File(mContext.getFilesDir()+File.separator+id+".png");
@@ -247,16 +247,11 @@ public class DbHelper extends SQLiteOpenHelper {
         int temp = db.delete(TABLE_MYCARDS, KEY_ID + " = ?", new String[]{String.valueOf(id)});
         closeDB();
         if (temp != 0) {
-            PokemonDto tempDto = new PokemonDto();
-            for (PokemonDto dto : myCardsList) {
-                if (dto.getId() == id) {
-                    tempDto = dto;
-                    break;
-                }
+            if(execInThread(setMyCardsListRunnable)){
+                return temp;
             }
-            myCardsList.remove(tempDto);
         }
-        return temp;
+        return 0;
     }
 
     public void closeDB() {

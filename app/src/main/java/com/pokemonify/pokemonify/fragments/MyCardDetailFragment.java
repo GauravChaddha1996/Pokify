@@ -58,7 +58,7 @@ public class MyCardDetailFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mPokemonDto = (PokemonDto) getArguments().getSerializable("PokemonDto");
-        Log.d("id is:", mPokemonDto.getId() + "");
+        Log.d("TAG","id is:"+ mPokemonDto.getId() + "");
     }
 
     @Nullable
@@ -181,7 +181,7 @@ public class MyCardDetailFragment extends Fragment {
         executorService.execute(new Runnable() {
             @Override
             public void run() {
-                Log.d("saving start",System.currentTimeMillis()+"");
+                Log.d("TAG","saving start:"+System.currentTimeMillis()+"");
                 if(DbHelper.getInstance().saveMyCard(getDtoOfScreenData())){
                     progressDialog.dismiss();
                 }
@@ -192,7 +192,7 @@ public class MyCardDetailFragment extends Fragment {
 
     private PokemonDto getDtoOfScreenData() {
         mPokemonDto = new PokemonDto();
-        mPokemonDto.setId(System.currentTimeMillis());
+        mPokemonDto.setId(Utils.getRandomId());
         mPokemonDto.setName(pokemonName.getText().toString());
         mPokemonDto.setHp(Integer.parseInt((pokemonHp.getText().toString().substring(0, pokemonHp.getText().toString().length() - 2)).trim()));
         mPokemonDto.setType(pokemonType.getText().toString());
@@ -241,7 +241,7 @@ public class MyCardDetailFragment extends Fragment {
                     }
                 });
                 temp = DbHelper.getInstance().deleteCard(mPokemonDto.getId());
-                Log.d("temp",temp+"");
+                Log.d("TAG","temp"+temp+"");
                 progressDialog.dismiss();
             }
         });
@@ -252,6 +252,7 @@ public class MyCardDetailFragment extends Fragment {
     private void dismissListener() {
         if (temp == 0) {
             Toast.makeText(getActivity(), "Oops we couldn't delete the pokemon.", Toast.LENGTH_SHORT).show();
+            getActivity().onBackPressed();
         } else {
             getActivity().onBackPressed();
         }

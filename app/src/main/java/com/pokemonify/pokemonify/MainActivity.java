@@ -420,7 +420,7 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_create_card) {
             if (!(currentFragment instanceof PokemonDetailFragment)) {
                 PokemonDetailFragment pokemonDetailFragment = new PokemonDetailFragment();
-                PokemonDto pokemonDto = new PokemonDto(System.currentTimeMillis(), "Pokemon name", 0, "pikachu",
+                PokemonDto pokemonDto = new PokemonDto(Utils.getRandomId(), "Pokemon name", 0, "pikachu",
                         "Pokemon Type", "Pokemon's Description", "", 20, 50, 5);
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("PokemonDto", pokemonDto);
