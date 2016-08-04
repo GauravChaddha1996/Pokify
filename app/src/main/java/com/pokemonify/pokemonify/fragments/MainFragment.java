@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,8 @@ import com.pokemonify.pokemonify.MainActivity;
 import com.pokemonify.pokemonify.R;
 import com.pokemonify.pokemonify.Utils;
 import com.pokemonify.pokemonify.pokemondatabase.PokemonDto;
+
+import java.io.File;
 
 public class MainFragment extends Fragment {
 
@@ -57,7 +60,8 @@ public class MainFragment extends Fragment {
         mMyPokemonImage.getLayoutParams().height= (int) (Utils.getDisplayHeight(getActivity())*0.40);
         Bitmap bitmap=null;
         if(currentMyPokemon.getImagePath().equals("-1")) {
-            bitmap=currentMyPokemon.getBitmap();
+            Log.d("file path stored is",getActivity().getFilesDir()+File.separator+currentMyPokemon.getBitmapPath());
+            bitmap=BitmapFactory.decodeFile(currentMyPokemon.getBitmapPath());
         } else {
             bitmap = BitmapFactory.decodeResource(getResources(), getResources()
                     .getIdentifier(currentMyPokemon.getImagePath(), "drawable", getActivity().getPackageName()));

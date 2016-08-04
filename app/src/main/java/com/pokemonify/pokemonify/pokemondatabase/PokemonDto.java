@@ -1,9 +1,5 @@
 package com.pokemonify.pokemonify.pokemondatabase;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-
-import java.io.ByteArrayOutputStream;
 import java.io.Serializable;
 
 /**
@@ -20,7 +16,7 @@ public class PokemonDto implements Serializable {
     private int weight;
     private int height;
     private int level;
-    private byte[] mBitmap = null;
+    private String bitmapPath =null;
 
     public PokemonDto() {
     }
@@ -118,21 +114,11 @@ public class PokemonDto implements Serializable {
         this.level = level;
     }
 
-    public Bitmap getBitmap() {
-        if (mBitmap == null) {
-            return null;
-        } else {
-            return BitmapFactory.decodeByteArray(mBitmap, 0, mBitmap.length);
-        }
+    public String getBitmapPath() {
+        return bitmapPath;
     }
 
-    public void setBitmap(Bitmap bitmap) {
-        if (bitmap != null) {
-            ByteArrayOutputStream stream = new ByteArrayOutputStream();
-            bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
-            mBitmap = stream.toByteArray();
-        } else {
-            mBitmap = null;
-        }
+    public void setBitmapPath(String bitmapPath) {
+        this.bitmapPath = bitmapPath;
     }
 }

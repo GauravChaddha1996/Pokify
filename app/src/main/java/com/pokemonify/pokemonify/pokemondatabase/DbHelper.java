@@ -5,11 +5,9 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.util.Log;
 
-import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
@@ -20,7 +18,8 @@ import java.util.concurrent.Executors;
  */
 public class DbHelper extends SQLiteOpenHelper {
     public static DbHelper mDbHelper = null;
-    private static final int DATABASE_VERSION = 5;
+    private static final int DATABASE_VERSION = 6;
+    private Context mContext;
 
     // Database Name
     private static final String DATABASE_NAME = "Test";
@@ -31,7 +30,7 @@ public class DbHelper extends SQLiteOpenHelper {
     private static final String KEY_ID = "id";
     public static final String KEY_NAME = "name";
     public static final String KEY_HP = "hp";
-    public static final String KEY_IMAGE = "image";
+    public static final String KEY_BITMAP_PATH = "image";
     public static final String KEY_IMAGE_PATH = "imagePath";
     public static final String KEY_TYPE = "type";
     public static final String KEY_DESC = "desc";
@@ -44,7 +43,7 @@ public class DbHelper extends SQLiteOpenHelper {
             KEY_ID + " INTEGER PRIMARY KEY," +
             KEY_NAME + " VARCHAR," +
             KEY_HP + " VARCHAR," +
-            KEY_IMAGE + " BLOB," +
+            KEY_BITMAP_PATH + " VARCHAR," +
             KEY_IMAGE_PATH + " VARCHAR," +
             KEY_TYPE + " VARCHAR," +
             KEY_DESC + " VARCHAR," +
@@ -57,7 +56,7 @@ public class DbHelper extends SQLiteOpenHelper {
             KEY_ID + " INTEGER PRIMARY KEY," +
             KEY_NAME + " VARCHAR," +
             KEY_HP + " VARCHAR," +
-            KEY_IMAGE + " BLOB," +
+            KEY_BITMAP_PATH + " VARCHAR," +
             KEY_IMAGE_PATH + " VARCHAR," +
             KEY_TYPE + " VARCHAR," +
             KEY_DESC + " VARCHAR," +
@@ -72,6 +71,7 @@ public class DbHelper extends SQLiteOpenHelper {
 
     public DbHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
+        mContext=context;
         mDbHelper = this;
     }
 
@@ -118,9 +118,7 @@ public class DbHelper extends SQLiteOpenHelper {
                 values.put(KEY_NAME, mPokemonDto.getName());
                 values.put(KEY_HP, mPokemonDto.getHp());
                 values.put(KEY_IMAGE_PATH, mPokemonDto.getImagePath());
-                ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-                mPokemonDto.getBitmap().compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
-                values.put(KEY_IMAGE, byteArrayOutputStream.toByteArray());
+                values.put(KEY_BITMAP_PATH,mPokemonDto.getBitmapPath());
                 values.put(KEY_TYPE, mPokemonDto.getType());
                 values.put(KEY_DESC, mPokemonDto.getDesc());
                 values.put(KEY_WEIGHT, mPokemonDto.getWeight());
@@ -145,11 +143,7 @@ public class DbHelper extends SQLiteOpenHelper {
                 values.put(KEY_NAME, pokemonDto.getName());
                 values.put(KEY_HP, pokemonDto.getHp());
                 values.put(KEY_IMAGE_PATH, pokemonDto.getImagePath());
-                ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-                if (pokemonDto.getImagePath().equals("-1")) {
-                    pokemonDto.getBitmap().compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
-                }
-                values.put(KEY_IMAGE, byteArrayOutputStream.toByteArray());
+                values.put(KEY_BITMAP_PATH, pokemonDto.getBitmapPath());
                 values.put(KEY_TYPE, pokemonDto.getType());
                 values.put(KEY_DESC, pokemonDto.getDesc());
                 values.put(KEY_WEIGHT, pokemonDto.getWeight());
@@ -191,13 +185,7 @@ public class DbHelper extends SQLiteOpenHelper {
                         dto.setId(c.getInt(c.getColumnIndex(KEY_ID)));
                         dto.setName(c.getString(c.getColumnIndex(KEY_NAME)));
                         dto.setHp(c.getInt(c.getColumnIndex(KEY_HP)));
-                        byte[] a = c.getBlob(c.getColumnIndex(KEY_IMAGE));
-                        dto.setImagePath(c.getString(c.getColumnIndex(KEY_IMAGE_PATH)));
-                        if (dto.getImagePath().equals("-1")) {
-                            dto.setBitmap(BitmapFactory.decodeByteArray(a, 0, a.length));
-                        } else {
-                            dto.setBitmap(null);
-                        }
+                        dto.setBitmapPath(c.getString(c.getColumnIndex(KEY_BITMAP_PATH)));
                         dto.setType(c.getString(c.getColumnIndex(KEY_TYPE)));
                         dto.setDesc(c.getString(c.getColumnIndex(KEY_DESC)));
                         dto.setWeight(c.getInt(c.getColumnIndex(KEY_WEIGHT)));
@@ -234,12 +222,7 @@ public class DbHelper extends SQLiteOpenHelper {
             myCurrentPokemon.setName(c.getString(c.getColumnIndex(KEY_NAME)));
             myCurrentPokemon.setHp(c.getInt(c.getColumnIndex(KEY_HP)));
             myCurrentPokemon.setImagePath(c.getString(c.getColumnIndex(KEY_IMAGE_PATH)));
-            if (myCurrentPokemon.getImagePath().equals("-1")) {
-                byte[] a = c.getBlob(c.getColumnIndex(KEY_IMAGE));
-                myCurrentPokemon.setBitmap(BitmapFactory.decodeByteArray(a, 0, a.length));
-            } else {
-                myCurrentPokemon.setBitmap(null);
-            }
+            myCurrentPokemon.setBitmapPath(c.getString(c.getColumnIndex(KEY_BITMAP_PATH)));
             myCurrentPokemon.setType(c.getString(c.getColumnIndex(KEY_TYPE)));
             myCurrentPokemon.setDesc(c.getString(c.getColumnIndex(KEY_DESC)));
             myCurrentPokemon.setWeight(c.getInt(c.getColumnIndex(KEY_WEIGHT)));
@@ -253,6 +236,14 @@ public class DbHelper extends SQLiteOpenHelper {
     public int deleteCard(long id) {
         Log.d("Deleting ", id + "");
         SQLiteDatabase db = this.getReadableDatabase();
+        try{
+            File file=new File(mContext.getFilesDir()+File.separator+id+".png");
+            if(file.exists()) {
+                file.delete();
+            }
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
         int temp = db.delete(TABLE_MYCARDS, KEY_ID + " = ?", new String[]{String.valueOf(id)});
         closeDB();
         if (temp != 0) {

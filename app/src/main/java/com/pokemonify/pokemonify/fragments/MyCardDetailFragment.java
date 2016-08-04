@@ -22,6 +22,9 @@ import com.pokemonify.pokemonify.Utils;
 import com.pokemonify.pokemonify.pokemondatabase.DbHelper;
 import com.pokemonify.pokemonify.pokemondatabase.PokemonDto;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -156,7 +159,7 @@ public class MyCardDetailFragment extends Fragment {
         pokemonLvl.setText("Lvl " + mPokemonDto.getLevel());
         Bitmap bitmap = null;
         if (mPokemonDto.getImagePath().equals("-1")) {
-            bitmap = mPokemonDto.getBitmap();
+            bitmap=BitmapFactory.decodeFile(mPokemonDto.getBitmapPath());
         } else {
             bitmap = BitmapFactory.decodeResource(getResources(), getResources()
                     .getIdentifier(mPokemonDto.getImagePath(), "drawable", getActivity().getPackageName()));
@@ -197,9 +200,31 @@ public class MyCardDetailFragment extends Fragment {
         mPokemonDto.setHeight(Integer.parseInt((pokemonHeight.getText().toString().substring(0, pokemonHeight.getText().toString().length() - 2)).trim()));
         mPokemonDto.setDesc(pokemonDesc.getText().toString());
         mPokemonDto.setLevel(Integer.parseInt((pokemonLvl.getText().toString().substring(3)).trim()));
-        mPokemonDto.setBitmap(pokemonImageBitmap);
+        mPokemonDto.setBitmapPath(writeToFile(pokemonImageBitmap,mPokemonDto.getId()).getAbsolutePath());
         mPokemonDto.setImagePath("-1");
         return mPokemonDto;
+    }
+
+    private File writeToFile(Bitmap bitmap,long id) {
+        OutputStream outStream = null;
+
+        File file = new File(getActivity().getFilesDir()+File.separator+id+ ".png");
+        if (file.exists()) {
+            file.delete();
+            file = new File(getActivity().getFilesDir()+File.separator+id+ ".png");
+            Log.e("file exist", "" + file + ",Bitmap= " + file.getAbsolutePath());
+        }
+        try {
+            // make a new bitmap from your file
+            outStream = new FileOutputStream(file);
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, outStream);
+            outStream.flush();
+            outStream.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        Log.e("file", "" + file);
+        return file;
     }
 
     public void deleteCard() {

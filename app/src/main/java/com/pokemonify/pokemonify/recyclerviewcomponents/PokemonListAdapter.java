@@ -47,7 +47,7 @@ public class PokemonListAdapter extends RecyclerView.Adapter<PokemonListAdapter.
     public void onBindViewHolder(MyViewHolder holder, int position) {
         holder.name.setText(pokeList.get(position).getName());
         if (pokeList.get(position).getImagePath().equals("-1")) {
-            pokeImage = pokeList.get(position).getBitmap();
+            pokeImage = BitmapFactory.decodeFile(pokeList.get(position).getBitmapPath());
         } else {
             pokeImage = BitmapFactory.decodeResource(mContext.getResources(), mContext.getResources()
                     .getIdentifier(pokeList.get(position).getImagePath(), "drawable", mContext.
