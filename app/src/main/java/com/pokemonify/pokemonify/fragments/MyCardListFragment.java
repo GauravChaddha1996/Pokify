@@ -7,25 +7,35 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.pokemonify.pokemonify.MainActivity;
 import com.pokemonify.pokemonify.R;
+import com.pokemonify.pokemonify.UIComponents.CommonAdapter;
 import com.pokemonify.pokemonify.Utils;
 import com.pokemonify.pokemonify.pokemondatabase.DbHelper;
 import com.pokemonify.pokemonify.pokemondatabase.PokemonDto;
 import com.pokemonify.pokemonify.recyclerviewcomponents.ItemClickSupport;
 import com.pokemonify.pokemonify.recyclerviewcomponents.PokemonListAdapter;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 
-public class MyCardListFragment extends Fragment {
+public class MyCardListFragment extends Fragment implements CommonAdapter.OnGetViewListener<String> {
     PokemonListAdapter mPokemonListAdapter;
     RecyclerView mRecyclerView;
     List<PokemonDto> nameList;
+    ProgressDialog progressDialog;
+    ProgressDialog progressDialog2;
+    int temp = 0;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -45,25 +55,56 @@ public class MyCardListFragment extends Fragment {
             @Override
             public boolean onItemLongClicked(RecyclerView recyclerView, final int position, View v) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                builder.setTitle("My Pokemon");
-                builder.setMessage("Set " + mPokemonListAdapter.getPokeList().get(position).getName() +
-                        " as My pokemon?");
-                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                builder.setTitle("Select action");
+                final CommonAdapter<String> commonAdapter = new CommonAdapter<>(MyCardListFragment.this);
+                final List<String> list = new ArrayList<>();
+                list.add("Set as my pokemon");
+                list.add("Delete this card");
+                commonAdapter.setList(list);
+                builder.setAdapter(commonAdapter, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
+                        if (list.get(i).equals("Set as my pokemon")) {
+                            progressDialog2 = new ProgressDialog(getActivity());
+                            progressDialog2.setTitle("Making this your current pokemon");
+                            progressDialog2.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                            progressDialog2.setCancelable(false);
+                            progressDialog2.show();
+                            ExecutorService executorService = Executors.newSingleThreadExecutor();
+                            executorService.execute(new Runnable() {
+                                @Override
+                                public void run() {
+                                    if (Utils.setMyPokemon(mPokemonListAdapter.getPokeList().get(position)
+                                            , getActivity())) {
+                                        progressDialog2.dismiss();
+                                    }
+                                }
+                            });
+                            executorService.shutdown();
+                        } else {
+                            progressDialog = new ProgressDialog(getActivity());
+                            progressDialog.setTitle("Making this your current pokemon");
+                            progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                            progressDialog.setCancelable(false);
+                            progressDialog.show();
 
-                    }
-                });
-                builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        ProgressDialog progressDialog=new ProgressDialog(getActivity());
-                        progressDialog.setTitle("Making this your current pokemon");
-                        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-                        progressDialog.setCancelable(false);
-                        progressDialog.show();
-                        if(Utils.setMyPokemon(mPokemonListAdapter.getPokeList().get(position), getActivity())) {
-                            progressDialog.dismiss();
+                            ExecutorService executorService = Executors.newSingleThreadExecutor();
+                            executorService.execute(new Runnable() {
+                                @Override
+                                public void run() {
+                                    progressDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                                        @Override
+                                        public void onDismiss(DialogInterface dialogInterface) {
+                                            dismissListener(position);
+                                        }
+                                    });
+                                    temp = DbHelper.getInstance().deleteCard(mPokemonListAdapter.
+                                            getPokeList().get(position).getId());
+                                    Log.d("TAG", "temp" + temp + "");
+                                    progressDialog.dismiss();
+                                }
+                            });
+                            executorService.shutdown();
                         }
                     }
                 });
@@ -85,5 +126,39 @@ public class MyCardListFragment extends Fragment {
                 mainActivity.changeFrag(detailFragment);
             }
         });
+    }
+
+    private void dismissListener(int position) {
+        if (temp == 0) {
+            Toast.makeText(getActivity(), "Oops we couldn't delete the pokemon.", Toast.LENGTH_SHORT).show();
+        } else {
+            mPokemonListAdapter.notifyItemRemoved(position);
+            /*mPokemonListAdapter.setPokeList(DbHelper.getInstance().getAllMyCards());
+            mPokemonListAdapter.notifyDataSetChanged();*/
+        }
+    }
+
+    @Override
+    public View getView(View convertView, String item, int position) {
+        MyDialogViewHolder myDialogViewHolder;
+        if (convertView == null) {
+            myDialogViewHolder = new MyDialogViewHolder();
+            convertView = LayoutInflater.from(getActivity()).inflate(R.layout.activity_imagepicker, null);
+            convertView.findViewById(R.id.dialogListImage).setVisibility(View.GONE);
+            myDialogViewHolder.mTextView = (TextView) convertView.findViewById(R.id.dialogListText);
+            convertView.setTag(myDialogViewHolder);
+        } else {
+            myDialogViewHolder = (MyDialogViewHolder) convertView.getTag();
+        }
+        if (item.equals("Set as my pokemon")) {
+            myDialogViewHolder.mTextView.setText("Set as my pokemon");
+        } else {
+            myDialogViewHolder.mTextView.setText("Delete this card");
+        }
+        return convertView;
+    }
+
+    private class MyDialogViewHolder {
+        TextView mTextView;
     }
 }

@@ -328,9 +328,7 @@ public class MainActivity extends AppCompatActivity
         } else {
             if (currentFragment instanceof MyCardDetailFragment) {
                 changeFrag(new MyCardListFragment());
-            } else if (currentFragment instanceof PokemonDetailFragment) {
-                changeFrag(new PokemonListFragment());
-            } else if (!(currentFragment instanceof MainFragment)) {
+            }else if (!(currentFragment instanceof MainFragment)) {
                 changeFrag(new MainFragment());
             } else {
                 super.onBackPressed();
