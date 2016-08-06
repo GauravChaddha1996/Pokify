@@ -55,9 +55,7 @@ public class PokemonListFragment extends Fragment {
             @Override
             public boolean onItemLongClicked(RecyclerView recyclerView, final int position, View v) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                builder.setTitle("My Pokemon");
-                builder.setMessage("Set " + mPokemonListAdapter.getPokeList().get(position).getName() +
-                        " as My pokemon?");
+                builder.setTitle("Set " + mPokemonListAdapter.getPokeList().get(position).getName() +" as my pokemon?");
                 builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {

@@ -350,10 +350,10 @@ public class MainActivity extends AppCompatActivity
             if (((PokemonDetailFragment) currentFragment).getPreEdit()) {
                 item.setIcon(android.R.drawable.ic_menu_save);
             }
-            MenuItem item2 = menu.findItem(R.id.action_search);
-            searchView.setMenuItem(item2);
         } else if (currentFragment instanceof MyCardDetailFragment) {
             getMenuInflater().inflate(R.menu.mycardetial, menu);
+        } else if (currentFragment instanceof MyCardListFragment) {
+            getMenuInflater().inflate(R.menu.mycardlist, menu);
         } else {
             getMenuInflater().inflate(R.menu.other, menu);
             MenuItem item = menu.findItem(R.id.action_search);

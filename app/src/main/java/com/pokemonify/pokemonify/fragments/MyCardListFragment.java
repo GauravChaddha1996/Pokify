@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -144,21 +145,24 @@ public class MyCardListFragment extends Fragment implements CommonAdapter.OnGetV
         if (convertView == null) {
             myDialogViewHolder = new MyDialogViewHolder();
             convertView = LayoutInflater.from(getActivity()).inflate(R.layout.activity_imagepicker, null);
-            convertView.findViewById(R.id.dialogListImage).setVisibility(View.GONE);
             myDialogViewHolder.mTextView = (TextView) convertView.findViewById(R.id.dialogListText);
+            myDialogViewHolder.mImageView = (ImageView) convertView.findViewById(R.id.dialogListImage);
             convertView.setTag(myDialogViewHolder);
         } else {
             myDialogViewHolder = (MyDialogViewHolder) convertView.getTag();
         }
         if (item.equals("Set as my pokemon")) {
             myDialogViewHolder.mTextView.setText("Set as my pokemon");
+            myDialogViewHolder.mImageView.setImageDrawable(getResources().getDrawable(android.R.drawable.ic_menu_set_as));
         } else {
             myDialogViewHolder.mTextView.setText("Delete this card");
+            myDialogViewHolder.mImageView.setImageDrawable(getResources().getDrawable(android.R.drawable.ic_menu_delete));
         }
         return convertView;
     }
 
     private class MyDialogViewHolder {
         TextView mTextView;
+        ImageView mImageView;
     }
 }

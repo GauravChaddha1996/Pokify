@@ -2,14 +2,14 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
       xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/action_mycard_make_current_pokemon"
-        android:title="Make this my pokemon"/>
-    <item
-        android:id="@+id/action_mycard_share"
+        android:id="@+id/action_mycard_edit"
         android:orderInCategory="100"
         android:title="Share"
-        android:icon="@android:drawable/ic_menu_share"
-        app:showAsAction="ifRoom"/>
+        android:icon="@android:drawable/ic_menu_edit"
+        app:showAsAction="always"/>
+    <item
+        android:id="@+id/action_mycard_make_current_pokemon"
+        android:title="Make this my pokemon"/>
     <item
         android:id="@+id/action_mycard_delete"
         android:orderInCategory="100"
@@ -17,9 +17,9 @@
         android:icon="@android:drawable/ic_menu_delete"
         app:showAsAction="always"/>
     <item
-        android:id="@+id/action_mycard_edit"
+        android:id="@+id/action_mycard_share"
         android:orderInCategory="100"
         android:title="Share"
-        android:icon="@android:drawable/ic_menu_edit"
-        app:showAsAction="always"/>
+        android:icon="@android:drawable/ic_menu_share"
+        app:showAsAction="ifRoom"/>
 </menu>
