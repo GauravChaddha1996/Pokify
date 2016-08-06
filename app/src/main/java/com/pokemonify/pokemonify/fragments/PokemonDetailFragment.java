@@ -46,6 +46,7 @@ public class PokemonDetailFragment extends Fragment {
     MaterialDialogCreator materialDialogCreator;
     Boolean preEdit = false;
     ProgressDialog progressDialog;
+    String fromSearch="-1";
 
     public PokemonDetailFragment() {
 
@@ -55,6 +56,7 @@ public class PokemonDetailFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mPokemonDto = (PokemonDto) getArguments().getSerializable("PokemonDto");
+        fromSearch =getArguments().getString("searchString");
     }
 
     @Nullable
@@ -63,6 +65,14 @@ public class PokemonDetailFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_pokemon_detail, container, false);
         initViews(view);
         return view;
+    }
+
+    public String getFromSearch() {
+        return fromSearch;
+    }
+
+    public void setFromSearch(String fromSearch) {
+        this.fromSearch = fromSearch;
     }
 
     private void initViews(View v) {

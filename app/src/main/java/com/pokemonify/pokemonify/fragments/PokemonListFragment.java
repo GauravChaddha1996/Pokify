@@ -34,6 +34,15 @@ public class PokemonListFragment extends Fragment {
     List<PokemonDto> nameList;
     String[] adjectiveList;
     TextView mSeachedText;
+    String query="-1";
+
+    public PokemonListFragment() {
+    }
+    public PokemonListFragment(String s) {
+        query=s;
+    }
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -87,12 +96,16 @@ public class PokemonListFragment extends Fragment {
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("PokemonDto", clickedPokemon);
                 PokemonDetailFragment detailFragment = new PokemonDetailFragment();
+                bundle.putString("searchString",((MainActivity)getActivity()).getSearchString());
                 detailFragment.setArguments(bundle);
                 Utils.hideKeyboard(mainActivity);
                 mainActivity.hideSearch();
                 mainActivity.changeFrag(detailFragment);
             }
         });
+        if(!query.equals("-1")) {
+            search(query);
+        }
     }
 
     public void search(String query) {

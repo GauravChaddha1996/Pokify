@@ -412,7 +412,14 @@ public class MaterialSearchView extends FrameLayout implements Filter.FilterList
             setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    setQuery((String) adapter.getItem(position), submit);
+                    String temp=mSearchSrcTextView.getText().toString();
+                    int tempi=temp.lastIndexOf(",");
+                    if(tempi !=-1) {
+                        temp=temp.substring(0,tempi);
+                    }else{
+                        temp="";
+                    }
+                    setQuery(temp+","+(String) adapter.getItem(position), submit);
                 }
             });
         } else {

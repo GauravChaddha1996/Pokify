@@ -53,6 +53,7 @@ public class MainActivity extends AppCompatActivity
     AppBarLayout mAppBarLayout;
     Uri cameraUri;
     ContentValues values;
+    String searchString="-1";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -128,6 +129,7 @@ public class MainActivity extends AppCompatActivity
 
     public void search(String query) {
         if (currentFragment instanceof PokemonListFragment) {
+            searchString=query;
             PokemonListFragment pokemonListFragment = (PokemonListFragment) currentFragment;
             pokemonListFragment.search(query);
         }
@@ -137,13 +139,24 @@ public class MainActivity extends AppCompatActivity
         searchView.closeSearch();
     }
 
+    public String getSearchString() {
+        return searchString;
+    }
+
     public void changeFrag(Fragment fragment) {
         if (currentFragment instanceof PokemonDetailFragment) {
             PokemonDetailFragment pokemonDetailFragment = (PokemonDetailFragment) currentFragment;
             if (pokemonDetailFragment.getEditing()) {
                 checkAndSaveCard(fragment);
             } else {
-                doFragTransaction(fragment);
+                String temp=((PokemonDetailFragment)currentFragment).getFromSearch();
+                if(!temp.equals("-1")) {
+                    PokemonListFragment listFragment=new PokemonListFragment(temp);
+                    doFragTransaction(listFragment);
+                }else{
+                    doFragTransaction(fragment);
+                }
+
             }
         } else if (currentFragment instanceof MyCardDetailFragment) {
             MyCardDetailFragment myCardDetailFragment = (MyCardDetailFragment) currentFragment;
@@ -157,7 +170,7 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    private void doFragTransaction(Fragment fragment) {
+    private boolean doFragTransaction(Fragment fragment) {
         currentFragment = fragment;
         if (currentFragment instanceof MainFragment) {
             mAppBarLayout = (AppBarLayout) findViewById(R.id.appbarlayout);
@@ -169,6 +182,7 @@ public class MainActivity extends AppCompatActivity
         fragmentTransaction.replace(R.id.mainFrameLayout, fragment);
         fragmentTransaction.commitAllowingStateLoss();
         supportInvalidateOptionsMenu();
+        return true;
     }
 
     private void checkAndSaveCard(final Fragment fragment) {
@@ -436,6 +450,7 @@ public class MainActivity extends AppCompatActivity
                         "Pokemon Type", "Pokemon's Description", "", 20, 50, 5);
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("PokemonDto", pokemonDto);
+                bundle.putString("searchString","-1");
                 pokemonDetailFragment.setArguments(bundle);
                 pokemonDetailFragment.setPreEdit(true);
                 changeFrag(pokemonDetailFragment);
