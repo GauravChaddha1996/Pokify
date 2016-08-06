@@ -62,6 +62,7 @@ public class MainFragment extends Fragment {
         if(currentMyPokemon.getImagePath().equals("-1")) {
             Log.d("file path stored is",getActivity().getFilesDir()+File.separator+currentMyPokemon.getBitmapPath());
             bitmap=BitmapFactory.decodeFile(currentMyPokemon.getBitmapPath());
+            bitmap=Utils.getRoundedCornerBitmap(bitmap);
         } else {
             bitmap = BitmapFactory.decodeResource(getResources(), getResources()
                     .getIdentifier(currentMyPokemon.getImagePath(), "drawable", getActivity().getPackageName()));

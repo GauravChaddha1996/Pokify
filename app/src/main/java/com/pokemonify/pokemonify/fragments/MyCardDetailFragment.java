@@ -160,6 +160,7 @@ public class MyCardDetailFragment extends Fragment {
         Bitmap bitmap = null;
         if (mPokemonDto.getImagePath().equals("-1")) {
             bitmap=BitmapFactory.decodeFile(mPokemonDto.getBitmapPath());
+            bitmap=Utils.getRoundedCornerBitmap(bitmap);
         } else {
             bitmap = BitmapFactory.decodeResource(getResources(), getResources()
                     .getIdentifier(mPokemonDto.getImagePath(), "drawable", getActivity().getPackageName()));
