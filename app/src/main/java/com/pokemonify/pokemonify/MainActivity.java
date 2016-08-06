@@ -145,7 +145,15 @@ public class MainActivity extends AppCompatActivity
             }else {
                doFragTransaction(fragment);
             }
-        } else {
+        } else if (currentFragment instanceof MyCardDetailFragment) {
+            MyCardDetailFragment myCardDetailFragment = (MyCardDetailFragment) currentFragment;
+            if (myCardDetailFragment.getEditing()) {
+                checkAndSaveCard(fragment);
+            }else {
+                doFragTransaction(fragment);
+            }
+        }
+        else {
            doFragTransaction(fragment);
         }
     }
@@ -170,14 +178,21 @@ public class MainActivity extends AppCompatActivity
         builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-
-                ((PokemonDetailFragment)currentFragment).saveToggleAndChange(fragment);
+                if(currentFragment instanceof PokemonDetailFragment) {
+                    ((PokemonDetailFragment)currentFragment).saveToggleAndChange(fragment);
+                } else {
+                    ((MyCardDetailFragment) currentFragment).saveAndToggleAndChange(fragment);
+                }
             }
         });
         builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                ((PokemonDetailFragment)currentFragment).toggleShouldEdit();
+                if(currentFragment instanceof PokemonDetailFragment) {
+                    ((PokemonDetailFragment)currentFragment).toggleShouldEdit();
+                }else  {
+                    ((MyCardDetailFragment)currentFragment).toggleShouldEdit();
+                }
                 changeFrag(fragment);
             }
         });

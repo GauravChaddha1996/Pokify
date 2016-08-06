@@ -270,6 +270,11 @@ public class MyCardDetailFragment extends Fragment {
         saveMyCard();
         toggleShouldEdit();
     }
+    public void saveAndToggleAndChange(Fragment fragment) {
+        saveMyCard();
+        toggleShouldEdit();
+        ((MainActivity)getActivity()).changeFrag(fragment);
+    }
 
     public void toggleShouldEdit() {
         materialDialogCreator.setShouldEdit();
