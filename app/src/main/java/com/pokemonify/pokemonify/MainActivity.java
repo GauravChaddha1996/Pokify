@@ -142,23 +142,22 @@ public class MainActivity extends AppCompatActivity
             PokemonDetailFragment pokemonDetailFragment = (PokemonDetailFragment) currentFragment;
             if (pokemonDetailFragment.getEditing()) {
                 checkAndSaveCard(fragment);
-            }else {
-               doFragTransaction(fragment);
+            } else {
+                doFragTransaction(fragment);
             }
         } else if (currentFragment instanceof MyCardDetailFragment) {
             MyCardDetailFragment myCardDetailFragment = (MyCardDetailFragment) currentFragment;
             if (myCardDetailFragment.getEditing()) {
                 checkAndSaveCard(fragment);
-            }else {
+            } else {
                 doFragTransaction(fragment);
             }
-        }
-        else {
-           doFragTransaction(fragment);
+        } else {
+            doFragTransaction(fragment);
         }
     }
 
-    private void doFragTransaction(Fragment fragment){
+    private void doFragTransaction(Fragment fragment) {
         currentFragment = fragment;
         if (currentFragment instanceof MainFragment) {
             mAppBarLayout = (AppBarLayout) findViewById(R.id.appbarlayout);
@@ -166,7 +165,7 @@ public class MainActivity extends AppCompatActivity
         }
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.setCustomAnimations(R.anim.slide_right_in, R.anim.slide_left_out);
+        fragmentTransaction.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out);
         fragmentTransaction.replace(R.id.mainFrameLayout, fragment);
         fragmentTransaction.commitAllowingStateLoss();
         supportInvalidateOptionsMenu();
@@ -178,8 +177,8 @@ public class MainActivity extends AppCompatActivity
         builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                if(currentFragment instanceof PokemonDetailFragment) {
-                    ((PokemonDetailFragment)currentFragment).saveToggleAndChange(fragment);
+                if (currentFragment instanceof PokemonDetailFragment) {
+                    ((PokemonDetailFragment) currentFragment).saveToggleAndChange(fragment);
                 } else {
                     ((MyCardDetailFragment) currentFragment).saveAndToggleAndChange(fragment);
                 }
@@ -188,10 +187,10 @@ public class MainActivity extends AppCompatActivity
         builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                if(currentFragment instanceof PokemonDetailFragment) {
-                    ((PokemonDetailFragment)currentFragment).toggleShouldEdit();
-                }else  {
-                    ((MyCardDetailFragment)currentFragment).toggleShouldEdit();
+                if (currentFragment instanceof PokemonDetailFragment) {
+                    ((PokemonDetailFragment) currentFragment).toggleShouldEdit();
+                } else {
+                    ((MyCardDetailFragment) currentFragment).toggleShouldEdit();
                 }
                 changeFrag(fragment);
             }
@@ -258,7 +257,7 @@ public class MainActivity extends AppCompatActivity
             Uri uri = data.getData();
             CropImage.activity(uri)
                     .setGuidelines(CropImageView.Guidelines.ON)
-                    .setAspectRatio(4,3)
+                    .setAspectRatio(4, 3)
                     .setFixAspectRatio(true)
                     .setOutputCompressQuality(30)
                     .start(this);
@@ -266,7 +265,7 @@ public class MainActivity extends AppCompatActivity
         if (requestCode == 23 && resultCode == RESULT_OK) {
             CropImage.activity(cameraUri)
                     .setGuidelines(CropImageView.Guidelines.ON)
-                    .setAspectRatio(4,3)
+                    .setAspectRatio(4, 3)
                     .setFixAspectRatio(true)
                     .setOutputCompressQuality(30)
                     .start(this);
@@ -277,7 +276,7 @@ public class MainActivity extends AppCompatActivity
                 Bitmap bitmap = null;
                 try {
                     bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), result.getUri());
-                    if(currentFragment instanceof PokemonDetailFragment) {
+                    if (currentFragment instanceof PokemonDetailFragment) {
                         ((PokemonDetailFragment) currentFragment).setPokemonImage(bitmap);
                     } else {
                         ((MyCardDetailFragment) currentFragment).setPokemonImage(bitmap);
@@ -327,15 +326,16 @@ public class MainActivity extends AppCompatActivity
         if (searchView.isSearchOpen()) {
             searchView.closeSearch();
         } else {
-            if(currentFragment instanceof MyCardDetailFragment){
+            if (currentFragment instanceof MyCardDetailFragment) {
                 changeFrag(new MyCardListFragment());
-            }else{
-                if (!(currentFragment instanceof MainFragment)) {
-                    changeFrag(new MainFragment());
-                } else {
-                    super.onBackPressed();
-                }
+            } else if (currentFragment instanceof PokemonDetailFragment) {
+                changeFrag(new PokemonListFragment());
+            } else if (!(currentFragment instanceof MainFragment)) {
+                changeFrag(new MainFragment());
+            } else {
+                super.onBackPressed();
             }
+
         }
     }
 
@@ -355,9 +355,8 @@ public class MainActivity extends AppCompatActivity
             MenuItem item2 = menu.findItem(R.id.action_search);
             searchView.setMenuItem(item2);
         } else if (currentFragment instanceof MyCardDetailFragment) {
-            getMenuInflater().inflate(R.menu.mycardetial,menu);
-        }
-        else {
+            getMenuInflater().inflate(R.menu.mycardetial, menu);
+        } else {
             getMenuInflater().inflate(R.menu.other, menu);
             MenuItem item = menu.findItem(R.id.action_search);
             searchView.setMenuItem(item);
@@ -391,13 +390,13 @@ public class MainActivity extends AppCompatActivity
                 item.setIcon(android.R.drawable.ic_menu_save);
                 pokemonDetailFragment.toggleShouldEdit();
             }
-        } else if( id == R.id.action_mycard_make_current_pokemon) {
+        } else if (id == R.id.action_mycard_make_current_pokemon) {
             MyCardDetailFragment myCardDetailFragment = (MyCardDetailFragment) currentFragment;
             myCardDetailFragment.setThisAsCurrentPokemon();
-        } else if( id == R.id.action_mycard_share) {
+        } else if (id == R.id.action_mycard_share) {
             MyCardDetailFragment myCardDetailFragment = (MyCardDetailFragment) currentFragment;
             myCardDetailFragment.shareThisPokemon();
-        } else if( id == R.id.action_mycard_edit) {
+        } else if (id == R.id.action_mycard_edit) {
             MyCardDetailFragment myCardDetailFragment = (MyCardDetailFragment) currentFragment;
             if (myCardDetailFragment.getEditing()) {
                 item.setIcon(android.R.drawable.ic_menu_edit);
@@ -406,7 +405,7 @@ public class MainActivity extends AppCompatActivity
                 item.setIcon(android.R.drawable.ic_menu_save);
                 myCardDetailFragment.toggleShouldEdit();
             }
-        } else if( id == R.id.action_mycard_delete) {
+        } else if (id == R.id.action_mycard_delete) {
             MyCardDetailFragment myCardDetailFragment = (MyCardDetailFragment) currentFragment;
             myCardDetailFragment.deleteCard();
         }
@@ -428,7 +427,7 @@ public class MainActivity extends AppCompatActivity
             if (!(currentFragment instanceof PokemonListFragment)) {
                 changeFrag(new PokemonListFragment());
             }
-        }else if (id == R.id.nav_my_cards) {
+        } else if (id == R.id.nav_my_cards) {
             if (!(currentFragment instanceof MyCardListFragment)) {
                 changeFrag(new MyCardListFragment());
             }
