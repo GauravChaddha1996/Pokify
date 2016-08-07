@@ -96,7 +96,7 @@ public class MyCardListFragment extends Fragment implements CommonAdapter.OnGetV
                                     progressDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
                                         @Override
                                         public void onDismiss(DialogInterface dialogInterface) {
-                                            dismissListener(position);
+                                            dismissListener();
                                         }
                                     });
                                     temp = DbHelper.getInstance().deleteCard(mPokemonListAdapter.
@@ -129,11 +129,11 @@ public class MyCardListFragment extends Fragment implements CommonAdapter.OnGetV
         });
     }
 
-    private void dismissListener(int position) {
+    private void dismissListener() {
         if (temp == 0) {
             Toast.makeText(getActivity(), "Oops we couldn't delete the pokemon.", Toast.LENGTH_SHORT).show();
         } else {
-            mPokemonListAdapter.notifyItemRemoved(position);
+            mPokemonListAdapter.notifyDataSetChanged();
             /*mPokemonListAdapter.setPokeList(DbHelper.getInstance().getAllMyCards());
             mPokemonListAdapter.notifyDataSetChanged();*/
         }

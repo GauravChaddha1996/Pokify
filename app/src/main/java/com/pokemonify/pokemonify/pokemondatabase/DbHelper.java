@@ -18,7 +18,7 @@ import java.util.concurrent.Executors;
  */
 public class DbHelper extends SQLiteOpenHelper {
     public static DbHelper mDbHelper = null;
-    private static final int DATABASE_VERSION = 8;
+    private static final int DATABASE_VERSION = 10;
     private Context mContext;
 
     // Database Name
