@@ -291,9 +291,9 @@ public class MainActivity extends AppCompatActivity
                 try {
                     bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), result.getUri());
                     if (currentFragment instanceof PokemonDetailFragment) {
-                        ((PokemonDetailFragment) currentFragment).setPokemonImage(bitmap);
+                        ((PokemonDetailFragment) currentFragment).setPokemonImage(Utils.getRoundedCornerBitmap(bitmap));
                     } else {
-                        ((MyCardDetailFragment) currentFragment).setPokemonImage(bitmap);
+                        ((MyCardDetailFragment) currentFragment).setPokemonImage(Utils.getRoundedCornerBitmap(bitmap));
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
