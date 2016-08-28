@@ -16,5 +16,10 @@
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
         <item name="android:typeface">monospace</item>
     </style>
+    <style name="textStyleArchRival">
+        <item name="android:typeface">monospace</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textSize">20dp</item>
+    </style>
 
 </resources>
