@@ -4,7 +4,6 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -180,12 +179,8 @@ public class MyCardDetailFragment extends Fragment {
         pokemonImage.setImageBitmap(pokemonImageBitmap);
         pokemonImage.setImageBitmap(bitmap);
         if (mPokemonDto.getType().equals("Mouse")) {
-            pokemonImage.setBackground(new BitmapDrawable(Utils.getRoundedCornerBitmap(
-                    BitmapFactory.decodeResource(getResources(), R.drawable.gaurav))));
             detailScreen.setBackground(getResources().getDrawable(R.drawable.pokeball));
         } else {
-            pokemonImage.setBackground(new BitmapDrawable(Utils.getRoundedCornerBitmap(
-                    BitmapFactory.decodeResource(getResources(), R.drawable.gaurav))));
             detailScreen.setBackground(getResources().getDrawable(R.drawable.pikachu));
         }
     }
