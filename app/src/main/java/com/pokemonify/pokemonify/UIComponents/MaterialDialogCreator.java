@@ -64,7 +64,7 @@ public class MaterialDialogCreator implements View.OnClickListener {
                     alert.setTitle("Enter your pokemon description");
                     edittext.setSingleLine(false);
                     edittext.setText(temp.getText().toString());
-                    edittext.setFilters(new InputFilter[]{new InputFilter.LengthFilter(150)});
+                    edittext.setFilters(new InputFilter[]{new InputFilter.LengthFilter(125)});
                     break;
                 case R.id.pokemon_level:
                     alert.setTitle("Enter your pokemon level");

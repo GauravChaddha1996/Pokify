@@ -2,6 +2,7 @@ package com.pokemonify.pokemonify;
 
 import android.app.Application;
 
+import com.pokemonify.pokemonify.UIComponents.FontOverride;
 import com.pokemonify.pokemonify.pokemondatabase.DbHelper;
 import com.pokemonify.pokemonify.pokemondatabase.PokemonDatabase;
 
@@ -16,6 +17,7 @@ public class Pokemonify extends Application {
         DbHelper dbHelper = new DbHelper(getApplicationContext());
         dbHelper.setMyCurrentPokemon();
         dbHelper.setMyCardsList();
+        FontOverride.setDefaultFont(getApplicationContext(),"MONOSPACE","archrival.ttf");
     }
 
 }
