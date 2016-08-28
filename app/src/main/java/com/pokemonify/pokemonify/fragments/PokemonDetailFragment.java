@@ -17,7 +17,6 @@ import com.pokemonify.pokemonify.MainActivity;
 import com.pokemonify.pokemonify.R;
 import com.pokemonify.pokemonify.UIComponents.MaterialDialogCreator;
 import com.pokemonify.pokemonify.Utils;
-import com.pokemonify.pokemonify.pokemondatabase.DbHelper;
 import com.pokemonify.pokemonify.pokemondatabase.PokemonDto;
 
 import java.io.File;
@@ -44,8 +43,6 @@ public class PokemonDetailFragment extends Fragment {
     View detailScreen;
     Bitmap savedScreen;
     MaterialDialogCreator materialDialogCreator;
-    Boolean preEdit = false;
-    ProgressDialog progressDialog;
 
     public PokemonDetailFragment() {
 
@@ -85,15 +82,7 @@ public class PokemonDetailFragment extends Fragment {
         setOnClick();
     }
 
-    public Boolean getPreEdit() {
-        return preEdit;
-    }
-
-    public void setPreEdit(Boolean preEdit) {
-        this.preEdit = preEdit;
-    }
-
-    private void setOnClick() {
+    private void initMaterial() {
         materialDialogCreator = new MaterialDialogCreator(getActivity(), new MaterialDialogCreator.OnClickCallBack() {
             @Override
             public void onPress(View v, String s) {
@@ -124,6 +113,10 @@ public class PokemonDetailFragment extends Fragment {
 
             }
         });
+    }
+
+    private void setOnClick() {
+        initMaterial();
         pokemonName.setOnClickListener(materialDialogCreator);
         pokemonHp.setOnClickListener(materialDialogCreator);
         pokemonType.setOnClickListener(materialDialogCreator);
@@ -140,9 +133,10 @@ public class PokemonDetailFragment extends Fragment {
                 }
             }
         });
-        if (preEdit) {
-            materialDialogCreator.setShouldEdit();
-        }
+    }
+
+    public PokemonDto getPokemonDto() {
+        return mPokemonDto;
     }
 
     public void setPokemonImage(Bitmap bitmap) {
@@ -175,25 +169,6 @@ public class PokemonDetailFragment extends Fragment {
         savedScreen = Bitmap.createBitmap(detailScreen.getDrawingCache());
         detailScreen.destroyDrawingCache();
         ((MainActivity) getActivity()).shareImage(savedScreen);
-    }
-
-    private void saveMyCard() {
-        progressDialog = new ProgressDialog(getActivity());
-        progressDialog.setTitle("Saving the pokemon");
-        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        progressDialog.setCancelable(false);
-        progressDialog.show();
-        ExecutorService executorService = Executors.newSingleThreadExecutor();
-        executorService.execute(new Runnable() {
-            @Override
-            public void run() {
-                Log.d("TAG", "time start:" + System.currentTimeMillis() + "");
-                if (DbHelper.getInstance().saveMyCard(getDtoOfScreen())) {
-                    progressDialog.dismiss();
-                }
-            }
-        });
-        executorService.shutdown();
     }
 
     private PokemonDto getDtoOfScreen() {
@@ -231,25 +206,6 @@ public class PokemonDetailFragment extends Fragment {
         }
         Log.e("file", "" + file);
         return file;
-    }
-
-    public void saveAndToggle() {
-        saveMyCard();
-        toggleShouldEdit();
-    }
-
-    public void saveToggleAndChange(Fragment fragment) {
-        saveMyCard();
-        toggleShouldEdit();
-        ((MainActivity) getActivity()).changeFrag(fragment);
-    }
-
-    public void toggleShouldEdit() {
-        materialDialogCreator.setShouldEdit();
-    }
-
-    public Boolean getEditing() {
-        return materialDialogCreator.getShouldEdit();
     }
 
     public void setThisAsCurrentPokemon() {

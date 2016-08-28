@@ -1,20 +1,17 @@
 package com.pokemonify.pokemonify.fragments;
 
 import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.pokemonify.pokemonify.MainActivity;
 import com.pokemonify.pokemonify.R;
@@ -32,7 +29,7 @@ import java.util.concurrent.Executors;
 /**
  * Created by gaurav on 25/7/16.
  */
-public class MyCardDetailFragment extends Fragment {
+public class PokemonEditFragment extends Fragment {
 
     PokemonDto mPokemonDto;
     TextView pokemonName;
@@ -47,11 +44,9 @@ public class MyCardDetailFragment extends Fragment {
     View detailScreen;
     Bitmap savedScreen;
     MaterialDialogCreator materialDialogCreator;
-    Boolean preEdit = false;
-    int temp = 0;
     ProgressDialog progressDialog;
 
-    public MyCardDetailFragment() {
+    public PokemonEditFragment() {
 
     }
 
@@ -59,7 +54,6 @@ public class MyCardDetailFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mPokemonDto = (PokemonDto) getArguments().getSerializable("PokemonDto");
-        Log.d("TAG", "id is:" + mPokemonDto.getId() + "");
     }
 
     @Nullable
@@ -81,27 +75,16 @@ public class MyCardDetailFragment extends Fragment {
         pokemonImage = (ImageView) v.findViewById(R.id.pokemon_image);
         detailScreen = v.findViewById(R.id.detailScreen);
         pokemonImage.getLayoutParams().height = (int) (Utils.getDisplayHeight(getActivity()) * 0.40);
+        if (mPokemonDto.getType().equals("Mouse")) {
+            detailScreen.setBackground(getResources().getDrawable(R.drawable.pokeball));
+        } else {
+            detailScreen.setBackground(getResources().getDrawable(R.drawable.pikachu));
+        }
         setPokemonData();
         setOnClick();
     }
 
-    public Boolean getPreEdit() {
-        return preEdit;
-    }
-
-    public void setPreEdit(Boolean preEdit) {
-        this.preEdit = preEdit;
-    }
-
-    public MaterialDialogCreator getMaterialDialogCreator() {
-        return materialDialogCreator;
-    }
-
-    public void setMaterialDialogCreator(MaterialDialogCreator materialDialogCreator) {
-        this.materialDialogCreator = materialDialogCreator;
-    }
-
-    private void setOnClick() {
+    private void initMaterial() {
         materialDialogCreator = new MaterialDialogCreator(getActivity(), new MaterialDialogCreator.OnClickCallBack() {
             @Override
             public void onPress(View v, String s) {
@@ -128,10 +111,13 @@ public class MyCardDetailFragment extends Fragment {
                         pokemonLvl.setText("Lvl " + s);
                         break;
                 }
-
-
             }
         });
+        materialDialogCreator.setShouldEdit();
+    }
+
+    private void setOnClick() {
+        initMaterial();
         pokemonName.setOnClickListener(materialDialogCreator);
         pokemonHp.setOnClickListener(materialDialogCreator);
         pokemonType.setOnClickListener(materialDialogCreator);
@@ -148,10 +134,8 @@ public class MyCardDetailFragment extends Fragment {
                 }
             }
         });
-        if (preEdit) {
-            materialDialogCreator.setShouldEdit();
-        }
     }
+
 
     public void setPokemonImage(Bitmap bitmap) {
         pokemonImageBitmap = bitmap;
@@ -185,57 +169,24 @@ public class MyCardDetailFragment extends Fragment {
         ((MainActivity) getActivity()).shareImage(savedScreen);
     }
 
-    private void saveMyCard(final Fragment fragment) {
-        final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle("How do you want to save the card?");
-        builder.setPositiveButton("New", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                startProgressDialog("Saving your pokemon");
-                Log.d("TAG", "time start:" + System.currentTimeMillis() + "");
-                if (DbHelper.getInstance().saveMyCard(getDtoOfScreenData())) {
-                    progressDialog.dismiss();
-                    toggleShouldEdit();
-                    getActivity().supportInvalidateOptionsMenu();
-                    if (fragment != null) {
-                        ((MainActivity) getActivity()).changeFrag(fragment);
-                    }
-                }
+    public void saveMyCard(Fragment fragment) {
+        progressDialog = new ProgressDialog(getActivity());
+        progressDialog.setTitle("Saving the pokemon");
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.setCancelable(false);
+        progressDialog.show();
+        Log.d("TAG", "time start:" + System.currentTimeMillis() + "");
+        if (DbHelper.getInstance().saveMyCard(getDtoOfScreen())) {
+            progressDialog.dismiss();
+            toggleShouldEdit();
+            if (fragment != null) {
+                ((MainActivity) getActivity()).doFragTransaction(fragment,0);
             }
-        });
-        builder.setNegativeButton("Existing", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                startProgressDialog("Saving your pokemon");
-                if (DbHelper.getInstance().updateMyCard(getDtoOfScreenDataWithId(mPokemonDto.getId()))) {
-                    progressDialog.dismiss();
-                    toggleShouldEdit();
-                    getActivity().supportInvalidateOptionsMenu();
-                    if (fragment != null) {
-                        ((MainActivity) getActivity()).changeFrag(fragment);
-                    }
-                }
-            }
-        });
-        builder.show();
+
+        }
     }
 
-    private PokemonDto getDtoOfScreenDataWithId(int id) {
-        mPokemonDto = new PokemonDto();
-        mPokemonDto.setId(id);
-        mPokemonDto.setName(pokemonName.getText().toString());
-        mPokemonDto.setHp(Integer.parseInt((pokemonHp.getText().toString().substring(0, pokemonHp.getText().toString().length() - 2)).trim()));
-        mPokemonDto.setType(pokemonType.getText().toString());
-        mPokemonDto.setWeight(Integer.parseInt((pokemonWeight.getText().toString().substring(0, pokemonWeight.getText().toString().length() - 1)).trim()));
-        mPokemonDto.setHeight(Integer.parseInt((pokemonHeight.getText().toString().substring(0, pokemonHeight.getText().toString().length() - 2)).trim()));
-        mPokemonDto.setDesc(pokemonDesc.getText().toString());
-        mPokemonDto.setLevel(Integer.parseInt((pokemonLvl.getText().toString().substring(3)).trim()));
-        mPokemonDto.setBitmapPath(writeToFile(pokemonImageBitmap, mPokemonDto.getId()).getAbsolutePath());
-        mPokemonDto.setImagePath("-1");
-        return mPokemonDto;
-    }
-
-    private PokemonDto getDtoOfScreenData() {
+    private PokemonDto getDtoOfScreen() {
         mPokemonDto = new PokemonDto();
         mPokemonDto.setId(Utils.getRandomId());
         mPokemonDto.setName(pokemonName.getText().toString());
@@ -272,68 +223,21 @@ public class MyCardDetailFragment extends Fragment {
         return file;
     }
 
-    public void deleteCard() {
-        startProgressDialog("Deleting the pokemon");
-
-        ExecutorService executorService = Executors.newSingleThreadExecutor();
-        executorService.execute(new Runnable() {
-            @Override
-            public void run() {
-                progressDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
-                    @Override
-                    public void onDismiss(DialogInterface dialogInterface) {
-                        dismissListener();
-                    }
-                });
-                temp = DbHelper.getInstance().deleteCard(mPokemonDto.getId());
-                Log.d("TAG", "temp" + temp + "");
-                progressDialog.dismiss();
-            }
-        });
-        executorService.shutdown();
-
-    }
-
-    private void dismissListener() {
-        if (temp == 0) {
-            Toast.makeText(getActivity(), "Oops we couldn't delete the pokemon.", Toast.LENGTH_SHORT).show();
-            getActivity().onBackPressed();
-        } else {
-            getActivity().onBackPressed();
-        }
-    }
-
-    private void startProgressDialog(String title) {
-        progressDialog = new ProgressDialog(getActivity());
-        progressDialog.setTitle(title);
-        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        progressDialog.setCancelable(false);
-        progressDialog.show();
-    }
-
-    public void saveAndToggle() {
-        saveMyCard(null);
-    }
-
-    public void saveAndToggleAndChange(Fragment fragment) {
-        saveMyCard(fragment);
-    }
-
     public void toggleShouldEdit() {
         materialDialogCreator.setShouldEdit();
     }
 
-    public Boolean getEditing() {
-        return materialDialogCreator.getShouldEdit();
-    }
-
     public void setThisAsCurrentPokemon() {
-        startProgressDialog("Making this your current pokemon");
+        final ProgressDialog progressDialog = new ProgressDialog(getActivity());
+        progressDialog.setTitle("Making this your current pokemon");
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.setCancelable(false);
+        progressDialog.show();
         ExecutorService executorService = Executors.newSingleThreadExecutor();
         executorService.execute(new Runnable() {
             @Override
             public void run() {
-                if (Utils.setMyPokemon(getDtoOfScreenData(), getActivity())) {
+                if (Utils.setMyPokemon(getDtoOfScreen(), getActivity())) {
                     progressDialog.dismiss();
                 }
             }
