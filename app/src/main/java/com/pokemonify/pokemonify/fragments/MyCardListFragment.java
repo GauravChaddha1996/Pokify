@@ -41,6 +41,7 @@ public class MyCardListFragment extends Fragment implements CommonAdapter.OnGetV
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        getActivity().setTitle("My Cards");
         nameList = DbHelper.getInstance().getAllMyCards();
         View view = inflater.inflate(R.layout.fragment_pokemon_list, container, false);
         initViews(view);

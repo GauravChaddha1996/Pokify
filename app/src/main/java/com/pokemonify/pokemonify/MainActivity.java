@@ -79,6 +79,11 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
     }
 
+    @Override
+    public void setTitle(CharSequence title) {
+        getSupportActionBar().setTitle(title);
+    }
+
     private void setNavigationView() {
         /*DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(

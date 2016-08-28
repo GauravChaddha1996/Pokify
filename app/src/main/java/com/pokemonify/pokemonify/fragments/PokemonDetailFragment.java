@@ -57,6 +57,7 @@ public class PokemonDetailFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        getActivity().setTitle(mPokemonDto.getName());
         View view = inflater.inflate(R.layout.fragment_pokemon_detail, container, false);
         initViews(view);
         return view;

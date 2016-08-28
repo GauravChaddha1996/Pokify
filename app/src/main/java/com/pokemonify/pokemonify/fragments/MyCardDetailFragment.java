@@ -159,6 +159,7 @@ public class MyCardDetailFragment extends Fragment {
     }
 
     private void setPokemonData() {
+        getActivity().setTitle(mPokemonDto.getName());
         pokemonName.setText(mPokemonDto.getName());
         pokemonHp.setText(mPokemonDto.getHp() + " Hp");
         pokemonType.setText(mPokemonDto.getType());

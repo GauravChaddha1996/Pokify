@@ -59,6 +59,7 @@ public class PokemonEditFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        getActivity().setTitle("Create Card");
         View view = inflater.inflate(R.layout.fragment_pokemon_detail, container, false);
         initViews(view);
         return view;

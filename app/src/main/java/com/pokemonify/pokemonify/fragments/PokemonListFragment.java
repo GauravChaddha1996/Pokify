@@ -37,12 +37,10 @@ public class PokemonListFragment extends Fragment {
 
     public PokemonListFragment() {
     }
-
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        getActivity().setTitle("Pokedex");
         nameList = Arrays.asList(PokemonDatabase.getPokemonDtos());
         adjectiveList = getResources().getStringArray(R.array.adjectives);
         View view = inflater.inflate(R.layout.fragment_pokemon_list, container, false);
