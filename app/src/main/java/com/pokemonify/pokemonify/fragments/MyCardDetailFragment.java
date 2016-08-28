@@ -81,6 +81,11 @@ public class MyCardDetailFragment extends Fragment {
         pokemonImage = (ImageView) v.findViewById(R.id.pokemon_image);
         detailScreen = v.findViewById(R.id.detailScreen);
         pokemonImage.getLayoutParams().height = (int) (Utils.getDisplayHeight(getActivity()) * 0.40);
+        if (mPokemonDto.getType().equals("Mouse")) {
+            detailScreen.setBackground(getResources().getDrawable(R.drawable.pokeball));
+        } else {
+            detailScreen.setBackground(getResources().getDrawable(R.drawable.pikachu));
+        }
         setPokemonData();
         setOnClick();
     }

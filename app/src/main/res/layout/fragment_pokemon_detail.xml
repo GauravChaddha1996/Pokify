@@ -7,7 +7,6 @@
         android:layout_width="match_parent"
         android:id="@+id/detailScreen"
         android:padding="16dp"
-        android:background="@android:color/background_light"
         android:layout_height="match_parent">
         <RelativeLayout
             android:layout_width="match_parent"

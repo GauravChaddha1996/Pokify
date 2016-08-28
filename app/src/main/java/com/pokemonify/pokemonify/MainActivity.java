@@ -152,13 +152,7 @@ public class MainActivity extends AppCompatActivity
             if (pokemonDetailFragment.getEditing()) {
                 checkAndSaveCard(fragment);
             } else {
-                String temp=((PokemonDetailFragment)currentFragment).getFromSearch();
-                if(!temp.equals("-1")) {
-                    PokemonListFragment listFragment=new PokemonListFragment(temp);
-                    doFragTransaction(listFragment);
-                }else{
-                    doFragTransaction(fragment);
-                }
+                doFragTransaction(new PokemonListFragment());
 
             }
         } else if (currentFragment instanceof MyCardDetailFragment) {
@@ -453,7 +447,6 @@ public class MainActivity extends AppCompatActivity
                         "Pokemon Type", "Pokemon's Description", "", 20, 50, 5);
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("PokemonDto", pokemonDto);
-                bundle.putString("searchString","-1");
                 pokemonDetailFragment.setArguments(bundle);
                 pokemonDetailFragment.setPreEdit(true);
                 changeFrag(pokemonDetailFragment);

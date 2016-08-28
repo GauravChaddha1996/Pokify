@@ -68,6 +68,11 @@ public class MainFragment extends Fragment {
                     .getIdentifier(currentMyPokemon.getImagePath(), "drawable", getActivity().getPackageName()));
         }
         mMyPokemonImage.setImageBitmap(bitmap);
+        if (currentMyPokemon.getType().equals("Mouse")) {
+            mMyPokemonScreen.setBackground(getResources().getDrawable(R.drawable.pokeball));
+        } else {
+            mMyPokemonScreen.setBackground(getResources().getDrawable(R.drawable.pikachu));
+        }
     }
 
     public void shareMyPokemon(){
