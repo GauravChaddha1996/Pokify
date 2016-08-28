@@ -154,10 +154,10 @@ public class MyCardListFragment extends Fragment implements CommonAdapter.OnGetV
         }
         if (item.equals("Set as my pokemon")) {
             myDialogViewHolder.mTextView.setText("Set as my pokemon");
-            myDialogViewHolder.mImageView.setImageDrawable(getResources().getDrawable(android.R.drawable.ic_menu_set_as));
+            myDialogViewHolder.mImageView.setImageDrawable(getResources().getDrawable(R.drawable.create));
         } else {
             myDialogViewHolder.mTextView.setText("Delete this card");
-            myDialogViewHolder.mImageView.setImageDrawable(getResources().getDrawable(android.R.drawable.ic_menu_delete));
+            myDialogViewHolder.mImageView.setImageDrawable(getResources().getDrawable(R.drawable.delete));
         }
         return convertView;
     }

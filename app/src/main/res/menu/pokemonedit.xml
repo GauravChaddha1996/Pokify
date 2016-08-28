@@ -5,16 +5,18 @@
         android:id="@+id/action_editfrag_save"
         android:orderInCategory="100"
         android:title="Save"
-        android:icon="@android:drawable/ic_menu_save"
+        android:icon="@drawable/save"
         app:showAsAction="always"/>
     <item
         android:id="@+id/action_editfrag_share"
         android:orderInCategory="100"
         android:title="Share"
-        android:icon="@android:drawable/ic_menu_share"
+        android:icon="@drawable/share"
         app:showAsAction="always"/>
     <item
         android:id="@+id/action_editfrag_make_current_pokemon"
+        android:showAsAction="always"
+        android:icon="@drawable/create"
         android:title="Make this my pokemon"/>
 
 </menu>

@@ -304,10 +304,10 @@ public class MainActivity extends AppCompatActivity
         }
         if (item.equals("Camera")) {
             myDialogViewHolder.mTextView.setText("Camera");
-            myDialogViewHolder.mImageView.setImageDrawable(getResources().getDrawable(android.R.drawable.ic_menu_camera));
+            myDialogViewHolder.mImageView.setImageDrawable(getResources().getDrawable(R.drawable.camera));
         } else {
             myDialogViewHolder.mTextView.setText("Gallery");
-            myDialogViewHolder.mImageView.setImageDrawable(getResources().getDrawable(android.R.drawable.ic_menu_gallery));
+            myDialogViewHolder.mImageView.setImageDrawable(getResources().getDrawable(R.drawable.gallery));
         }
         return convertView;
     }
@@ -348,9 +348,9 @@ public class MainActivity extends AppCompatActivity
             MenuItem item = menu.findItem(R.id.action_mycard_edit);
             if (((MyCardDetailFragment) currentFragment).getMaterialDialogCreator() != null) {
                 if (((MyCardDetailFragment) currentFragment).getEditing()) {
-                    item.setIcon(android.R.drawable.ic_menu_save);
+                    item.setIcon(R.drawable.save);
                 } else {
-                    item.setIcon(android.R.drawable.ic_menu_edit);
+                    item.setIcon(R.drawable.edit);
                 }
             }
         } else if (currentFragment instanceof MyCardListFragment) {
@@ -398,7 +398,7 @@ public class MainActivity extends AppCompatActivity
                 myCardDetailFragment.saveAndToggle();
             } else {
                 myCardDetailFragment.toggleShouldEdit();
-                item.setIcon(android.R.drawable.ic_menu_save);
+                item.setIcon(R.drawable.save);
             }
         } else if (id == R.id.action_mycard_delete) {
             MyCardDetailFragment myCardDetailFragment = (MyCardDetailFragment) currentFragment;
