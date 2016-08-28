@@ -7,6 +7,7 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -177,18 +178,59 @@ public class MyCardDetailFragment extends Fragment {
     }
 
     private void saveMyCard() {
-        startProgressDialog("Saving your pokemon");
-        ExecutorService executorService= Executors.newSingleThreadExecutor();
-        executorService.execute(new Runnable() {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle("How do you want to save the card?");
+        builder.setPositiveButton("New", new DialogInterface.OnClickListener() {
             @Override
-            public void run() {
-                Log.d("TAG","saving start:"+System.currentTimeMillis()+"");
-                if(DbHelper.getInstance().saveMyCard(getDtoOfScreenData())){
-                    progressDialog.dismiss();
-                }
+            public void onClick(DialogInterface dialogInterface, int i) {
+                startProgressDialog("Saving your pokemon");
+                ExecutorService executorService= Executors.newSingleThreadExecutor();
+                executorService.execute(new Runnable() {
+                    @Override
+                    public void run() {
+                        if(DbHelper.getInstance().saveMyCard(getDtoOfScreenData())){
+                        Log.d("TAG","saving start:"+System.currentTimeMillis()+"");
+                            progressDialog.dismiss();
+                        }
+                    }
+                });
+                executorService.shutdown();
             }
         });
-        executorService.shutdown();
+        builder.setNegativeButton("Existing", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                startProgressDialog("Saving your pokemon");
+                ExecutorService executorService= Executors.newSingleThreadExecutor();
+                executorService.execute(new Runnable() {
+                    @Override
+                    public void run() {
+                        Log.d("TAG","saving start:"+System.currentTimeMillis()+"");
+                        if(DbHelper.getInstance().updateMyCard(getDtoOfScreenDataWithId(mPokemonDto.getId()))){
+                            progressDialog.dismiss();
+                        }
+                    }
+                });
+                executorService.shutdown();
+            }
+        });
+        builder.show();
+    }
+
+
+    private PokemonDto getDtoOfScreenDataWithId(int id) {
+        mPokemonDto = new PokemonDto();
+        mPokemonDto.setId(id);
+        mPokemonDto.setName(pokemonName.getText().toString());
+        mPokemonDto.setHp(Integer.parseInt((pokemonHp.getText().toString().substring(0, pokemonHp.getText().toString().length() - 2)).trim()));
+        mPokemonDto.setType(pokemonType.getText().toString());
+        mPokemonDto.setWeight(Integer.parseInt((pokemonWeight.getText().toString().substring(0, pokemonWeight.getText().toString().length() - 1)).trim()));
+        mPokemonDto.setHeight(Integer.parseInt((pokemonHeight.getText().toString().substring(0, pokemonHeight.getText().toString().length() - 2)).trim()));
+        mPokemonDto.setDesc(pokemonDesc.getText().toString());
+        mPokemonDto.setLevel(Integer.parseInt((pokemonLvl.getText().toString().substring(3)).trim()));
+        mPokemonDto.setBitmapPath(writeToFile(pokemonImageBitmap,mPokemonDto.getId()).getAbsolutePath());
+        mPokemonDto.setImagePath("-1");
+        return mPokemonDto;
     }
 
     private PokemonDto getDtoOfScreenData() {

@@ -133,6 +133,33 @@ public class DbHelper extends SQLiteOpenHelper {
         return execInThread(runnable);
     }
 
+    public boolean updateMyCard(PokemonDto cardsDto) {
+        mPokemonDto=new PokemonDto();
+        mPokemonDto = cardsDto;
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                SQLiteDatabase db = DbHelper.this.getWritableDatabase();
+
+                ContentValues values = new ContentValues();
+                values.put(KEY_ID, mPokemonDto.getId());
+                values.put(KEY_NAME, mPokemonDto.getName());
+                values.put(KEY_HP, mPokemonDto.getHp());
+                values.put(KEY_IMAGE_PATH, mPokemonDto.getImagePath());
+                values.put(KEY_BITMAP_PATH,mPokemonDto.getBitmapPath());
+                values.put(KEY_TYPE, mPokemonDto.getType());
+                values.put(KEY_DESC, mPokemonDto.getDesc());
+                values.put(KEY_WEIGHT, mPokemonDto.getWeight());
+                values.put(KEY_HEIGHT, mPokemonDto.getHeight());
+                values.put(KEY_LEVEL, mPokemonDto.getLevel());
+                db.update(TABLE_MYCARDS,values,"id = ?",new String[]{mPokemonDto.getId()+""});
+
+                closeDB();
+            }
+        };
+        return execInThread(runnable);
+    }
+
     public boolean saveMyPokemon(final PokemonDto pokemonDto) {
 
         myCurrentPokemon = pokemonDto;
