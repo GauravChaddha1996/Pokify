@@ -2,6 +2,7 @@ package com.pokemonify.pokemonify.fragments;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -70,8 +71,12 @@ public class MainFragment extends Fragment {
         }
         mMyPokemonImage.setImageBitmap(bitmap);
         if (currentMyPokemon.getType().equals("Mouse")) {
+            mMyPokemonImage.setBackground(new BitmapDrawable(Utils.getRoundedCornerBitmap(
+                    BitmapFactory.decodeResource(getResources(), R.drawable.gaurav))));
             mMyPokemonScreen.setBackground(getResources().getDrawable(R.drawable.pokeball));
         } else {
+            mMyPokemonImage.setBackground(new BitmapDrawable(Utils.getRoundedCornerBitmap(
+                    BitmapFactory.decodeResource(getResources(), R.drawable.gaurav))));
             mMyPokemonScreen.setBackground(getResources().getDrawable(R.drawable.pikachu));
         }
     }
