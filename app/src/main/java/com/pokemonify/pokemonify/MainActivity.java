@@ -457,7 +457,11 @@ public class MainActivity extends AppCompatActivity
                 changeFrag(pokemonDetailFragment);
             }
         } else if (id == R.id.nav_how_to) {
-
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            View view = LayoutInflater.from(getBaseContext()).inflate(R.layout.howtodialogview, null);
+            builder.setView(view);
+            AlertDialog a = builder.create();
+            a.show();
         } else if(id == R.id.nav_about) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             View view = LayoutInflater.from(getBaseContext()).inflate(R.layout.aboutdialogview, null);
