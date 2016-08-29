@@ -52,13 +52,10 @@ public class SearchAdapter extends BaseAdapter implements Filterable {
                 if (!TextUtils.isEmpty(constraint)) {
                     Log.d("typed searched", constraint.toString());
                     List<String> searchData = new ArrayList<>();
-                    String[] strings = constraint.toString().split(",");
-                    if (strings.length != 0) {
-                        for (String string : suggestions) {
-                            if (string.toLowerCase().contains(strings[strings.length-1].toLowerCase())) {
-                                Log.d("ashbad",string);
-                                searchData.add(string);
-                            }
+                    for (String string : suggestions) {
+                        if (string.toLowerCase().contains(constraint.toString().toLowerCase())) {
+                            Log.d("ashbad",string);
+                            searchData.add(string);
                         }
                     }
                     if(searchData.size()>3){

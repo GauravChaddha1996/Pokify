@@ -10,6 +10,7 @@ import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
@@ -67,4 +68,18 @@ public class Utils {
     public static int getRandomId() {
         return new Random().nextInt();
     }
+
+    public static boolean isTypePresent(String type) {
+        String[] strings = {"bug", "dragon", "electric", "fairy", "fight", "fighting", "fire", "flying",
+                "ghost", "grass", "ground", "ice", "normal", "poison", "psychic", "rock", "steel", "water"};
+        for(String s:strings) {
+            if(s.equals(type.trim())) {
+                Log.d("True:string recieved:",type);
+                return true;
+            }
+        }
+        Log.d("False:string recieved",type);
+        return false;
+    }
+
 }

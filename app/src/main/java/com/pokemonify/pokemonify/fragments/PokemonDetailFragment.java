@@ -75,14 +75,12 @@ public class PokemonDetailFragment extends Fragment {
         pokemonImage = (ImageView) v.findViewById(R.id.pokemon_image);
         detailScreen = v.findViewById(R.id.detailScreen);
         pokemonImage.getLayoutParams().height = (int) (Utils.getDisplayHeight(getActivity()) * 0.40);
-        if (mPokemonDto.getType().equals("Mouse")) {
-            pokemonImage.setBackground(new BitmapDrawable(Utils.getRoundedCornerBitmap(
-                    BitmapFactory.decodeResource(getResources(), R.drawable.gaurav))));
-            detailScreen.setBackground(getResources().getDrawable(R.drawable.pokeball));
+        if (Utils.isTypePresent(pokemonType.getText().toString().toLowerCase())) {
+            detailScreen.setBackground(new BitmapDrawable(BitmapFactory.decodeResource(getResources(),
+                    getResources().getIdentifier(pokemonType.getText().toString().toLowerCase(), "drawable",
+                            getActivity().getPackageName()))));
         } else {
-            pokemonImage.setBackground(new BitmapDrawable(Utils.getRoundedCornerBitmap(
-                    BitmapFactory.decodeResource(getResources(), R.drawable.gaurav))));
-            detailScreen.setBackground(getResources().getDrawable(R.drawable.pikachu));
+            detailScreen.setBackground(getResources().getDrawable(R.drawable.standardbackground));
         }
         setPokemonData();
         setOnClick();
@@ -97,16 +95,16 @@ public class PokemonDetailFragment extends Fragment {
                         pokemonName.setText(s);
                         break;
                     case R.id.pokemon_hp:
-                        pokemonHp.setText(s + " Hp");
+                        pokemonHp.setText(s + "Hp");
                         break;
                     case R.id.pokemon_type:
                         pokemonType.setText(s);
                         break;
                     case R.id.pokemon_weight:
-                        pokemonWeight.setText(s + " g");
+                        pokemonWeight.setText(s + "Lbs");
                         break;
                     case R.id.pokemon_height:
-                        pokemonHeight.setText(s + " cm");
+                        pokemonHeight.setText(s + "Inch");
                         break;
                     case R.id.pokemon_desc:
                         pokemonDesc.setText(s);
@@ -154,8 +152,8 @@ public class PokemonDetailFragment extends Fragment {
         pokemonName.setText(mPokemonDto.getName());
         pokemonHp.setText(mPokemonDto.getHp() + " Hp");
         pokemonType.setText(mPokemonDto.getType());
-        pokemonWeight.setText(mPokemonDto.getWeight() + " g");
-        pokemonHeight.setText(mPokemonDto.getHeight() + " cm");
+        pokemonWeight.setText(mPokemonDto.getWeight() + " Lbs");
+        pokemonHeight.setText(mPokemonDto.getHeight() + " Inch");
         pokemonDesc.setText(mPokemonDto.getDesc());
         pokemonLvl.setText("Lvl " + mPokemonDto.getLevel());
         Bitmap bitmap = null;
@@ -183,8 +181,8 @@ public class PokemonDetailFragment extends Fragment {
         mPokemonDto.setName(pokemonName.getText().toString());
         mPokemonDto.setHp(Integer.parseInt((pokemonHp.getText().toString().substring(0, pokemonHp.getText().toString().length() - 2)).trim()));
         mPokemonDto.setType(pokemonType.getText().toString());
-        mPokemonDto.setWeight(Integer.parseInt((pokemonWeight.getText().toString().substring(0, pokemonWeight.getText().toString().length() - 1)).trim()));
-        mPokemonDto.setHeight(Integer.parseInt((pokemonHeight.getText().toString().substring(0, pokemonHeight.getText().toString().length() - 2)).trim()));
+        mPokemonDto.setWeight(Integer.parseInt((pokemonWeight.getText().toString().substring(0, pokemonWeight.getText().toString().length() - 3)).trim()));
+        mPokemonDto.setHeight(Integer.parseInt((pokemonHeight.getText().toString().substring(0, pokemonHeight.getText().toString().length() - 4)).trim()));
         mPokemonDto.setDesc(pokemonDesc.getText().toString());
         mPokemonDto.setLevel(Integer.parseInt((pokemonLvl.getText().toString().substring(3)).trim()));
         mPokemonDto.setBitmapPath(writeToFile(pokemonImageBitmap, mPokemonDto.getId()).getAbsolutePath());

@@ -134,6 +134,17 @@ public class DbHelper extends SQLiteOpenHelper {
     }
 
     public boolean updateMyCard(PokemonDto cardsDto) {
+        PokemonDto temp = null;
+        for(PokemonDto dto:myCardsList) {
+            if(dto.getId()==cardsDto.getId()) {
+                temp=dto;
+                break;
+            }
+        }
+        if(temp!=null) {
+            myCardsList.remove(temp);
+        }
+        myCardsList.add(cardsDto);
         mPokemonDto=new PokemonDto();
         mPokemonDto = cardsDto;
         Runnable runnable = new Runnable() {

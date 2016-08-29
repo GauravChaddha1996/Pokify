@@ -50,13 +50,13 @@ public class MaterialDialogCreator implements View.OnClickListener {
                     break;
                 case R.id.pokemon_weight:
                     alert.setTitle("Enter your pokemon weight");
-                    edittext.setText(temp.getText().toString().substring(0, temp.getText().length() - 1));
+                    edittext.setText(temp.getText().toString().substring(0, temp.getText().length() - 3));
                     edittext.setInputType(InputType.TYPE_CLASS_NUMBER);
                     edittext.setFilters(new InputFilter[]{new InputFilter.LengthFilter(8)});
                     break;
                 case R.id.pokemon_height:
                     alert.setTitle("Enter your pokemon height");
-                    edittext.setText(temp.getText().toString().substring(0, temp.getText().length() - 2));
+                    edittext.setText(temp.getText().toString().substring(0, temp.getText().length() - 4));
                     edittext.setInputType(InputType.TYPE_CLASS_NUMBER);
                     edittext.setFilters(new InputFilter[]{new InputFilter.LengthFilter(8)});
                     break;

@@ -15,7 +15,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:src="@drawable/pikachu"/>
+            android:src="@drawable/pokeball"/>
 
         <TextView
             android:id="@+id/textView1"
@@ -26,6 +26,7 @@
             android:text="Developed By:"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textSize="24dp"
+            android:layout_marginBottom="24dp"
             android:textStyle="italic"/>
 
         <TextView
@@ -57,26 +58,18 @@
             android:layout_below="@+id/phone"
             android:text="chaddhag@gmail.com"
             android:layout_centerHorizontal="true"
+            android:typeface="sans"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="@color/colorPrimary"
             android:textSize="21dp"/>
 
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/email"
-            android:layout_centerHorizontal="true"
-            android:text="Design And Database By:"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textSize="24dp"
-            android:textStyle="italic"/>
 
         <TextView
             android:id="@+id/textView4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/textView3"
+            android:layout_marginTop="24dp"
+            android:layout_below="@+id/email"
             android:layout_centerHorizontal="true"
             android:text="Saurav Tiru"
             android:textAppearance="?android:attr/textAppearanceLarge"
@@ -89,7 +82,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/textView4"
             android:layout_centerHorizontal="true"
-            android:text="+91 9006256972"
+            android:text="+91 8754511849"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="@color/colorPrimary"
             android:textSize="21dp"/>
@@ -100,9 +93,10 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/designphone"
             android:layout_centerHorizontal="true"
-            android:text="ezio@gmail.com"
+            android:text="sauravezio@gmail.com"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="@color/colorPrimary"
+            android:typeface="sans"
             android:textSize="21dp"/>
 
     </RelativeLayout>

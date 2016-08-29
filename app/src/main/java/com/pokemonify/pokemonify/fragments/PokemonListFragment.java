@@ -32,7 +32,6 @@ public class PokemonListFragment extends Fragment {
     PokemonListAdapter mPokemonListAdapter;
     RecyclerView mRecyclerView;
     List<PokemonDto> nameList;
-    String[] adjectiveList;
     TextView mSeachedText;
 
     public PokemonListFragment() {
@@ -42,7 +41,6 @@ public class PokemonListFragment extends Fragment {
                              Bundle savedInstanceState) {
         getActivity().setTitle("Pokedex");
         nameList = Arrays.asList(PokemonDatabase.getPokemonDtos());
-        adjectiveList = getResources().getStringArray(R.array.adjectives);
         View view = inflater.inflate(R.layout.fragment_pokemon_list, container, false);
         initViews(view);
         return view;
@@ -107,13 +105,6 @@ public class PokemonListFragment extends Fragment {
                 if (p.getName().toLowerCase().contains(s.toLowerCase())) {
                     Log.d("asjhas", p.getName());
                     newSet.add(p);
-                }
-            }
-            for (String tmp : adjectiveList) {
-                if (tmp.equals(s)) {
-                    for (PokemonDto p : PokemonDatabase.getPokemonViaAdjective(s)) {
-                        newSet.add(p);
-                    }
                 }
             }
         }

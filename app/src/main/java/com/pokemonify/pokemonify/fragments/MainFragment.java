@@ -2,6 +2,7 @@ package com.pokemonify.pokemonify.fragments;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -52,11 +53,11 @@ public class MainFragment extends Fragment {
         mMyPokemonImage = (ImageView) v.findViewById(R.id.my_pokemon_image);
         mMyPokemonScreen = v.findViewById(R.id.my_pokemon_screen);
         mMyPokemonName.setText(currentMyPokemon.getName());
-        mMyPokemonHp.setText(currentMyPokemon.getHp() + "Hp");
+        mMyPokemonHp.setText(currentMyPokemon.getHp() + " Hp");
         mMyPokemonType.setText(currentMyPokemon.getType());
         mMyPokemonLevel.setText("Lvl " + currentMyPokemon.getLevel());
-        mMyPokemonWeight.setText(currentMyPokemon.getWeight() + "lbs");
-        mMyPokemonHeight.setText(currentMyPokemon.getHeight() + "cm");
+        mMyPokemonWeight.setText(currentMyPokemon.getWeight() + " lbs");
+        mMyPokemonHeight.setText(currentMyPokemon.getHeight() + " cm");
         mMyPokemonDesc.setText(currentMyPokemon.getDesc());
         mMyPokemonImage.getLayoutParams().height= (int) (Utils.getDisplayHeight(getActivity())*0.40);
         Bitmap bitmap=null;
@@ -69,10 +70,12 @@ public class MainFragment extends Fragment {
                     .getIdentifier(currentMyPokemon.getImagePath(), "drawable", getActivity().getPackageName()));
         }
         mMyPokemonImage.setImageBitmap(bitmap);
-        if (currentMyPokemon.getType().equals("Mouse")) {
-            mMyPokemonScreen.setBackground(getResources().getDrawable(R.drawable.pokeball));
-        } else {
-            mMyPokemonScreen.setBackground(getResources().getDrawable(R.drawable.pikachu));
+        if(Utils.isTypePresent(currentMyPokemon.getType().toLowerCase())) {
+            mMyPokemonScreen.setBackground(new BitmapDrawable(BitmapFactory.decodeResource(getResources(),
+                    getResources().getIdentifier(currentMyPokemon.getType().toLowerCase(),"drawable",
+                            getActivity().getPackageName()))));
+        }else{
+            mMyPokemonScreen.setBackground(getResources().getDrawable(R.drawable.standardbackground));
         }
     }
 
@@ -86,7 +89,8 @@ public class MainFragment extends Fragment {
     public void setMyPokemon() {
         currentMyPokemon = Utils.getMyPokemon(getActivity());
         if (currentMyPokemon == null) {
-            currentMyPokemon = new PokemonDto(1, "Raichu", 50, "", "Mouse", "", "angry,strong", 18, 3, 15);
+            currentMyPokemon = new PokemonDto(24, "pikachu",35,"pikachu","Electric","Whenever Pikachu comes" +
+                    " across something new, it blasts it with a jolt of electricity.","",60,4,112);
         }
     }
 }

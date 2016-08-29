@@ -6,10 +6,10 @@
         android:orderInCategory="100"
         android:title="Share"
         android:icon="@drawable/share"
-        app:showAsAction="ifRoom"/>
+        app:showAsAction="always"/>
     <item
         android:id="@+id/action_search"
         android:icon="@drawable/search"
-        android:title="Search Items"
-        app:showAsAction="ifRoom|collapseActionView"/>
+        android:title="Search Pokedex"
+        app:showAsAction="always"/>
 </menu>

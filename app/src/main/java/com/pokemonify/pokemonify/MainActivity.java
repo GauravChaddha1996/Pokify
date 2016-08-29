@@ -1,22 +1,29 @@
 package com.pokemonify.pokemonify;
 
+import android.Manifest;
 import android.content.ActivityNotFoundException;
 import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.provider.MediaStore;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -27,6 +34,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
 import com.pokemonify.pokemonify.UIComponents.CommonAdapter;
@@ -49,6 +57,9 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, CommonAdapter.OnGetViewListener<String> {
+    public static final int CAM_CODE = 234;
+    public static final int READ_WRITE = 235;
+    public static final int READ_WRITE_2 = 236;
     Toolbar toolbar;
     MaterialSearchView searchView;
     Fragment currentFragment;
@@ -62,7 +73,7 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        askPermissions();
         setToolbar();
         setNavigationView();
         setSearch();
@@ -72,6 +83,19 @@ public class MainActivity extends AppCompatActivity
         fragmentTransaction.replace(R.id.mainFrameLayout, currentFragment);
         fragmentTransaction.commitAllowingStateLoss();
         supportInvalidateOptionsMenu();
+    }
+
+    private void askPermissions() {
+        if (ContextCompat.checkSelfPermission(MainActivity.this,
+                Manifest.permission.READ_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(MainActivity.this,
+                    new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, READ_WRITE);
+        }
+        if (ContextCompat.checkSelfPermission(MainActivity.this,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED) {
+        }
     }
 
     private void setToolbar() {
@@ -85,11 +109,11 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void setNavigationView() {
-        /*DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
-        toggle.syncState();*/
+        toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setItemTextAppearance(R.style.textStyleArchRival);
@@ -100,7 +124,7 @@ public class MainActivity extends AppCompatActivity
     public void setSearch() {
 
         searchView = (MaterialSearchView) findViewById(R.id.search_view);
-        searchView.setSuggestions(getResources().getStringArray(R.array.query_suggestions));
+        searchView.setSuggestions(getResources().getStringArray(R.array.pokemon_name));
         searchView.setOnQueryTextListener(new MaterialSearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -156,14 +180,14 @@ public class MainActivity extends AppCompatActivity
             if (myCardDetailFragment.getEditing()) {
                 ((MyCardDetailFragment) currentFragment).saveAndToggleAndChange(fragment);
             } else {
-                doFragTransaction(fragment,0);
+                doFragTransaction(fragment, 0);
             }
         } else {
-            doFragTransaction(fragment,0);
+            doFragTransaction(fragment, 0);
         }
     }
 
-    public boolean doFragTransaction(Fragment fragment,int anim) {
+    public boolean doFragTransaction(Fragment fragment, int anim) {
         currentFragment = fragment;
         if (currentFragment instanceof MainFragment) {
             mAppBarLayout = (AppBarLayout) findViewById(R.id.appbarlayout);
@@ -171,7 +195,7 @@ public class MainActivity extends AppCompatActivity
         }
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        if(anim==0) {
+        if (anim == 0) {
             fragmentTransaction.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out);
         }
         fragmentTransaction.replace(R.id.mainFrameLayout, fragment);
@@ -192,7 +216,7 @@ public class MainActivity extends AppCompatActivity
         builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                doFragTransaction(new MainFragment(),0);
+                doFragTransaction(new MainFragment(), 0);
             }
         });
         builder.show();
@@ -210,14 +234,14 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 if ("Camera".equals(commonAdapter.getItem(i))) {
-                    values = new ContentValues();
-                    values.put(MediaStore.Images.Media.TITLE, "New Picture");
-                    values.put(MediaStore.Images.Media.DESCRIPTION, "From your Camera");
-                    cameraUri = getContentResolver().insert(
-                            MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
-                    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                    intent.putExtra(MediaStore.EXTRA_OUTPUT, cameraUri);
-                    startActivityForResult(intent, 23);
+                    if (ContextCompat.checkSelfPermission(MainActivity.this,
+                            Manifest.permission.READ_CONTACTS)
+                            != PackageManager.PERMISSION_GRANTED) {
+                        ActivityCompat.requestPermissions(MainActivity.this,
+                                new String[]{Manifest.permission.CAMERA}, CAM_CODE);
+                    } else {
+                        startCamera();
+                    }
                 } else {
                     Intent intent = new Intent();
                     intent.setType("image/*");
@@ -227,6 +251,59 @@ public class MainActivity extends AppCompatActivity
             }
         });
         builder.show();
+    }
+
+    public void startCamera() {
+        values = new ContentValues();
+        values.put(MediaStore.Images.Media.TITLE, "New Picture");
+        values.put(MediaStore.Images.Media.DESCRIPTION, "From your Camera");
+        cameraUri = getContentResolver().insert(
+                MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, cameraUri);
+        startActivityForResult(intent, 23);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case CAM_CODE: {
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    startCamera();
+                } else {
+                }
+                break;
+            }
+            case READ_WRITE: {
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                } else {
+                    ActivityCompat.requestPermissions(MainActivity.this,
+                            new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, READ_WRITE_2);
+                }
+                break;
+            }
+            case READ_WRITE_2: {
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                } else {
+                    Handler handler = new Handler() {
+                        @Override
+                        public void handleMessage(Message msg) {
+                            System.exit(1);
+                        }
+                    };
+                    Toast.makeText(this, "External Storage permission used for saving images denied." +
+                            "Please allow this for the app to function properly.Byee..", Toast.LENGTH_LONG).show();
+                    handler.sendEmptyMessageDelayed(0, 3000);
+                }
+                break;
+            }
+        }
     }
 
     public void shareImage(Bitmap bitmap) {
@@ -381,11 +458,11 @@ public class MainActivity extends AppCompatActivity
             PokemonDetailFragment pokemonDetailFragment = (PokemonDetailFragment) currentFragment;
             pokemonDetailFragment.shareThisPokemon();
         } else if (id == R.id.action_edit) {
-            PokemonEditFragment pokemonEditFragment= new PokemonEditFragment();
+            PokemonEditFragment pokemonEditFragment = new PokemonEditFragment();
             Bundle bundle = new Bundle();
-            bundle.putSerializable("PokemonDto", ((PokemonDetailFragment)currentFragment).getPokemonDto());
+            bundle.putSerializable("PokemonDto", ((PokemonDetailFragment) currentFragment).getPokemonDto());
             pokemonEditFragment.setArguments(bundle);
-            doFragTransaction(pokemonEditFragment,1);
+            doFragTransaction(pokemonEditFragment, 1);
         } else if (id == R.id.action_mycard_make_current_pokemon) {
             MyCardDetailFragment myCardDetailFragment = (MyCardDetailFragment) currentFragment;
             myCardDetailFragment.setThisAsCurrentPokemon();
@@ -437,8 +514,8 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_create_card) {
             if (!(currentFragment instanceof PokemonEditFragment)) {
                 PokemonEditFragment pokemonEditFragment = new PokemonEditFragment();
-                PokemonDto pokemonDto = new PokemonDto(Utils.getRandomId(), "Pokemon name", 0, "pikachu",
-                        "Pokemon Type", "Pokemon's Description", "", 20, 50, 5);
+                PokemonDto pokemonDto = new PokemonDto(200, "pokeball", 25, "pokeball", "Pokemon Type", "Click " +
+                        "items to edit", "", 60, 4, 120);
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("PokemonDto", pokemonDto);
                 pokemonEditFragment.setArguments(bundle);

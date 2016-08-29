@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -114,12 +115,13 @@ public class MyCardDetailFragment extends Fragment {
                         break;
                     case R.id.pokemon_type:
                         pokemonType.setText(s);
+                        setMyScreenBackGround();
                         break;
                     case R.id.pokemon_weight:
-                        pokemonWeight.setText(s + " g");
+                        pokemonWeight.setText(s + " Lbs");
                         break;
                     case R.id.pokemon_height:
-                        pokemonHeight.setText(s + " cm");
+                        pokemonHeight.setText(s + " Inch");
                         break;
                     case R.id.pokemon_desc:
                         pokemonDesc.setText(s);
@@ -163,8 +165,8 @@ public class MyCardDetailFragment extends Fragment {
         pokemonName.setText(mPokemonDto.getName());
         pokemonHp.setText(mPokemonDto.getHp() + " Hp");
         pokemonType.setText(mPokemonDto.getType());
-        pokemonWeight.setText(mPokemonDto.getWeight() + " g");
-        pokemonHeight.setText(mPokemonDto.getHeight() + " cm");
+        pokemonWeight.setText(mPokemonDto.getWeight() + " Lbs");
+        pokemonHeight.setText(mPokemonDto.getHeight() + " Inch");
         pokemonDesc.setText(mPokemonDto.getDesc());
         pokemonLvl.setText("Lvl " + mPokemonDto.getLevel());
         Bitmap bitmap = null;
@@ -178,10 +180,18 @@ public class MyCardDetailFragment extends Fragment {
         pokemonImageBitmap = bitmap;
         pokemonImage.setImageBitmap(pokemonImageBitmap);
         pokemonImage.setImageBitmap(bitmap);
-        if (mPokemonDto.getType().equals("Mouse")) {
-            detailScreen.setBackground(getResources().getDrawable(R.drawable.pokeball));
-        } else {
-            detailScreen.setBackground(getResources().getDrawable(R.drawable.pikachu));
+        setMyScreenBackGround();
+    }
+
+
+    private void setMyScreenBackGround() {
+        Log.d("Type:",pokemonType.getText().toString().toLowerCase());
+        if(Utils.isTypePresent(pokemonType.getText().toString().toLowerCase())) {
+            detailScreen.setBackground(new BitmapDrawable(BitmapFactory.decodeResource(getResources(),
+                    getResources().getIdentifier(pokemonType.getText().toString().toLowerCase(),"drawable",
+                            getActivity().getPackageName()))));
+        }else{
+            detailScreen.setBackground(getResources().getDrawable(R.drawable.standardbackground));
         }
     }
 
@@ -233,8 +243,8 @@ public class MyCardDetailFragment extends Fragment {
         mPokemonDto.setName(pokemonName.getText().toString());
         mPokemonDto.setHp(Integer.parseInt((pokemonHp.getText().toString().substring(0, pokemonHp.getText().toString().length() - 2)).trim()));
         mPokemonDto.setType(pokemonType.getText().toString());
-        mPokemonDto.setWeight(Integer.parseInt((pokemonWeight.getText().toString().substring(0, pokemonWeight.getText().toString().length() - 1)).trim()));
-        mPokemonDto.setHeight(Integer.parseInt((pokemonHeight.getText().toString().substring(0, pokemonHeight.getText().toString().length() - 2)).trim()));
+        mPokemonDto.setWeight(Integer.parseInt((pokemonWeight.getText().toString().substring(0, pokemonWeight.getText().toString().length() - 3)).trim()));
+        mPokemonDto.setHeight(Integer.parseInt((pokemonHeight.getText().toString().substring(0, pokemonHeight.getText().toString().length() - 4)).trim()));
         mPokemonDto.setDesc(pokemonDesc.getText().toString());
         mPokemonDto.setLevel(Integer.parseInt((pokemonLvl.getText().toString().substring(3)).trim()));
         mPokemonDto.setBitmapPath(writeToFile(pokemonImageBitmap, mPokemonDto.getId()).getAbsolutePath());
@@ -248,8 +258,8 @@ public class MyCardDetailFragment extends Fragment {
         mPokemonDto.setName(pokemonName.getText().toString());
         mPokemonDto.setHp(Integer.parseInt((pokemonHp.getText().toString().substring(0, pokemonHp.getText().toString().length() - 2)).trim()));
         mPokemonDto.setType(pokemonType.getText().toString());
-        mPokemonDto.setWeight(Integer.parseInt((pokemonWeight.getText().toString().substring(0, pokemonWeight.getText().toString().length() - 1)).trim()));
-        mPokemonDto.setHeight(Integer.parseInt((pokemonHeight.getText().toString().substring(0, pokemonHeight.getText().toString().length() - 2)).trim()));
+        mPokemonDto.setWeight(Integer.parseInt((pokemonWeight.getText().toString().substring(0, pokemonWeight.getText().toString().length() - 3)).trim()));
+        mPokemonDto.setHeight(Integer.parseInt((pokemonHeight.getText().toString().substring(0, pokemonHeight.getText().toString().length() - 4)).trim()));
         mPokemonDto.setDesc(pokemonDesc.getText().toString());
         mPokemonDto.setLevel(Integer.parseInt((pokemonLvl.getText().toString().substring(3)).trim()));
         mPokemonDto.setBitmapPath(writeToFile(pokemonImageBitmap, mPokemonDto.getId()).getAbsolutePath());

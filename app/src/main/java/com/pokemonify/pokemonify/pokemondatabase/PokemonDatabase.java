@@ -15,7 +15,7 @@ public class PokemonDatabase {
     private static int[] sPokemonIds;
 
     public PokemonDatabase(Context context) {
-        sPokemonDtos = new PokemonDto[10];
+        sPokemonDtos = new PokemonDto[150];
         sPokemonIds = context.getResources().getIntArray(R.array.pokemon_id);
         String[] sPokemonName = context.getResources().getStringArray(R.array.pokemon_name);
         String[] sPokemonType = context.getResources().getStringArray(R.array.pokemon_type);
@@ -25,9 +25,9 @@ public class PokemonDatabase {
         int[] sPokemonWeight = context.getResources().getIntArray(R.array.pokemon_weight);
         int[] sPokemonHeight = context.getResources().getIntArray(R.array.pokemon_height);
         int[] sPokemonLevel = context.getResources().getIntArray(R.array.pokemon_level);
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 150; i++) {
             sPokemonDtos[i] = new PokemonDto(sPokemonIds[i], sPokemonName[i], sPokemonHp[i], sPokemonName[i],
-                    sPokemonType[i], sPokemonDesc[i], sPokemonAdjectives[i], sPokemonWeight[i], sPokemonHeight[i], sPokemonLevel[i]);
+                    sPokemonType[i], sPokemonDesc[i],"", sPokemonWeight[i], sPokemonHeight[i], sPokemonLevel[i]);
         }
     }
 

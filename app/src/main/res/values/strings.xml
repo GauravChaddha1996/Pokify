@@ -5,49 +5,157 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
-
-    <string-array name="query_suggestions">
-        <item>happy</item>
-        <item>angry</item>
-        <item>strong</item>
-        <item>cute</item>
-        <item>calm</item>
-        <item>lazy</item>
-        <item>fat</item>
-        <item>long</item>
-        <item>Pikachu</item>
-        <item>Onix</item>
-        <item>ratata</item>
-        <item>bulbasaur</item>
-        <item>squirtle</item>
-        <item>charmandir</item>
-        <item>charlizard</item>
-        <item>eevee</item>
-        <item>snorlax</item>
-        <item>gaurav</item>
-    </string-array>
-    <string-array name="adjectives">
-        <item>happy</item>
-        <item>angry</item>
-        <item>strong</item>
-        <item>cute</item>
-        <item>calm</item>
-        <item>lazy</item>
-        <item>fat</item>
-        <item>long</item>
-    </string-array>
-
     <string-array name="pokemon_name">
-        <item>pikachu</item>
-        <item>onix</item>
-        <item>ratata</item>
         <item>bulbasaur</item>
+        <item>ivysaur</item>
+        <item>venusaur</item>
+        <item>charmander</item>
+        <item>charmeleon</item>
+        <item>charizard</item>
         <item>squirtle</item>
-        <item>charmandir</item>
-        <item>charlizard</item>
+        <item>wartortle</item>
+        <item>blastoise</item>
+        <item>caterpie</item>
+        <item>metapod</item>
+        <item>butterfree</item>
+        <item>weedle</item>
+        <item>kakuna</item>
+        <item>beedrill</item>
+        <item>pidgey</item>
+        <item>pidgeotto</item>
+        <item>pidgeot</item>
+        <item>rattata</item>
+        <item>raticate</item>
+        <item>spearow</item>
+        <item>fearow</item>
+        <item>ekans</item>
+        <item>arbok</item>
+        <item>pikachu</item>
+        <item>raichu</item>
+        <item>sandshrew</item>
+        <item>sandslash</item>
+        <item>nidoranf</item>
+        <item>nidorina</item>
+        <item>nidoqueen</item>
+        <item>nidoranm</item>
+        <item>nidorina</item>
+        <item>nidoking</item>
+        <item>clefairy</item>
+        <item>clefable</item>
+        <item>vulpix</item>
+        <item>ninetales</item>
+        <item>jigglypuff</item>
+        <item>wigglytuff</item>
+        <item>zubat</item>
+        <item>golbat</item>
+        <item>oddish</item>
+        <item>gloom</item>
+        <item>vileplume</item>
+        <item>paras</item>
+        <item>parasect</item>
+        <item>venonat</item>
+        <item>venomoth</item>
+        <item>diglett</item>
+        <item>dugtrio</item>
+        <item>meowth</item>
+        <item>persian</item>
+        <item>psyduck</item>
+        <item>golduck</item>
+        <item>mankey</item>
+        <item>primeape</item>
+        <item>growlithe</item>
+        <item>arcanine</item>
+        <item>poliwag</item>
+        <item>poliwhirl</item>
+        <item>poliwrath</item>
+        <item>abra</item>
+        <item>kadabra</item>
+        <item>alakazam</item>
+        <item>machop</item>
+        <item>machoke</item>
+        <item>machamp</item>
+        <item>bellsprout</item>
+        <item>weepinbell</item>
+        <item>victreebel</item>
+        <item>tentacool</item>
+        <item>tentacruel</item>
+        <item>geodude</item>
+        <item>graveler</item>
+        <item>golem</item>
+        <item>ponyta</item>
+        <item>rapidash</item>
+        <item>slowpoke</item>
+        <item>slowbro</item>
+        <item>magnemite</item>
+        <item>magneton</item>
+        <item>farfetchd</item>
+        <item>doduo</item>
+        <item>dodrio</item>
+        <item>seel</item>
+        <item>dewgong</item>
+        <item>grimer</item>
+        <item>muk</item>
+        <item>shellder</item>
+        <item>cloyster</item>
+        <item>gastly</item>
+        <item>haunter</item>
+        <item>gengar</item>
+        <item>onix</item>
+        <item>drowzee</item>
+        <item>hypno</item>
+        <item>krabby</item>
+        <item>kingler</item>
+        <item>voltorb</item>
+        <item>electrode</item>
+        <item>exeggcute</item>
+        <item>exeggutor</item>
+        <item>cubone</item>
+        <item>marowak</item>
+        <item>hitmonlee</item>
+        <item>hitmonchan</item>
+        <item>lickitung</item>
+        <item>koffing</item>
+        <item>weezing</item>
+        <item>rhyhorn</item>
+        <item>rhydon</item>
+        <item>chansey</item>
+        <item>tangela</item>
+        <item>kangaskhan</item>
+        <item>horsea</item>
+        <item>seadra</item>
+        <item>goldeen</item>
+        <item>seaking</item>
+        <item>staryu</item>
+        <item>starmie</item>
+        <item>mrmime</item>
+        <item>scyther</item>
+        <item>jynx</item>
+        <item>electabuzz</item>
+        <item>magmar</item>
+        <item>pinsir</item>
+        <item>tauros</item>
+        <item>magikarp</item>
+        <item>gyarados</item>
+        <item>lapras</item>
+        <item>ditto</item>
         <item>eevee</item>
+        <item>vaporeon</item>
+        <item>jolteon</item>
+        <item>flareon</item>
+        <item>porygon</item>
+        <item>omanyte</item>
+        <item>omastar</item>
+        <item>kabuto</item>
+        <item>kabutops</item>
+        <item>aerodactyl</item>
         <item>snorlax</item>
-        <item>gaurav</item>
+        <item>articuno</item>
+        <item>zapdos</item>
+        <item>moltres</item>
+        <item>dratini</item>
+        <item>dragonair</item>
+        <item>dragonite</item>
+        <item>mewtwo</item>
     </string-array>
     <string-array name="pokemon_adjectives">
         <item>happy,cute</item>
@@ -72,77 +180,1359 @@
         <item>7</item>
         <item>8</item>
         <item>9</item>
-    </integer-array>
-    <integer-array name="pokemon_hp">
-        <item>80</item>
-        <item>120</item>
-        <item>50</item>
-        <item>200</item>
-        <item>180</item>
-        <item>180</item>
-        <item>150</item>
-        <item>70</item>
-        <item>40</item>
-        <item>125</item>
-    </integer-array>
-    <string-array name="pokemon_type">
-        <item>Mouse</item>
-        <item>Snake</item>
-        <item>Mouse</item>
-        <item>Amphibian</item>
-        <item>Aquatic</item>
-        <item>Fire</item>
-        <item>Fire</item>
-        <item>Rodent</item>
-        <item>Dog</item>
-        <item>Human</item>
-    </string-array>
-    <string-array name="pokemon_desc">
-        <item>It is a famous pokemon</item>
-        <item>This one is very long and angryThis one is very long and angryThis one is very long and angryThis one is very long and angry.</item>
-        <item>The angriest mouse on this planet</item>
-        <item>The number 1 guy</item>
-        <item>This is a cute pokemon</item>
-        <item>Considered a legendary guy</item>
-        <item>Is mix of fire and cuteness</item>
-        <item>She is silent and deadly</item>
-        <item>He is just so lazy</item>
-        <item>He is a good guy too</item>
-    </string-array>
-    <integer-array name="pokemon_weight">
-        <item>24</item>
-        <item>43</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>13</item>
+        <item>14</item>
+        <item>15</item>
+        <item>16</item>
+        <item>17</item>
+        <item>18</item>
+        <item>19</item>
+        <item>20</item>
         <item>21</item>
+        <item>22</item>
+        <item>23</item>
+        <item>24</item>
+        <item>25</item>
+        <item>26</item>
+        <item>27</item>
+        <item>28</item>
+        <item>29</item>
+        <item>30</item>
+        <item>31</item>
+        <item>32</item>
+        <item>33</item>
+        <item>34</item>
+        <item>35</item>
+        <item>36</item>
         <item>37</item>
+        <item>38</item>
+        <item>39</item>
+        <item>40</item>
+        <item>41</item>
+        <item>42</item>
+        <item>43</item>
+        <item>44</item>
+        <item>45</item>
+        <item>46</item>
+        <item>47</item>
+        <item>48</item>
         <item>49</item>
         <item>50</item>
-        <item>16</item>
-        <item>19</item>
-        <item>38</item>
+        <item>51</item>
+        <item>52</item>
+        <item>53</item>
         <item>54</item>
+        <item>55</item>
+        <item>56</item>
+        <item>57</item>
+        <item>58</item>
+        <item>59</item>
+        <item>60</item>
+        <item>61</item>
+        <item>62</item>
+        <item>63</item>
+        <item>64</item>
+        <item>65</item>
+        <item>66</item>
+        <item>67</item>
+        <item>68</item>
+        <item>69</item>
+        <item>70</item>
+        <item>71</item>
+        <item>72</item>
+        <item>73</item>
+        <item>74</item>
+        <item>75</item>
+        <item>76</item>
+        <item>77</item>
+        <item>78</item>
+        <item>79</item>
+        <item>80</item>
+        <item>81</item>
+        <item>82</item>
+        <item>83</item>
+        <item>84</item>
+        <item>85</item>
+        <item>86</item>
+        <item>87</item>
+        <item>88</item>
+        <item>89</item>
+        <item>90</item>
+        <item>91</item>
+        <item>92</item>
+        <item>93</item>
+        <item>94</item>
+        <item>95</item>
+        <item>96</item>
+        <item>97</item>
+        <item>98</item>
+        <item>99</item>
+        <item>100</item>
+        <item>101</item>
+        <item>102</item>
+        <item>103</item>
+        <item>104</item>
+        <item>105</item>
+        <item>106</item>
+        <item>107</item>
+        <item>108</item>
+        <item>109</item>
+        <item>110</item>
+        <item>111</item>
+        <item>112</item>
+        <item>113</item>
+        <item>114</item>
+        <item>115</item>
+        <item>116</item>
+        <item>117</item>
+        <item>118</item>
+        <item>119</item>
+        <item>120</item>
+        <item>121</item>
+        <item>122</item>
+        <item>123</item>
+        <item>124</item>
+        <item>125</item>
+        <item>126</item>
+        <item>127</item>
+        <item>128</item>
+        <item>129</item>
+        <item>130</item>
+        <item>131</item>
+        <item>132</item>
+        <item>133</item>
+        <item>134</item>
+        <item>135</item>
+        <item>136</item>
+        <item>137</item>
+        <item>138</item>
+        <item>139</item>
+        <item>140</item>
+        <item>141</item>
+        <item>142</item>
+        <item>143</item>
+        <item>144</item>
+        <item>145</item>
+        <item>146</item>
+        <item>147</item>
+        <item>148</item>
+        <item>149</item>
+    </integer-array>
+    <integer-array name="pokemon_hp">
+        <item>45
+        </item>
+        <item>60
+        </item>
+        <item>80
+        </item>
+        <item>39
+        </item>
+        <item>58
+        </item>
+        <item>78
+        </item>
+        <item>44
+        </item>
+        <item>59
+        </item>
+        <item>79
+        </item>
+        <item>45
+        </item>
+        <item>50
+        </item>
+        <item>60
+        </item>
+        <item>40
+        </item>
+        <item>45
+        </item>
+        <item>65
+        </item>
+        <item>40
+        </item>
+        <item>63
+        </item>
+        <item>83
+        </item>
+        <item>30
+        </item>
+        <item>55
+        </item>
+        <item>40
+        </item>
+        <item>65
+        </item>
+        <item>35
+        </item>
+        <item>60
+        </item>
+        <item>35
+        </item>
+        <item>60
+        </item>
+        <item>50
+        </item>
+        <item>75
+        </item>
+        <item>55
+        </item>
+        <item>70
+        </item>
+        <item>90
+        </item>
+        <item>46
+        </item>
+        <item>61
+        </item>
+        <item>81
+        </item>
+        <item>70
+        </item>
+        <item>95
+        </item>
+        <item>38
+        </item>
+        <item>73
+        </item>
+        <item>115
+        </item>
+        <item>140
+        </item>
+        <item>40
+        </item>
+        <item>75
+        </item>
+        <item>45
+        </item>
+        <item>60
+        </item>
+        <item>75
+        </item>
+        <item>35
+        </item>
+        <item>60
+        </item>
+        <item>60
+        </item>
+        <item>70
+        </item>
+        <item>19
+        </item>
+        <item>35
+        </item>
+        <item>40
+        </item>
+        <item>65
+        </item>
+        <item>50
+        </item>
+        <item>80
+        </item>
+        <item>40
+        </item>
+        <item>65
+        </item>
+        <item>55
+        </item>
+        <item>90
+        </item>
+        <item>40
+        </item>
+        <item>65
+        </item>
+        <item>90
+        </item>
+        <item>25
+        </item>
+        <item>40
+        </item>
+        <item>55
+        </item>
+        <item>70
+        </item>
+        <item>80
+        </item>
+        <item>90
+        </item>
+        <item>50
+        </item>
+        <item>65
+        </item>
+        <item>80
+        </item>
+        <item>40
+        </item>
+        <item>80
+        </item>
+        <item>40
+        </item>
+        <item>55
+        </item>
+        <item>80
+        </item>
+        <item>50
+        </item>
+        <item>65
+        </item>
+        <item>90
+        </item>
+        <item>95
+        </item>
+        <item>25
+        </item>
+        <item>50
+        </item>
+        <item>52
+        </item>
+        <item>35
+        </item>
+        <item>60
+        </item>
+        <item>65
+        </item>
+        <item>90
+        </item>
+        <item>80
+        </item>
+        <item>105
+        </item>
+        <item>30
+        </item>
+        <item>50
+        </item>
+        <item>30
+        </item>
+        <item>45
+        </item>
+        <item>60
+        </item>
+        <item>35
+        </item>
+        <item>60
+        </item>
+        <item>85
+        </item>
+        <item>30
+        </item>
+        <item>55
+        </item>
+        <item>40
+        </item>
+        <item>60
+        </item>
+        <item>60
+        </item>
+        <item>95
+        </item>
+        <item>50
+        </item>
+        <item>60
+        </item>
+        <item>50
+        </item>
+        <item>50
+        </item>
+        <item>90
+        </item>
+        <item>40
+        </item>
+        <item>65
+        </item>
+        <item>80
+        </item>
+        <item>105
+        </item>
+        <item>250
+        </item>
+        <item>65
+        </item>
+        <item>105
+        </item>
+        <item>30
+        </item>
+        <item>55
+        </item>
+        <item>45
+        </item>
+        <item>80
+        </item>
+        <item>30
+        </item>
+        <item>60
+        </item>
+        <item>40
+        </item>
+        <item>70
+        </item>
+        <item>65
+        </item>
+        <item>65
+        </item>
+        <item>65
+        </item>
+        <item>65
+        </item>
+        <item>75
+        </item>
+        <item>20
+        </item>
+        <item>95
+        </item>
+        <item>130
+        </item>
+        <item>48
+        </item>
+        <item>55
+        </item>
+        <item>130
+        </item>
+        <item>65
+        </item>
+        <item>65
+        </item>
+        <item>65
+        </item>
+        <item>35
+        </item>
+        <item>70
+        </item>
+        <item>30
+        </item>
+        <item>60
+        </item>
+        <item>80
+        </item>
+        <item>160
+        </item>
+        <item>90
+        </item>
+        <item>90
+        </item>
+        <item>90
+        </item>
+        <item>41
+        </item>
+        <item>61
+        </item>
+        <item>91
+        </item>
+        <item>106
+        </item>
+        <item>100
+        </item>
+    </integer-array>
+    <string-array name="pokemon_type">
+        <item>poison</item>
+        <item>poison</item>
+        <item>poison</item>
+        <item>fire</item>
+        <item>fire</item>
+        <item>fire</item>
+        <item>water</item>
+        <item>water</item>
+        <item>water</item>
+        <item>grass</item>
+        <item>grass</item>
+        <item>flying</item>
+        <item>poison</item>
+        <item>poison</item>
+        <item>poison</item>
+        <item>flying</item>
+        <item>flying</item>
+        <item>flying</item>
+        <item>normal</item>
+        <item>normal</item>
+        <item>flying</item>
+        <item>flying</item>
+        <item>poison</item>
+        <item>poison</item>
+        <item>electric</item>
+        <item>electric</item>
+        <item>ground</item>
+        <item>ground</item>
+        <item>poison</item>
+        <item>poison</item>
+        <item>ground</item>
+        <item>poison</item>
+        <item>poison</item>
+        <item>ground</item>
+        <item>fairy</item>
+        <item>fairy</item>
+        <item>fire</item>
+        <item>fire</item>
+        <item>fairy</item>
+        <item>fairy</item>
+        <item>flying</item>
+        <item>flying</item>
+        <item>poison</item>
+        <item>poison</item>
+        <item>poison</item>
+        <item>grass</item>
+        <item>grass</item>
+        <item>poison</item>
+        <item>poison</item>
+        <item>ground</item>
+        <item>ground</item>
+        <item>normal</item>
+        <item>normal</item>
+        <item>water</item>
+        <item>water</item>
+        <item>fighting</item>
+        <item>fighting</item>
+        <item>fire</item>
+        <item>fire</item>
+        <item>water</item>
+        <item>water</item>
+        <item>fighting</item>
+        <item>psychic</item>
+        <item>psychic</item>
+        <item>psychic</item>
+        <item>fighting</item>
+        <item>fighting</item>
+        <item>fighting</item>
+        <item>poison</item>
+        <item>poison</item>
+        <item>poison</item>
+        <item>poison</item>
+        <item>poison</item>
+        <item>ground</item>
+        <item>ground</item>
+        <item>ground</item>
+        <item>fire</item>
+        <item>fire</item>
+        <item>psychic</item>
+        <item>psychic</item>
+        <item>steel</item>
+        <item>steel</item>
+        <item>flying</item>
+        <item>flying</item>
+        <item>flying</item>
+        <item>water</item>
+        <item>ice</item>
+        <item>poison</item>
+        <item>poison</item>
+        <item>water</item>
+        <item>ice</item>
+        <item>poison</item>
+        <item>poison</item>
+        <item>poison</item>
+        <item>ground</item>
+        <item>psychic</item>
+        <item>psychic</item>
+        <item>water</item>
+        <item>water</item>
+        <item>electric</item>
+        <item>electric</item>
+        <item>psychic</item>
+        <item>psychic</item>
+        <item>ground</item>
+        <item>ground</item>
+        <item>fighting</item>
+        <item>fighting</item>
+        <item>normal</item>
+        <item>poison</item>
+        <item>poison</item>
+        <item>rock</item>
+        <item>rock</item>
+        <item>normal</item>
+        <item>grass</item>
+        <item>normal</item>
+        <item>water</item>
+        <item>water</item>
+        <item>water</item>
+        <item>water</item>
+        <item>water</item>
+        <item>psychic</item>
+        <item>fairy</item>
+        <item>flying</item>
+        <item>psychic</item>
+        <item>electric</item>
+        <item>fire</item>
+        <item>bug</item>
+        <item>normal</item>
+        <item>water</item>
+        <item>flying</item>
+        <item>ice</item>
+        <item>normal</item>
+        <item>normal</item>
+        <item>water</item>
+        <item>electric</item>
+        <item>fire</item>
+        <item>normal</item>
+        <item>water</item>
+        <item>water</item>
+        <item>water</item>
+        <item>water</item>
+        <item>flying</item>
+        <item>fighting</item>
+        <item>flying</item>
+        <item>flying</item>
+        <item>flying</item>
+        <item>dragon</item>
+        <item>dragon</item>
+        <item>electric</item>
+        <item>psychic</item>
+    </string-array>
+    <string-array name="pokemon_desc">
+                <item>Bulbasaur can be seen napping in bright sunlight. By soaking up the sun\'s rays, the seed in his back grows progressively larger.
+        </item>
+        <item>There is a bud on this Pokémon\'s back. To support its weight, Ivysaur\'s legs and trunk grow thick and strong.
+        </item>
+        <item>There is a large flower on Venusaur\'s back.The flower is said to take on vivid colors if it gets plenty of nutrition and sunlight
+        </item>
+        <item>The flame that burns at the tip of its tail is an indication of its emotions. The flame wavers when Charmander is enjoying itself
+        </item>
+        <item>Charmeleon mercilessly destroys its foes using its sharp claws. If it encounters a strong foe, it turns aggressive.
+        </item>
+        <item>Charizard flies around the sky in search of powerful opponents. It breathes fire of such great heat that it melts anything.
+        </item>
+        <item>Squirtle\'s shell is not merely used for protection. The shell\'s rounded shape help minimize resistance in water.
+        </item>
+        <item>Its tail is large and covered with a rich, thick fur. The tail becomes increasingly deeper in color as Wartortle ages.
+        </item>
+        <item>Blastoise has water spouts that protrude from its shell. The water spouts are very accurate over 60 feet.
+        </item>
+        <item>Caterpie has a voracious appetite. It can devour leaves bigger than its body right before your eyes.
+        </item>
+        <item>The shell covering this Pokémon\'s body is as hard as an iron slab. Metapod does not move very much
+        </item>
+        <item>Butterfree has a superior ability to search for delicious honey from flowers.
+        </item>
+        <item>It is capable of distinguishing its favorite kinds of leaves from those it dislikes just by sniffing with its big red proboscis.
+        </item>
+        <item>Kakuna remains virtually immobile as it clings to a tree. It is extremely busy as it prepares for its coming evolution.
+        </item>
+        <item>Beedrill is extremely territorial. No one should ever approach its nestthis is for their own safety.
+        </item>
+        <item>It is capable of unerringly returning home to its nest, however far it may be removed from its familiar surroundings.
+        </item>
+        <item>Pidgeotto claims a large area as its own territory. This Pokémon flies around, patrolling its living space.
+        </item>
+        <item>Trainers are captivated by the striking beauty of the feathers on its head, compelling them to choose Pidgeot as their Pokémon.
+        </item>
+        <item>Rattata is cautious in the extreme. Even while it is asleep, it constantly listens by moving its ears around.
+        </item>
+        <item>Raticate\'s sturdy fangs grow steadily. To keep them ground down, it gnaws on rocks and logs.
+        </item>
+        <item>Spearow has a very loud cry that can be heard over half a mile away.
+        </item>
+        <item>Fearow is recognized by its long neck and elongated beak. They are conveniently shaped for catching prey in soil or water.
+        </item>
+        <item>Assuming this position allows it to quickly respond to a threat from any direction with a glare from its upraised head.
+        </item>
+        <item>This Pokémon is terrifically strong in order to constrict things with its body. It can even flatten steel oil drums.
+        </item>
+        <item>Whenever Pikachu comes across something new, it blasts it with a jolt of electricity.
+        </item>
+        <item>If the electrical sacs become excessively charged, Raichu plants its tail in the ground and discharges.
+        </item>
+        <item>Sandshrew\'s body is configured to absorb water without waste, enabling it to survive in an arid desert.
+        </item>
+        <item>Sandslash\'s body is covered by tough spikes, which are hardened sections of its hide.
+        </item>
+        <item>Nidoran has barbs that secrete a powerful poison. They are thought to have developed as protection for this small-bodied Pokémon
+        </item>
+        <item>When Nidorina are with their friends or family, they keep their barbs tucked away to prevent hurting each other.
+        </item>
+        <item>Nidoqueen\'s body is encased in extremely hard scales. It is adept at sending foes flying with harsh tackles.
+        </item>
+        <item>Nidoran? has developed muscles for moving its ears. Thanks to them, the ears can be freely moved in any direction.
+        </item>
+        <item>If it senses a hostile presence, all the barbs on its back bristle up at once, and it challenges the foe with all its might.
+        </item>
+        <item>Nidoking\'s thick tail packs enormously destructive power. With one swing, it can topple a metal transmission tower.
+        </item>
+        <item>On every night of a full moon, groups of this Pokémon come out to play.
+        </item>
+        <item>Clefable moves by skipping lightly as if it were flying using its wings. Its bouncy step lets it even walk on water.
+        </item>
+        <item>The tail separates into six if this Pokémon receives plenty of love from its Trainer. The six tails become magnificently curled.
+        </item>
+        <item>Ninetales casts a sinister light from its bright red eyes to gain total control over its foe\'s mind.
+        </item>
+        <item>Jigglypuff\'s vocal cords can freely adjust the wavelength of its voice.
+        </item>
+        <item>Wigglytuff has large, saucerlike eyes. The surfaces of its eyes are always covered with a thin layer of tears.
+        </item>
+        <item>Zubat remains quietly unmoving in a dark spot during the bright daylight hours.
+        </item>
+        <item>Golbat loves to drink the blood of living things. It is particularly active in the pitch black of night.
+        </item>
+        <item>During the daytime, Oddish buries itself in soil to absorb nutrients from the ground using its entire body.
+        </item>
+        <item>Gloom releases a foul fragrance from the pistil of its flower. When faced with danger, the stench worsens.
+        </item>
+        <item>Vileplume\'s toxic pollen triggers atrocious allergy attacks.
+        </item>
+        <item>Paras has parasitic mushrooms growing on its back called tochukaso. They grow large by drawing nutrients from this Bug host.
+        </item>
+        <item>Parasect is known to infest large trees en masse and drain nutrients from the lower trunk and roots.
+        </item>
+        <item>Venonat is said to have evolved with a coat of thin, stiff hair that covers its entire body for protection.
+        </item>
+        <item>Venomoth is nocturnalit is a Pokémon that only becomes active at night.
+        </item>
+        <item>Diglett are raised in most farms.The reason is wherever this Pokémon burrows,the soil is left perfectly tilled for planting crops
+        </item>
+        <item>Dugtrio are actually triplets that emerged from one body.
+        </item>
+        <item>Meowth withdraws its sharp claws into its paws to slinkily sneak about without making any incriminating footsteps.
+        </item>
+        <item>Persian has six bold whiskers that give it a look of toughness.
+        </item>
+        <item>Psyduck uses a mysterious power. When it does so, this Pokémon generates brain waves that are supposedly only seen in sleepers.
+        </item>
+        <item>The webbed flippers on its forelegs and hind legs and the streamlined body of Golduck give it frightening speed.
+        </item>
+        <item>When Mankey starts shaking and its nasal breathing turns rough, it\'s a sure sign that it is becoming angry.
+        </item>
+        <item>When Primeape becomes furious, its blood circulation is boosted. In turn, its muscles are made even stronger.
+        </item>
+        <item>Growlithe has a superb sense of smell. Once it smells anything, this Pokémon won\'t forget the scent, no matter what.
+        </item>
+        <item>Arcanine is known for its high speed. It is said to be capable of running over 6,200 miles in a single day and night.
+        </item>
+        <item>Poliwag has a very thin skin. It is possible to see the Pokémon\'s spiral innards right through the skin.
+        </item>
+        <item>The surface of Poliwhirl\'s body is always wet and slick with a slimy fluid.
+        </item>
+        <item>Poliwrath\'s highly developed, brawny muscles never grow fatigued, however much it exercises.
+        </item>
+        <item>Abra sleeps for eighteen hours a day. However, it can sense the presence of foes even while it is sleeping.
+        </item>
+        <item>Kadabra emits a peculiar alpha wave if it develops a headache.
+        </item>
+        <item>Alakazam\'s brain continually grows, making its head far too heavy to support with its neck.
+        </item>
+        <item>Machop\'s muscles are specialthey never get sore no matter how much they are used in exercise.
+        </item>
+        <item>Machoke\'s thoroughly toned muscles possess the hardness of steel.
+        </item>
+        <item>Machamp has the power to hurl anything aside. However its arms can get easily entangled.
+        </item>
+        <item>Bellsprout\'s thin and flexible body lets it bend and sway to avoid any attack, however strong it may be.
+        </item>
+        <item>Weepinbell has a large hook on its rear end. At night, the Pokémon hooks on to a tree branch and goes to sleep.
+        </item>
+        <item>Victreebel has a long vine that extends from its head and it is waved and flicked about as if it were an animal to attract prey.
+        </item>
+        <item>Tentacool\'s body is largely composed of water. If it is removed from the sea, it dries up like parchment.
+        </item>
+        <item>Tentacruel has large red orbs on its head. The orbs glow before lashing the vicinity with a harsh ultrasonic blast.
+        </item>
+        <item>The longer a Geodude lives, the more its edges are chipped and worn away, making it more rounded in appearance.
+        </item>
+        <item>Graveler grows by feeding on rocks. Apparently, it prefers to eat rocks that are covered in moss.
+        </item>
+        <item>If there is a large earthquake, these Pokémon will come rolling down off the mountains en masse to the foothills below.
+        </item>
+        <item>Ponyta is very weak at birth. It can barely stand up. This Pokémon becomes stronger by stumbling.
+        </item>
+        <item>Rapidash usually can be seen casually cantering in the fields and plains.
+        </item>
+        <item>Slowpoke uses its tail to catch prey by dipping it in water at the side of a river.
+        </item>
+        <item>Slowbro\'s tail has a Shellder firmly attached with a bite. As a result, the tail can\'t be used for fishing anymore.
+        </item>
+        <item>Magnemite attaches itself to power lines to feed on electricity.
+        </item>
+        <item>Magneton emits a powerful magnetic force that is fatal to mechanical devices.
+        </item>
+        <item>Farfetch\'d is always seen with a stalk from a plant of some sort.
+        </item>
+        <item>Doduo\'s two heads never sleep at the same time. Its two heads take turns sleeping, so one head can always keep watch .
+        </item>
+        <item>Watch out if Dodrio\'s three heads are looking in three separate directions.
+        </item>
+        <item>Seel hunts for prey in the frigid sea underneath sheets of ice.
+        </item>
+        <item>The sight of this Pokémon sleeping on a glacier was mistakenly thought to be a mermaid by a mariner long ago.
+        </item>
+        <item>Grimer\'s sludgy and rubbery body can be forced through any opening, however small it may be.
+        </item>
+        <item>From Muk\'s body seeps a foul fluid that gives off a nose-bendingly horrible stench.
+        </item>
+        <item>At night, this Pokémon uses its broad tongue to burrow a hole in the seafloor sand and then sleep in it.
+        </item>
+        <item>Cloyster is capable of swimming in the sea. It does so by swallowing water, then jetting it out toward the rear.
+        </item>
+        <item>Gastly is largely composed of gaseous matter. When exposed to a strong wind, the gaseous body quickly dwindles away.
+        </item>
+        <item>Haunter is a dangerous Pokémon. If one beckons you while floating in darkness, you must never approach it.
+        </item>
+        <item>Sometimes, on a dark night, your shadow thrown by a streetlight will suddenly and startlingly overtake you.
+        </item>
+        <item>Onix has a magnet in its brain. It acts as a compass so that this Pokémon does not lose direction while it is tunneling.
+        </item>
+        <item>It stands above your pillow and trying to eat your dream through your nostrils.
+        </item>
+        <item>Hypno holds a pendulum in its hand. The arcing movement and glitter of the pendulum lull the foe into a deep state of hypnosis.
+        </item>
+        <item>Krabby live on beaches, burrowed inside holes dug into the sand.
+        </item>
+        <item>Kingler has an enormous, oversized claw. It waves this huge claw in the air to communicate with others.
+        </item>
+        <item>Voltorb was first sighted at a company that manufactures Poké Balls.
+        </item>
+        <item>On days when lightning strikes, you can see this Pokémon exploding all over the place from eating too much electricity.
+        </item>
+        <item>This Pokémon consists of six eggs that form a closely knit cluster.
+        </item>
+        <item>Exeggutor originally came from the tropics. Its heads steadily grow larger from exposure to strong sunlight.
+        </item>
+        <item>Cubone pines for the mother it will never see again. Seeing a likeness of its mother in the full moon, it cries.
+        </item>
+        <item>Marowak is the evolved form of a Cubone that has overcome its sadness at the loss of its mother and grown tough.
+        </item>
+        <item>Hitmonlee\'s legs freely contract and stretch. Using these springlike legs, it bowls over foes with devastating kicks.
+        </item>
+        <item>Hitmonchan is said to possess the spirit of a boxer who had been working toward a world championship.
+        </item>
+        <item>Whenever Lickitung comes across something new, it will unfailingly give it a lick.
+        </item>
+        <item>If Koffing becomes agitated, it raises the toxicity of its internal gases and jets them out from all over its body.
+        </item>
+        <item>Weezing loves the gases given off by rotted kitchen garbage. This Pokémon will find a dirty, unkempt house and make it its home.
+        </item>
+        <item>Rhyhorn runs in a straight line, smashing everything in its path.
+        </item>
+        <item>Rhydon\'s horn can crush even uncut diamonds. One sweeping blow of its tail can topple a building.
+        </item>
+                <item>Chansey lays nutritionally excellent eggs on an everyday basis.
+                </item>
+        <item>Tangela\'s vines snap off easily if they are grabbed. This happens without pain, allowing it to make a quick getaway.
+        </item>
+        <item>If you come across a young Kangaskhan playing by itself, you must never disturb it or attempt to catch it.
+        </item>
+        <item>This Pokémon anchors itself by wrapping its tail around rocks or coral to prevent being washed away.
+        </item>
+        <item>Seadra sleeps after wriggling itself between the branches of coral.
+        </item>
+        <item>Goldeen is a very beautiful Pokémon with fins that billow elegantly in water.
+        </item>
+        <item>In the autumn, Seaking males can be seen performing courtship dances in riverbeds to woo females.
+        </item>
+        <item>Staryu\'s center section has an organ called the core that shines bright red.
+        </item>
+        <item>Starmie\'s center sectionthe coreglows brightly in seven colors.
+        </item>
+        <item>Its gestures and motions convince watchers that something unseeable actually exists.
+        </item>
+        <item>Scyther is blindingly fast. Its blazing speed enhances the effectiveness of the twin scythes on its forearms.
+        </item>
+        <item>Jynx walks rhythmically, swaying and shaking its hips as if it were dancing.
+        </item>
+        <item>When a storm arrives, gangs of this Pokémon compete with each other to scale heights that are likely to be stricken by lightning bolts.
+        </item>
+        <item>In battle, Magmar blows out intensely hot flames from all over its body to intimidate its opponent.
+        </item>
+        <item>Pinsir is astoundingly strong. It can grip a foe weighing twice its weight in its horns and easily lift it.
+        </item>
+        <item>This Pokémon is not satisfied unless it is rampaging at all times.
+        </item>
+        <item>Magikarp is a pathetic excuse for a Pokémon that is only capable of flopping and splashing.
+        </item>
+        <item>When Magikarp evolves into Gyarados, its brain cells undergo a structural transformation.
+        </item>
+        <item>In the evenings, this Pokémon is said to sing plaintively as it seeks what few others of its kind still remain.
+        </item>
+        <item>Ditto rearranges its cell structure to transform itself into other shapes.
+        </item>
+        <item>Eevee has an unstable genetic makeup that suddenly mutates due to the environment in which it lives.
+        </item>
+        <item>Vaporeon underwent a spontaneous mutation and grew fins and gills that allow it to live underwater.
+        </item>
+        <item>Jolteon\'s cells generate a low level of electricity. This power is amplified by the static electricity of its fur.
+        </item>
+        <item>Flareon\'s fluffy fur has a functional purposeit releases heat into the air so that its body does not get excessively hot.
+        </item>
+        <item>Porygon is capable of reverting itself entirely back to program data and entering cyberspace.
+        </item>
+        <item>Omanyte is one of the ancient and long-since-extinct Pokémon that have been regenerated from fossils by people.
+        </item>
+        <item>It is believed to have become extinct because its shell grew too large and heavy.
+        </item>
+        <item>Kabuto is a Pokémon that has been regenerated from a fossil.
+        </item>
+        <item>Kabutops swam underwater to hunt for its prey in ancient times.
+        </item>
+        <item>Aerodactyl is a Pokémon from the age of dinosaurs. It was regenerated from genetic material extracted from amber.
+        </item>
+        <item>Snorlax\'s typical day consists of nothing more than eating and sleeping.
+        </item>
+        <item>Articuno is a legendary bird Pokémon that can control ice. The flapping of its wings chills the air.
+        </item>
+        <item>Zapdos is a legendary bird Pokémon that has the ability to control electricity. It usually lives in thunderclouds.
+        </item>
+        <item>Moltres is a legendary bird Pokémon that has the ability to control fire.
+        </item>
+        <item>Dratini continually molts and sloughs off its old skin.
+        </item>
+        <item>Dragonair stores an enormous amount of energy inside its body. It is said to alter weather conditions .
+        </item>
+        <item>Dragonite is capable of circling the globe in just 16 hours. It is a kindhearted Pokémon.
+        </item>
+        <item>Mewtwo is a Pokémon that was created by genetic manipulation.It killed its creators.
+        </item>
+    </string-array>
+    <integer-array name="pokemon_weight">
+        <item>69</item>
+        <item>130</item>
+        <item>1000</item>
+        <item>85</item>
+        <item>190</item>
+        <item>905</item>
+        <item>90</item>
+        <item>225</item>
+        <item>855</item>
+        <item>29</item>
+        <item>99</item>
+        <item>320</item>
+        <item>32</item>
+        <item>100</item>
+        <item>295</item>
+        <item>18</item>
+        <item>300</item>
+        <item>395</item>
+        <item>35</item>
+        <item>185</item>
+        <item>20</item>
+        <item>380</item>
+        <item>69</item>
+        <item>650</item>
+        <item>60</item>
+        <item>300</item>
+        <item>120</item>
+        <item>295</item>
+        <item>70</item>
+        <item>200</item>
+        <item>600</item>
+        <item>90</item>
+        <item>195</item>
+        <item>620</item>
+        <item>75</item>
+        <item>400</item>
+        <item>99</item>
+        <item>199</item>
+        <item>55</item>
+        <item>120</item>
+        <item>75</item>
+        <item>550</item>
+        <item>54</item>
+        <item>86</item>
+        <item>186</item>
+        <item>54</item>
+        <item>295</item>
+        <item>300</item>
+        <item>125</item>
+        <item>8</item>
+        <item>333</item>
+        <item>42</item>
+        <item>320</item>
+        <item>196</item>
+        <item>766</item>
+        <item>280</item>
+        <item>320</item>
+        <item>190</item>
+        <item>1550</item>
+        <item>124</item>
+        <item>200</item>
+        <item>540</item>
+        <item>195</item>
+        <item>565</item>
+        <item>480</item>
+        <item>195</item>
+        <item>705</item>
+        <item>1300</item>
+        <item>40</item>
+        <item>64</item>
+        <item>155</item>
+        <item>455</item>
+        <item>550</item>
+        <item>200</item>
+        <item>1050</item>
+        <item>3000</item>
+        <item>300</item>
+        <item>950</item>
+        <item>360</item>
+        <item>785</item>
+        <item>60</item>
+        <item>600</item>
+        <item>150</item>
+        <item>392</item>
+        <item>852</item>
+        <item>900</item>
+        <item>1200</item>
+        <item>300</item>
+        <item>300</item>
+        <item>40</item>
+        <item>1325</item>
+        <item>1</item>
+        <item>1</item>
+        <item>405</item>
+        <item>2100</item>
+        <item>324</item>
+        <item>756</item>
+        <item>65</item>
+        <item>600</item>
+        <item>104</item>
+        <item>666</item>
+        <item>25</item>
+        <item>1200</item>
+        <item>65</item>
+        <item>450</item>
+        <item>498</item>
+        <item>502</item>
+        <item>655</item>
+        <item>10</item>
+        <item>95</item>
+        <item>1150</item>
+        <item>1200</item>
+        <item>346</item>
+        <item>350</item>
+        <item>800</item>
+        <item>80</item>
+        <item>250</item>
+        <item>150</item>
+        <item>390</item>
+        <item>345</item>
+        <item>800</item>
+        <item>545</item>
+        <item>560</item>
+        <item>406</item>
+        <item>300</item>
+        <item>445</item>
+        <item>550</item>
+        <item>884</item>
+        <item>100</item>
+        <item>2350</item>
+        <item>2200</item>
+        <item>40</item>
+        <item>65</item>
+        <item>290</item>
+        <item>245</item>
+        <item>250</item>
+        <item>365</item>
+        <item>75</item>
+        <item>350</item>
+        <item>115</item>
+        <item>405</item>
+        <item>590</item>
+        <item>4600</item>
+        <item>554</item>
+        <item>526</item>
+        <item>600</item>
+        <item>33</item>
+        <item>165</item>
+        <item>2100</item>
+        <item>1220</item>
     </integer-array>
     <integer-array name="pokemon_height">
+        <item>7</item>
+        <item>10</item>
+        <item>20</item>
         <item>6</item>
-        <item>21</item>
+        <item>11</item>
+        <item>17</item>
         <item>5</item>
-        <item>19</item>
-        <item>14</item>
-        <item>4</item>
+        <item>10</item>
+        <item>16</item>
+        <item>3</item>
+        <item>7</item>
+        <item>11</item>
+        <item>3</item>
         <item>6</item>
+        <item>10</item>
+        <item>3</item>
+        <item>11</item>
+        <item>15</item>
+        <item>3</item>
+        <item>7</item>
+        <item>3</item>
+        <item>12</item>
+        <item>20</item>
+        <item>35</item>
+        <item>4</item>
+        <item>8</item>
+        <item>6</item>
+        <item>10</item>
+        <item>4</item>
+        <item>8</item>
+        <item>13</item>
+        <item>5</item>
+        <item>9</item>
         <item>14</item>
+        <item>6</item>
+        <item>13</item>
+        <item>6</item>
+        <item>11</item>
+        <item>5</item>
+        <item>10</item>
+        <item>8</item>
+        <item>16</item>
         <item>5</item>
         <item>8</item>
+        <item>12</item>
+        <item>3</item>
+        <item>10</item>
+        <item>10</item>
+        <item>15</item>
+        <item>2</item>
+        <item>7</item>
+        <item>4</item>
+        <item>10</item>
+        <item>8</item>
+        <item>17</item>
+        <item>5</item>
+        <item>10</item>
+        <item>7</item>
+        <item>19</item>
+        <item>6</item>
+        <item>10</item>
+        <item>13</item>
+        <item>9</item>
+        <item>13</item>
+        <item>15</item>
+        <item>8</item>
+        <item>15</item>
+        <item>16</item>
+        <item>7</item>
+        <item>10</item>
+        <item>17</item>
+        <item>9</item>
+        <item>16</item>
+        <item>4</item>
+        <item>10</item>
+        <item>14</item>
+        <item>10</item>
+        <item>17</item>
+        <item>12</item>
+        <item>16</item>
+        <item>3</item>
+        <item>10</item>
+        <item>8</item>
+        <item>14</item>
+        <item>18</item>
+        <item>11</item>
+        <item>17</item>
+        <item>9</item>
+        <item>12</item>
+        <item>3</item>
+        <item>15</item>
+        <item>13</item>
+        <item>16</item>
+        <item>15</item>
+        <item>88</item>
+        <item>10</item>
+        <item>16</item>
+        <item>4</item>
+        <item>13</item>
+        <item>5</item>
+        <item>12</item>
+        <item>4</item>
+        <item>20</item>
+        <item>4</item>
+        <item>10</item>
+        <item>15</item>
+        <item>14</item>
+        <item>12</item>
+        <item>6</item>
+        <item>12</item>
+        <item>10</item>
+        <item>19</item>
+        <item>11</item>
+        <item>10</item>
+        <item>22</item>
+        <item>4</item>
+        <item>12</item>
+        <item>6</item>
+        <item>13</item>
+        <item>8</item>
+        <item>11</item>
+        <item>13</item>
+        <item>15</item>
+        <item>14</item>
+        <item>11</item>
+        <item>13</item>
+        <item>15</item>
+        <item>14</item>
+        <item>9</item>
+        <item>65</item>
+        <item>25</item>
+        <item>3</item>
+        <item>3</item>
+        <item>10</item>
+        <item>8</item>
+        <item>9</item>
+        <item>8</item>
+        <item>4</item>
+        <item>10</item>
+        <item>5</item>
+        <item>13</item>
+        <item>18</item>
+        <item>21</item>
+        <item>17</item>
+        <item>16</item>
+        <item>20</item>
+        <item>18</item>
+        <item>40</item>
+        <item>22</item>
+        <item>20</item>
     </integer-array>
     <integer-array name="pokemon_level">
-        <item>4</item>
-        <item>4</item>
-        <item>6</item>
-        <item>5</item>
-        <item>2</item>
-        <item>8</item>
-        <item>7</item>
-        <item>2</item>
-        <item>8</item>
-        <item>7</item>
+        <item>64</item>
+        <item>142</item>
+        <item>236</item>
+        <item>62</item>
+        <item>142</item>
+        <item>240</item>
+        <item>63</item>
+        <item>142</item>
+        <item>239</item>
+        <item>39</item>
+        <item>72</item>
+        <item>178</item>
+        <item>39</item>
+        <item>72</item>
+        <item>178</item>
+        <item>50</item>
+        <item>122</item>
+        <item>216</item>
+        <item>51</item>
+        <item>145</item>
+        <item>52</item>
+        <item>155</item>
+        <item>58</item>
+        <item>153</item>
+        <item>112</item>
+        <item>218</item>
+        <item>60</item>
+        <item>158</item>
+        <item>55</item>
+        <item>128</item>
+        <item>227</item>
+        <item>55</item>
+        <item>128</item>
+        <item>227</item>
+        <item>113</item>
+        <item>217</item>
+        <item>60</item>
+        <item>177</item>
+        <item>95</item>
+        <item>196</item>
+        <item>49</item>
+        <item>159</item>
+        <item>64</item>
+        <item>138</item>
+        <item>221</item>
+        <item>57</item>
+        <item>142</item>
+        <item>61</item>
+        <item>158</item>
+        <item>53</item>
+        <item>142</item>
+        <item>58</item>
+        <item>154</item>
+        <item>64</item>
+        <item>175</item>
+        <item>61</item>
+        <item>159</item>
+        <item>70</item>
+        <item>194</item>
+        <item>60</item>
+        <item>135</item>
+        <item>230</item>
+        <item>62</item>
+        <item>140</item>
+        <item>225</item>
+        <item>61</item>
+        <item>142</item>
+        <item>227</item>
+        <item>60</item>
+        <item>137</item>
+        <item>221</item>
+        <item>67</item>
+        <item>180</item>
+        <item>60</item>
+        <item>137</item>
+        <item>223</item>
+        <item>82</item>
+        <item>175</item>
+        <item>63</item>
+        <item>172</item>
+        <item>65</item>
+        <item>163</item>
+        <item>123</item>
+        <item>62</item>
+        <item>161</item>
+        <item>65</item>
+        <item>166</item>
+        <item>65</item>
+        <item>175</item>
+        <item>61</item>
+        <item>184</item>
+        <item>62</item>
+        <item>142</item>
+        <item>225</item>
+        <item>77</item>
+        <item>66</item>
+        <item>169</item>
+        <item>65</item>
+        <item>166</item>
+        <item>66</item>
+        <item>168</item>
+        <item>65</item>
+        <item>182</item>
+        <item>64</item>
+        <item>149</item>
+        <item>159</item>
+        <item>159</item>
+        <item>77</item>
+        <item>68</item>
+        <item>172</item>
+        <item>69</item>
+        <item>170</item>
+        <item>395</item>
+        <item>87</item>
+        <item>172</item>
+        <item>59</item>
+        <item>154</item>
+        <item>64</item>
+        <item>158</item>
+        <item>68</item>
+        <item>182</item>
+        <item>161</item>
+        <item>100</item>
+        <item>159</item>
+        <item>172</item>
+        <item>173</item>
+        <item>175</item>
+        <item>172</item>
+        <item>40</item>
+        <item>189</item>
+        <item>187</item>
+        <item>101</item>
+        <item>65</item>
+        <item>184</item>
+        <item>184</item>
+        <item>184</item>
+        <item>79</item>
+        <item>71</item>
+        <item>173</item>
+        <item>71</item>
+        <item>173</item>
+        <item>180</item>
+        <item>189</item>
+        <item>261</item>
+        <item>261</item>
+        <item>261</item>
+        <item>60</item>
+        <item>147</item>
+        <item>270</item>
+        <item>306</item>
     </integer-array>
 </resources>
