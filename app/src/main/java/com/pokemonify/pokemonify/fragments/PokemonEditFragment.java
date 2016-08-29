@@ -116,7 +116,7 @@ public class PokemonEditFragment extends Fragment {
                         pokemonDesc.setText(s);
                         break;
                     case R.id.pokemon_level:
-                        pokemonLvl.setText("Lvl " + s);
+                        pokemonLvl.setText("Exp " + s);
                         break;
                 }
             }
@@ -157,7 +157,7 @@ public class PokemonEditFragment extends Fragment {
         pokemonWeight.setText(mPokemonDto.getWeight() + " Lbs");
         pokemonHeight.setText(mPokemonDto.getHeight() + " Inch");
         pokemonDesc.setText(mPokemonDto.getDesc());
-        pokemonLvl.setText("Lvl " + mPokemonDto.getLevel());
+        pokemonLvl.setText("Exp " + mPokemonDto.getLevel());
         Bitmap bitmap = null;
         if (mPokemonDto.getImagePath().equals("-1")) {
             bitmap = BitmapFactory.decodeFile(mPokemonDto.getBitmapPath());

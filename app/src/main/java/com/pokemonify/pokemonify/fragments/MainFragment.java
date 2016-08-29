@@ -55,9 +55,9 @@ public class MainFragment extends Fragment {
         mMyPokemonName.setText(currentMyPokemon.getName());
         mMyPokemonHp.setText(currentMyPokemon.getHp() + " Hp");
         mMyPokemonType.setText(currentMyPokemon.getType());
-        mMyPokemonLevel.setText("Lvl " + currentMyPokemon.getLevel());
+        mMyPokemonLevel.setText("Exp " + currentMyPokemon.getLevel());
         mMyPokemonWeight.setText(currentMyPokemon.getWeight() + " lbs");
-        mMyPokemonHeight.setText(currentMyPokemon.getHeight() + " cm");
+        mMyPokemonHeight.setText(currentMyPokemon.getHeight() + " Inch");
         mMyPokemonDesc.setText(currentMyPokemon.getDesc());
         mMyPokemonImage.getLayoutParams().height= (int) (Utils.getDisplayHeight(getActivity())*0.40);
         Bitmap bitmap=null;

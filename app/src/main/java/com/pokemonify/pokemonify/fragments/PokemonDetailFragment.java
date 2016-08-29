@@ -75,13 +75,6 @@ public class PokemonDetailFragment extends Fragment {
         pokemonImage = (ImageView) v.findViewById(R.id.pokemon_image);
         detailScreen = v.findViewById(R.id.detailScreen);
         pokemonImage.getLayoutParams().height = (int) (Utils.getDisplayHeight(getActivity()) * 0.40);
-        if (Utils.isTypePresent(pokemonType.getText().toString().toLowerCase())) {
-            detailScreen.setBackground(new BitmapDrawable(BitmapFactory.decodeResource(getResources(),
-                    getResources().getIdentifier(pokemonType.getText().toString().toLowerCase(), "drawable",
-                            getActivity().getPackageName()))));
-        } else {
-            detailScreen.setBackground(getResources().getDrawable(R.drawable.standardbackground));
-        }
         setPokemonData();
         setOnClick();
     }
@@ -110,7 +103,7 @@ public class PokemonDetailFragment extends Fragment {
                         pokemonDesc.setText(s);
                         break;
                     case R.id.pokemon_level:
-                        pokemonLvl.setText("Lvl " + s);
+                        pokemonLvl.setText("Exp " + s);
                         break;
                 }
 
@@ -155,7 +148,7 @@ public class PokemonDetailFragment extends Fragment {
         pokemonWeight.setText(mPokemonDto.getWeight() + " Lbs");
         pokemonHeight.setText(mPokemonDto.getHeight() + " Inch");
         pokemonDesc.setText(mPokemonDto.getDesc());
-        pokemonLvl.setText("Lvl " + mPokemonDto.getLevel());
+        pokemonLvl.setText("Exp " + mPokemonDto.getLevel());
         Bitmap bitmap = null;
         if (mPokemonDto.getImagePath().equals("-1")) {
             bitmap = BitmapFactory.decodeFile(mPokemonDto.getBitmapPath());
@@ -166,6 +159,13 @@ public class PokemonDetailFragment extends Fragment {
         }
         pokemonImageBitmap = bitmap;
         pokemonImage.setImageBitmap(pokemonImageBitmap);
+        if (Utils.isTypePresent(pokemonType.getText().toString().toLowerCase())) {
+            detailScreen.setBackground(new BitmapDrawable(BitmapFactory.decodeResource(getResources(),
+                    getResources().getIdentifier(pokemonType.getText().toString().toLowerCase(), "drawable",
+                            getActivity().getPackageName()))));
+        } else {
+            detailScreen.setBackground(getResources().getDrawable(R.drawable.standardbackground));
+        }
     }
 
     public void shareThisPokemon() {

@@ -168,7 +168,7 @@ public class MyCardDetailFragment extends Fragment {
         pokemonWeight.setText(mPokemonDto.getWeight() + " Lbs");
         pokemonHeight.setText(mPokemonDto.getHeight() + " Inch");
         pokemonDesc.setText(mPokemonDto.getDesc());
-        pokemonLvl.setText("Lvl " + mPokemonDto.getLevel());
+        pokemonLvl.setText("Exp " + mPokemonDto.getLevel());
         Bitmap bitmap = null;
         if (mPokemonDto.getImagePath().equals("-1")) {
             bitmap = BitmapFactory.decodeFile(mPokemonDto.getBitmapPath());
@@ -229,8 +229,16 @@ public class MyCardDetailFragment extends Fragment {
                     toggleShouldEdit();
                     getActivity().supportInvalidateOptionsMenu();
                     if (fragment != null) {
-                        ((MainActivity) getActivity()).changeFrag(fragment);
+                        ((MainActivity) getActivity()).doFragTransaction(fragment,0);
                     }
+                }
+            }
+        });
+        builder.setNeutralButton("Don't Save", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                if (fragment != null) {
+                    ((MainActivity) getActivity()).doFragTransaction(fragment,0);
                 }
             }
         });
