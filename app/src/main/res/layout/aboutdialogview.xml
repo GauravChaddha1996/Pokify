@@ -16,18 +16,43 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:src="@drawable/pokeball"/>
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/imageView"
+            android:layout_centerHorizontal="true"
+            android:text="Contact Us:"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textSize="24dp"
+            android:layout_marginBottom="8dp"
+            android:textStyle="italic"/>
+
+        <TextView
+            android:id="@+id/textView0"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textView"
+            android:text="dev@pokify.com"
+            android:layout_centerHorizontal="true"
+            android:typeface="sans"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/colorPrimary"
+            android:textSize="21dp"/>
 
         <TextView
             android:id="@+id/textView1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/imageView"
+            android:layout_below="@+id/textView0"
             android:layout_centerHorizontal="true"
+            android:layout_marginTop="8dp"
             android:text="Developed By:"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textSize="24dp"
-            android:layout_marginBottom="24dp"
+            android:layout_marginBottom="8dp"
             android:textStyle="italic"/>
+
 
         <TextView
             android:id="@+id/textView2"
@@ -68,7 +93,7 @@
             android:id="@+id/textView4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="8dp"
             android:layout_below="@+id/email"
             android:layout_centerHorizontal="true"
             android:text="Saurav Tiru"
@@ -97,6 +122,19 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="@color/colorPrimary"
             android:typeface="sans"
+            android:textSize="21dp"/>
+
+        <TextView
+            android:id="@+id/specialThanks"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/designemail"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:layout_marginTop="8dp"
+            android:text="Special Thanks to Tanmay Gupta for the scripts."
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/colorPrimary"
             android:textSize="21dp"/>
 
     </RelativeLayout>

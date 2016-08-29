@@ -9,14 +9,20 @@ import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.graphics.RectF;
+import android.os.Environment;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Toast;
 
+import com.pokemonify.pokemonify.UIComponents.SingleMediaScanner;
 import com.pokemonify.pokemonify.pokemondatabase.DbHelper;
 import com.pokemonify.pokemonify.pokemondatabase.PokemonDto;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.Random;
 
 /**
@@ -82,4 +88,36 @@ public class Utils {
         return false;
     }
 
+    public static void saveFile(Context context,Bitmap bitmap,int id) {
+        File mFolder=new File(Environment.getExternalStorageDirectory()+File.separator+"Pokify");
+        File file=new File(mFolder.getAbsolutePath()+File.separator+id+".png");
+        if(!mFolder.exists()) {
+            mFolder.mkdir();
+        }
+        if(!file.exists()) {
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        Log.d("path:",file.getAbsolutePath());
+        FileOutputStream out = null;
+        try {
+            out = new FileOutputStream(file);
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, out);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (out != null) {
+                    out.close();
+                    Toast.makeText(context,"Saved to gallery!",Toast.LENGTH_SHORT).show();
+                    new SingleMediaScanner(context,file);
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }

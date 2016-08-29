@@ -2,14 +2,19 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
       xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/action_share_myPokemon"
-        android:orderInCategory="100"
-        android:title="Share"
-        android:icon="@drawable/share"
-        app:showAsAction="always"/>
-    <item
         android:id="@+id/action_search"
         android:icon="@drawable/search"
         android:title="Search Pokedex"
         app:showAsAction="always"/>
+    <item
+        android:id="@+id/action_share_myPokemon"
+        android:title="Share"
+        android:icon="@drawable/share"
+        app:showAsAction="always"/>
+    <item
+        android:id="@+id/action_save_myPokemon"
+        android:title="Save To Gallery"
+        android:icon="@drawable/gallery"
+        app:showAsAction="always"/>
+
 </menu>

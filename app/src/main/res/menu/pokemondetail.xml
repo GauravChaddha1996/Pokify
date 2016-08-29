@@ -16,5 +16,4 @@
         android:title="Share"
         android:icon="@drawable/share"
         app:showAsAction="always"/>
-
 </menu>

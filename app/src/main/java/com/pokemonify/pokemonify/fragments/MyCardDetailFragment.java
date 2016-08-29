@@ -202,6 +202,13 @@ public class MyCardDetailFragment extends Fragment {
         ((MainActivity) getActivity()).shareImage(savedScreen);
     }
 
+    public void saveInGallery() {
+        detailScreen.setDrawingCacheEnabled(true);
+        savedScreen = Bitmap.createBitmap(detailScreen.getDrawingCache());
+        detailScreen.destroyDrawingCache();
+        Utils.saveFile(getActivity(), savedScreen, mPokemonDto.getId());
+    }
+
     private void saveMyCard(final Fragment fragment) {
         final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle("How do you want to save the card?");
@@ -322,9 +329,9 @@ public class MyCardDetailFragment extends Fragment {
     private void dismissListener() {
         if (temp == 0) {
             Toast.makeText(getActivity(), "Oops we couldn't delete the pokemon.", Toast.LENGTH_SHORT).show();
-            getActivity().onBackPressed();
+            ((MainActivity)getActivity()).doFragTransaction(new MyCardListFragment(),0);
         } else {
-            getActivity().onBackPressed();
+            ((MainActivity)getActivity()).doFragTransaction(new MyCardListFragment(),0);
         }
     }
 

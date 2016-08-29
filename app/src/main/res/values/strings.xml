@@ -626,9 +626,9 @@
         </item>
     </integer-array>
     <string-array name="pokemon_type">
-        <item>poison</item>
-        <item>poison</item>
-        <item>poison</item>
+        <item>grass</item>
+        <item>grass</item>
+        <item>grass</item>
         <item>fire</item>
         <item>fire</item>
         <item>fire</item>
@@ -717,9 +717,9 @@
         <item>poison</item>
         <item>water</item>
         <item>ice</item>
-        <item>poison</item>
-        <item>poison</item>
-        <item>poison</item>
+        <item>ghost</item>
+        <item>ghost</item>
+        <item>ghost</item>
         <item>ground</item>
         <item>psychic</item>
         <item>psychic</item>
@@ -834,13 +834,13 @@
         </item>
         <item>Sandslash\'s body is covered by tough spikes, which are hardened sections of its hide.
         </item>
-        <item>Nidoran has barbs that secrete a powerful poison. They are thought to have developed as protection for this small-bodied Pokémon
+        <item>Nidoran F has barbs that secrete a powerful poison. They are thought to have developed as protection for this small-bodied Pokémon
         </item>
         <item>When Nidorina are with their friends or family, they keep their barbs tucked away to prevent hurting each other.
         </item>
         <item>Nidoqueen\'s body is encased in extremely hard scales. It is adept at sending foes flying with harsh tackles.
         </item>
-        <item>Nidoran? has developed muscles for moving its ears. Thanks to them, the ears can be freely moved in any direction.
+        <item>Nidoran M has developed muscles for moving its ears. Thanks to them, the ears can be freely moved in any direction.
         </item>
         <item>If it senses a hostile presence, all the barbs on its back bristle up at once, and it challenges the foe with all its might.
         </item>

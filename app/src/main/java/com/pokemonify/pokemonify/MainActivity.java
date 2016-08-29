@@ -451,13 +451,17 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.action_share_myPokemon) {
             MainFragment mainFragment = (MainFragment) currentFragment;
             mainFragment.shareMyPokemon();
-        } else if (id == R.id.action_make_current_pokemon) {
+        } else if (id == R.id.action_save_myPokemon) {
+            MainFragment mainFragment = (MainFragment) currentFragment;
+            mainFragment.saveMyPokemon();
+        }
+        else if (id == R.id.action_make_current_pokemon) {
             PokemonDetailFragment pokemonDetailFragment = (PokemonDetailFragment) currentFragment;
             pokemonDetailFragment.setThisAsCurrentPokemon();
         } else if (id == R.id.action_share) {
             PokemonDetailFragment pokemonDetailFragment = (PokemonDetailFragment) currentFragment;
             pokemonDetailFragment.shareThisPokemon();
-        } else if (id == R.id.action_edit) {
+        }else if (id == R.id.action_edit) {
             PokemonEditFragment pokemonEditFragment = new PokemonEditFragment();
             Bundle bundle = new Bundle();
             bundle.putSerializable("PokemonDto", ((PokemonDetailFragment) currentFragment).getPokemonDto());
@@ -480,6 +484,9 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.action_mycard_delete) {
             MyCardDetailFragment myCardDetailFragment = (MyCardDetailFragment) currentFragment;
             myCardDetailFragment.deleteCard();
+        } else if (id == R.id.action_mycard_gallery) {
+            MyCardDetailFragment myCardDetailFragment = (MyCardDetailFragment) currentFragment;
+            myCardDetailFragment.saveInGallery();
         } else if (id == R.id.action_editfrag_save) {
             PokemonEditFragment pokemonEditFragment = (PokemonEditFragment) currentFragment;
             pokemonEditFragment.saveMyCard(new MyCardListFragment());

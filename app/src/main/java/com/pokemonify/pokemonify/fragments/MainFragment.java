@@ -59,38 +59,45 @@ public class MainFragment extends Fragment {
         mMyPokemonWeight.setText(currentMyPokemon.getWeight() + " lbs");
         mMyPokemonHeight.setText(currentMyPokemon.getHeight() + " Inch");
         mMyPokemonDesc.setText(currentMyPokemon.getDesc());
-        mMyPokemonImage.getLayoutParams().height= (int) (Utils.getDisplayHeight(getActivity())*0.40);
-        Bitmap bitmap=null;
-        if(currentMyPokemon.getImagePath().equals("-1")) {
-            Log.d("file path stored is",getActivity().getFilesDir()+File.separator+currentMyPokemon.getBitmapPath());
-            bitmap=BitmapFactory.decodeFile(currentMyPokemon.getBitmapPath());
-            bitmap=Utils.getRoundedCornerBitmap(bitmap);
+        mMyPokemonImage.getLayoutParams().height = (int) (Utils.getDisplayHeight(getActivity()) * 0.40);
+        Bitmap bitmap = null;
+        if (currentMyPokemon.getImagePath().equals("-1")) {
+            Log.d("file path stored is", getActivity().getFilesDir() + File.separator + currentMyPokemon.getBitmapPath());
+            bitmap = BitmapFactory.decodeFile(currentMyPokemon.getBitmapPath());
+            bitmap = Utils.getRoundedCornerBitmap(bitmap);
         } else {
             bitmap = BitmapFactory.decodeResource(getResources(), getResources()
                     .getIdentifier(currentMyPokemon.getImagePath(), "drawable", getActivity().getPackageName()));
         }
         mMyPokemonImage.setImageBitmap(bitmap);
-        if(Utils.isTypePresent(currentMyPokemon.getType().toLowerCase())) {
+        if (Utils.isTypePresent(currentMyPokemon.getType().toLowerCase())) {
             mMyPokemonScreen.setBackground(new BitmapDrawable(BitmapFactory.decodeResource(getResources(),
-                    getResources().getIdentifier(currentMyPokemon.getType().toLowerCase(),"drawable",
+                    getResources().getIdentifier(currentMyPokemon.getType().toLowerCase(), "drawable",
                             getActivity().getPackageName()))));
-        }else{
+        } else {
             mMyPokemonScreen.setBackground(getResources().getDrawable(R.drawable.standardbackground));
         }
     }
 
-    public void shareMyPokemon(){
+    public void shareMyPokemon() {
         mMyPokemonScreen.setDrawingCacheEnabled(true);
-        Bitmap bitmap=Bitmap.createBitmap(mMyPokemonScreen.getDrawingCache());
+        Bitmap bitmap = Bitmap.createBitmap(mMyPokemonScreen.getDrawingCache());
         mMyPokemonScreen.destroyDrawingCache();
-        ((MainActivity)getActivity()).shareImage(bitmap);
+        ((MainActivity) getActivity()).shareImage(bitmap);
+    }
+
+    public void saveMyPokemon() {
+        mMyPokemonScreen.setDrawingCacheEnabled(true);
+        Bitmap bitmap = Bitmap.createBitmap(mMyPokemonScreen.getDrawingCache());
+        mMyPokemonScreen.destroyDrawingCache();
+        Utils.saveFile(getActivity(), bitmap, currentMyPokemon.getId());
     }
 
     public void setMyPokemon() {
         currentMyPokemon = Utils.getMyPokemon(getActivity());
         if (currentMyPokemon == null) {
-            currentMyPokemon = new PokemonDto(24, "pikachu",35,"pikachu","Electric","Whenever Pikachu comes" +
-                    " across something new, it blasts it with a jolt of electricity.","",60,4,112);
+            currentMyPokemon = new PokemonDto(24, "pikachu", 35, "pikachu", "Electric", "Whenever Pikachu comes" +
+                    " across something new, it blasts it with a jolt of electricity.", "", 60, 4, 112);
         }
     }
 }
