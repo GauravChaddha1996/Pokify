@@ -11,4 +11,10 @@
         android:title="Share"
         android:icon="@drawable/share"
         app:showAsAction="always"/>
+    <item
+        android:id="@+id/action_save"
+        android:title="Save To Gallery"
+        android:icon="@drawable/gallery"
+        app:showAsAction="always"/>
+
 </menu>

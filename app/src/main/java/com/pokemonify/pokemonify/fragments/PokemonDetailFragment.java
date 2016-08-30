@@ -161,4 +161,11 @@ public class PokemonDetailFragment extends Fragment {
         detailScreen.destroyDrawingCache();
         ((MainActivity) getActivity()).shareImage(savedScreen);
     }
+
+    public void saveMyPokemon() {
+        detailScreen.setDrawingCacheEnabled(true);
+        Bitmap bitmap = Bitmap.createBitmap(detailScreen.getDrawingCache());
+        detailScreen.destroyDrawingCache();
+        Utils.saveFile(getActivity(), bitmap, mPokemonDto.getId());
+    }
 }

@@ -447,7 +447,6 @@ public class MainActivity extends AppCompatActivity
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_share_myPokemon) {
             MainFragment mainFragment = (MainFragment) currentFragment;
             mainFragment.shareMyPokemon();
@@ -457,6 +456,9 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.action_share) {
             PokemonDetailFragment pokemonDetailFragment = (PokemonDetailFragment) currentFragment;
             pokemonDetailFragment.shareThisPokemon();
+        } else if (id == R.id.action_save) {
+            PokemonDetailFragment pokemonDetailFragment = (PokemonDetailFragment) currentFragment;
+            pokemonDetailFragment.saveMyPokemon();
         } else if (id == R.id.action_edit) {
             PokemonEditFragment pokemonEditFragment = new PokemonEditFragment();
             Bundle bundle = new Bundle();
