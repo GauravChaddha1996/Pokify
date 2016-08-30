@@ -26,7 +26,10 @@ import com.pokemonify.pokemonify.recyclerviewcomponents.PokemonListAdapter;
 import com.pokemonify.pokemonify.recyclerviewcomponents.RecyclerViewEmptyExtdener;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -37,7 +40,6 @@ public class MyCardListFragment extends Fragment implements CommonAdapter.OnGetV
     TextView mEmptyView;
     List<PokemonDto> nameList;
     ProgressDialog progressDialog;
-    ProgressDialog progressDialog2;
     int temp = 0;
 
     @Override
@@ -45,6 +47,7 @@ public class MyCardListFragment extends Fragment implements CommonAdapter.OnGetV
                              Bundle savedInstanceState) {
         getActivity().setTitle("My Cards");
         nameList = DbHelper.getInstance().getAllMyCards();
+        Collections.reverse(nameList);
         View view = inflater.inflate(R.layout.fragment_pokemon_list, container, false);
         initViews(view);
         return view;
@@ -53,7 +56,7 @@ public class MyCardListFragment extends Fragment implements CommonAdapter.OnGetV
     private void initViews(View v) {
         mRecyclerView = (RecyclerViewEmptyExtdener) v.findViewById(R.id.pokemonRecyclerView);
         mEmptyView = (TextView) v.findViewById(R.id.emptyRecyclerView);
-        mEmptyView.setText("No Cards :( \n Click on create card to make a new one :)");
+        mEmptyView.setText("No Cards :(");
         mRecyclerView.setEmptyView(mEmptyView);
         if (nameList.isEmpty()) {
             mEmptyView.setVisibility(View.VISIBLE);
@@ -98,6 +101,14 @@ public class MyCardListFragment extends Fragment implements CommonAdapter.OnGetV
                                             temp = DbHelper.getInstance().deleteCard(mPokemonListAdapter.
                                                     getPokeList().get(position).getId());
                                             Log.d("TAG", "temp" + temp + "");
+                                            getActivity().runOnUiThread(new Runnable() {
+                                                @Override
+                                                public void run() {
+                                                    nameList=DbHelper.getInstance().getAllMyCards();
+                                                    mPokemonListAdapter.setPokeList(nameList);
+                                                    mPokemonListAdapter.notifyDataSetChanged();
+                                                }
+                                            });
                                             progressDialog.dismiss();
                                         }
                                     });
@@ -140,6 +151,17 @@ public class MyCardListFragment extends Fragment implements CommonAdapter.OnGetV
         } else {
             mPokemonListAdapter.notifyDataSetChanged();
         }
+    }
+
+    public void search(String query) {
+        Set<PokemonDto> newSet = new HashSet<>();
+        for (PokemonDto p : nameList) {
+            if (p.getName().toLowerCase().contains(query.toLowerCase())) {
+                newSet.add(p);
+            }
+        }
+        mPokemonListAdapter.setPokeList(new ArrayList<PokemonDto>(newSet));
+        mPokemonListAdapter.notifyDataSetChanged();
     }
 
     @Override

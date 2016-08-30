@@ -49,6 +49,7 @@ public class DbHelper extends SQLiteOpenHelper {
     private Context mContext;
     private PokemonDto mPokemonDto = null;
     private List<PokemonDto> myCardsList = new ArrayList<PokemonDto>();
+    private List<String> myCardsNameList = new ArrayList<String>();
     private Runnable setMyCardsListRunnable;
 
     public DbHelper(Context context) {
@@ -158,6 +159,10 @@ public class DbHelper extends SQLiteOpenHelper {
         }
     }
 
+    public List<String> getMyCardsNameList() {
+        return myCardsNameList;
+    }
+
     public List<PokemonDto> setMyCardsList() {
         setMyCardsListRunnable = new Runnable() {
             @Override
@@ -181,6 +186,7 @@ public class DbHelper extends SQLiteOpenHelper {
                         dto.setHeight(c.getInt(c.getColumnIndex(KEY_HEIGHT)));
                         dto.setLevel(c.getInt(c.getColumnIndex(KEY_LEVEL)));
                         myCardsList.add(dto);
+                        myCardsNameList.add(c.getString(c.getColumnIndex(KEY_NAME)));
                     } while (c.moveToNext());
                 }
                 closeDB();

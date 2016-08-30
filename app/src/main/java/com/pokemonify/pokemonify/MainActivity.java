@@ -147,9 +147,14 @@ public class MainActivity extends AppCompatActivity
         searchView.setOnSearchViewListener(new MaterialSearchView.SearchViewListener() {
             @Override
             public void onSearchViewShown() {
-                if (!(currentFragment instanceof PokemonListFragment)) {
+                if(currentFragment instanceof MyCardListFragment) {
+                    searchView.setSuggestions(new String[]{});
+                    supportInvalidateOptionsMenu();
+                } else if (!(currentFragment instanceof PokemonListFragment)) {
+                    searchView.setSuggestions(getResources().getStringArray(R.array.pokemon_name));
                     changeFrag(new PokemonListFragment());
                 } else {
+                    searchView.setSuggestions(getResources().getStringArray(R.array.pokemon_name));
                     supportInvalidateOptionsMenu();
                 }
             }
@@ -165,6 +170,9 @@ public class MainActivity extends AppCompatActivity
             searchString = query;
             PokemonListFragment pokemonListFragment = (PokemonListFragment) currentFragment;
             pokemonListFragment.search(query);
+        } else if(currentFragment instanceof MyCardListFragment){
+            searchString = query;
+            ((MyCardListFragment)currentFragment).search(searchString);
         }
     }
 
@@ -436,6 +444,8 @@ public class MainActivity extends AppCompatActivity
             }
         } else if (currentFragment instanceof MyCardListFragment) {
             getMenuInflater().inflate(R.menu.mycardlist, menu);
+            MenuItem item = menu.findItem(R.id.action_my_card_list_search);
+            searchView.setMenuItem(item);
         } else {
             getMenuInflater().inflate(R.menu.other, menu);
             MenuItem item = menu.findItem(R.id.action_search);
