@@ -204,6 +204,10 @@ public class DbHelper extends SQLiteOpenHelper {
             if (file.exists()) {
                 file.delete();
             }
+            file = new File(mContext.getFilesDir() + File.separator + id + "thumb.png");
+            if (file.exists()) {
+                file.delete();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }

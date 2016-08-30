@@ -328,6 +328,27 @@ public class MyCardDetailFragment extends Fragment {
             e.printStackTrace();
         }
         Log.e("file", "" + file);
+        File thumbnail = new File(getActivity().getFilesDir() + File.separator + id + "thumb.png");
+        if (thumbnail.exists()) {
+            thumbnail.delete();
+            thumbnail = new File(getActivity().getFilesDir() + File.separator + id + "thumb.png");
+            Log.e("thumbnail exist", "" + file + ",Bitmap= " + file.getAbsolutePath());
+        }
+        try {
+            // make a new bitmap from your file
+            outStream = new FileOutputStream(thumbnail);
+            if (id % 2 == 0) {
+                bitmap=Bitmap.createScaledBitmap(bitmap,320,250,false);
+            } else {
+                bitmap=Bitmap.createScaledBitmap(bitmap,360,285,false);
+            }
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, outStream);
+            outStream.flush();
+            outStream.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        Log.e("thumbnail", "" + thumbnail);
         return file;
     }
 

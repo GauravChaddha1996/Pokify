@@ -47,11 +47,15 @@ public class PokemonListAdapter extends RecyclerView.Adapter<PokemonListAdapter.
     public void onBindViewHolder(MyViewHolder holder, int position) {
         holder.name.setText(pokeList.get(position).getName());
         if (pokeList.get(position).getImagePath().equals("-1")) {
-            if (pokeList.get(position).getId() % 2 == 0) {
+            String fname=pokeList.get(position).getBitmapPath();
+            fname=fname.substring(0,fname.length()-4);
+            fname=fname+"thumb.png";
+            pokeImage=BitmapFactory.decodeFile(fname);
+            /*if (pokeList.get(position).getId() % 2 == 0) {
                 pokeImage = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(pokeList.get(position).getBitmapPath()),320,250,false);
             } else {
                 pokeImage = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(pokeList.get(position).getBitmapPath()),360,285,false);
-            }
+            }*/
         } else {
             pokeImage = BitmapFactory.decodeResource(mContext.getResources(), mContext.getResources()
                     .getIdentifier(pokeList.get(position).getImagePath(), "drawable", mContext.

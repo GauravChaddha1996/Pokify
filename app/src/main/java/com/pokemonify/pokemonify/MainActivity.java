@@ -356,7 +356,6 @@ public class MainActivity extends AppCompatActivity
                     .setGuidelines(CropImageView.Guidelines.ON)
                     .setAspectRatio(4, 3)
                     .setFixAspectRatio(true)
-                    .setMaxCropResultSize(800,600)
                     .setOutputCompressQuality(30)
                     .start(this);
         }
@@ -366,6 +365,7 @@ public class MainActivity extends AppCompatActivity
                 Bitmap bitmap = null;
                 try {
                     bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), result.getUri());
+                    bitmap= Bitmap.createScaledBitmap(bitmap,900,700,false);
                     if (currentFragment instanceof PokemonEditFragment) {
                         ((PokemonEditFragment) currentFragment).setPokemonImage(Utils.getRoundedCornerBitmap(bitmap));
                     } else {
