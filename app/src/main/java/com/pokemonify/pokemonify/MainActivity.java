@@ -175,7 +175,11 @@ public class MainActivity extends AppCompatActivity
     public void changeFrag(Fragment fragment) {
         if (currentFragment instanceof PokemonEditFragment) {
             checkAndSaveCard(fragment);
-        } else if (currentFragment instanceof MyCardDetailFragment) {
+        } else if(currentFragment instanceof PokemonDetailFragment) {
+            PokemonListFragment pokemonListFragment=new PokemonListFragment();
+            pokemonListFragment.setPreScrollName(((PokemonDetailFragment)currentFragment).getPokemonDto().getName());
+            doFragTransaction(pokemonListFragment,0);
+        }else if (currentFragment instanceof MyCardDetailFragment) {
             MyCardDetailFragment myCardDetailFragment = (MyCardDetailFragment) currentFragment;
             if (myCardDetailFragment.getEditing()) {
                 ((MyCardDetailFragment) currentFragment).saveAndToggleAndChange(fragment);

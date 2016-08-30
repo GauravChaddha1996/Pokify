@@ -31,6 +31,7 @@ public class PokemonListFragment extends Fragment {
     TextView mEmptyView;
     List<PokemonDto> nameList;
     TextView mSeachedText;
+    String preScrollName=null;
 
     public PokemonListFragment() {
     }
@@ -72,6 +73,9 @@ public class PokemonListFragment extends Fragment {
                 mainActivity.changeFrag(detailFragment);
             }
         });
+        if(preScrollName!=null) {
+            scrollTo();
+        }
     }
 
     public void search(String query) {
@@ -86,7 +90,22 @@ public class PokemonListFragment extends Fragment {
         mPokemonListAdapter.notifyDataSetChanged();
     }
 
-    public PokemonListAdapter getPokemonListAdapter() {
-        return mPokemonListAdapter;
+    private void scrollTo() {
+        int i=0;
+        for(PokemonDto p:nameList) {
+            i++;
+            if(p.getName().toLowerCase().equals(preScrollName)) {
+                break;
+            }
+        }
+        i=i-2;
+        if(i<0) {
+            i=0;
+        }
+        mRecyclerView.scrollToPosition(i);
+    }
+
+    public void setPreScrollName(String preScrollName) {
+        this.preScrollName = preScrollName;
     }
 }
