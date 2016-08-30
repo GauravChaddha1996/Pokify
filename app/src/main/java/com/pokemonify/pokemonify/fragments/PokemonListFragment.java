@@ -38,6 +38,7 @@ public class PokemonListFragment extends Fragment {
 
     public PokemonListFragment() {
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -54,7 +55,7 @@ public class PokemonListFragment extends Fragment {
         mEmptyView.setText("No pokemon found :( \n Search again !!");
         mRecyclerView = (RecyclerViewEmptyExtdener) v.findViewById(R.id.pokemonRecyclerView);
         mRecyclerView.setEmptyView(mEmptyView);
-        if(nameList.isEmpty()) {
+        if (nameList.isEmpty()) {
             mEmptyView.setVisibility(View.VISIBLE);
             mRecyclerView.setVisibility(View.GONE);
         }
@@ -65,7 +66,7 @@ public class PokemonListFragment extends Fragment {
             @Override
             public boolean onItemLongClicked(RecyclerView recyclerView, final int position, View v) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                builder.setTitle("Set " + mPokemonListAdapter.getPokeList().get(position).getName() +" as my pokemon?");
+                builder.setTitle("Set " + mPokemonListAdapter.getPokeList().get(position).getName() + " as my pokemon?");
                 builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
@@ -75,12 +76,12 @@ public class PokemonListFragment extends Fragment {
                 builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        ProgressDialog progressDialog=new ProgressDialog(getActivity());
+                        ProgressDialog progressDialog = new ProgressDialog(getActivity());
                         progressDialog.setTitle("Making this your current pokemon");
                         progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
                         progressDialog.setCancelable(false);
                         progressDialog.show();
-                        if(Utils.setMyPokemon(mPokemonListAdapter.getPokeList().get(position), getActivity())) {
+                        if (Utils.setMyPokemon(mPokemonListAdapter.getPokeList().get(position), getActivity())) {
                             progressDialog.dismiss();
                         }
                     }

@@ -84,11 +84,11 @@ public class PokemonEditFragment extends Fragment {
     }
 
     private void setMyScreenBackGround() {
-        if(Utils.isTypePresent(pokemonType.getText().toString().toLowerCase())) {
+        if (Utils.isTypePresent(pokemonType.getText().toString().toLowerCase())) {
             detailScreen.setBackground(new BitmapDrawable(BitmapFactory.decodeResource(getResources(),
-                    getResources().getIdentifier(pokemonType.getText().toString().toLowerCase(),"drawable",
+                    getResources().getIdentifier(pokemonType.getText().toString().toLowerCase(), "drawable",
                             getActivity().getPackageName()))));
-        }else{
+        } else {
             detailScreen.setBackground(getResources().getDrawable(R.drawable.standardbackground));
         }
     }
@@ -186,7 +186,7 @@ public class PokemonEditFragment extends Fragment {
         progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         progressDialog.setCancelable(false);
         progressDialog.show();
-        Handler handler=new Handler(){
+        Handler handler = new Handler() {
             @Override
             public void handleMessage(Message msg) {
                 Log.d("TAG", "time start:" + System.currentTimeMillis() + "");
@@ -194,13 +194,13 @@ public class PokemonEditFragment extends Fragment {
                     progressDialog.dismiss();
                     toggleShouldEdit();
                     if (fragment != null) {
-                        ((MainActivity) getActivity()).doFragTransaction(fragment,0);
+                        ((MainActivity) getActivity()).doFragTransaction(fragment, 0);
                     }
 
                 }
             }
         };
-        handler.sendEmptyMessageDelayed(0,800);
+        handler.sendEmptyMessageDelayed(0, 800);
     }
 
     private PokemonDto getDtoOfScreen() {

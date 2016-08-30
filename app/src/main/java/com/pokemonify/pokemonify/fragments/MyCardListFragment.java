@@ -52,10 +52,10 @@ public class MyCardListFragment extends Fragment implements CommonAdapter.OnGetV
 
     private void initViews(View v) {
         mRecyclerView = (RecyclerViewEmptyExtdener) v.findViewById(R.id.pokemonRecyclerView);
-        mEmptyView= (TextView) v.findViewById(R.id.emptyRecyclerView);
+        mEmptyView = (TextView) v.findViewById(R.id.emptyRecyclerView);
         mEmptyView.setText("No Cards :( \n Click on create card to make a new one :)");
         mRecyclerView.setEmptyView(mEmptyView);
-        if(nameList.isEmpty()) {
+        if (nameList.isEmpty()) {
             mEmptyView.setVisibility(View.VISIBLE);
             mRecyclerView.setVisibility(View.GONE);
         }

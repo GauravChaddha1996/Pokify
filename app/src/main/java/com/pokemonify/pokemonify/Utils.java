@@ -32,7 +32,7 @@ import java.util.Random;
  */
 public class Utils {
     public static boolean setMyPokemon(PokemonDto pokemonDto, Context context) {
-        PokemonDto dto=new PokemonDto();
+        PokemonDto dto = new PokemonDto();
         dto.setId(131);
         dto.setName(pokemonDto.getName());
         dto.setHp(pokemonDto.getHp());
@@ -44,7 +44,7 @@ public class Utils {
         dto.setImagePath("-1");
         OutputStream outStream = null;
         File file = new File(context.getFilesDir() + File.separator + 131 + ".png");
-        Log.d("file path",file.getAbsolutePath());
+        Log.d("file path", file.getAbsolutePath());
         dto.setBitmapPath(file.getAbsolutePath());
         if (file.exists()) {
             file.delete();
@@ -109,30 +109,30 @@ public class Utils {
     public static boolean isTypePresent(String type) {
         String[] strings = {"bug", "dragon", "electric", "fairy", "fight", "fighting", "fire", "flying",
                 "ghost", "grass", "ground", "ice", "normal", "poison", "psychic", "rock", "steel", "water"};
-        for(String s:strings) {
-            if(s.equals(type.trim())) {
-                Log.d("True:string recieved:",type);
+        for (String s : strings) {
+            if (s.equals(type.trim())) {
+                Log.d("True:string recieved:", type);
                 return true;
             }
         }
-        Log.d("False:string recieved",type);
+        Log.d("False:string recieved", type);
         return false;
     }
 
-    public static void saveFile(Context context,Bitmap bitmap,int id) {
-        File mFolder=new File(Environment.getExternalStorageDirectory()+File.separator+"Pokify");
-        File file=new File(mFolder.getAbsolutePath()+File.separator+id+".png");
-        if(!mFolder.exists()) {
+    public static void saveFile(Context context, Bitmap bitmap, int id) {
+        File mFolder = new File(Environment.getExternalStorageDirectory() + File.separator + "Pokify");
+        File file = new File(mFolder.getAbsolutePath() + File.separator + id + ".png");
+        if (!mFolder.exists()) {
             mFolder.mkdir();
         }
-        if(!file.exists()) {
+        if (!file.exists()) {
             try {
                 file.createNewFile();
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
-        Log.d("path:",file.getAbsolutePath());
+        Log.d("path:", file.getAbsolutePath());
         FileOutputStream out = null;
         try {
             out = new FileOutputStream(file);
@@ -143,8 +143,8 @@ public class Utils {
             try {
                 if (out != null) {
                     out.close();
-                    Toast.makeText(context,"Saved to gallery!",Toast.LENGTH_SHORT).show();
-                    new SingleMediaScanner(context,file);
+                    Toast.makeText(context, "Saved to gallery!", Toast.LENGTH_SHORT).show();
+                    new SingleMediaScanner(context, file);
                 }
             } catch (IOException e) {
                 e.printStackTrace();

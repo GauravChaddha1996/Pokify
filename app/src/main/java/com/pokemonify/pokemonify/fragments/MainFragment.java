@@ -61,14 +61,14 @@ public class MainFragment extends Fragment {
         mMyPokemonImage.getLayoutParams().height = (int) (Utils.getDisplayHeight(getActivity()) * 0.40);
         Bitmap bitmap = null;
         if (currentMyPokemon.getImagePath().equals("-1")) {
-            Log.d("file path stored is",currentMyPokemon.getBitmapPath());
+            Log.d("file path stored is", currentMyPokemon.getBitmapPath());
             bitmap = BitmapFactory.decodeFile(currentMyPokemon.getBitmapPath());
-            if(bitmap != null) {
+            if (bitmap != null) {
                 bitmap = Utils.getRoundedCornerBitmap(bitmap);
-            }else {
-                Toast.makeText(getActivity(),"Something went wrong.Please set your pokemon again." +
-                        "We're really sorry.",Toast.LENGTH_LONG).show();
-                bitmap =Utils.getRoundedCornerBitmap(BitmapFactory.decodeResource(getResources(), getResources()
+            } else {
+                Toast.makeText(getActivity(), "Something went wrong.Please set your pokemon again." +
+                        "We're really sorry.", Toast.LENGTH_LONG).show();
+                bitmap = Utils.getRoundedCornerBitmap(BitmapFactory.decodeResource(getResources(), getResources()
                         .getIdentifier("exeggutor", "drawable", getActivity().getPackageName())));
             }
         } else {
@@ -104,7 +104,7 @@ public class MainFragment extends Fragment {
         if (currentMyPokemon == null) {
             currentMyPokemon = new PokemonDto(24, "pikachu", 35, "pikachu", "Electric", "Whenever Pikachu comes" +
                     " across something new, it blasts it with a jolt of electricity.", "", 60, 4, 112);
-            Utils.setMyPokemon(currentMyPokemon,getActivity());
+            Utils.setMyPokemon(currentMyPokemon, getActivity());
         }
     }
 }

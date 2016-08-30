@@ -17,17 +17,6 @@ import java.util.concurrent.Executors;
  * Created by gaurav on 2/8/16.
  */
 public class DbHelper extends SQLiteOpenHelper {
-    public static DbHelper mDbHelper = null;
-    private static final int DATABASE_VERSION = 10;
-    private Context mContext;
-
-    // Database Name
-    private static final String DATABASE_NAME = "Test";
-    private static final String TABLE_MYCARDS = "myCards";
-    private static final String TABLE_MYPOKEMON = "myPokemon";
-
-    // Common column names
-    private static final String KEY_ID = "id";
     public static final String KEY_NAME = "name";
     public static final String KEY_HP = "hp";
     public static final String KEY_BITMAP_PATH = "image";
@@ -37,7 +26,13 @@ public class DbHelper extends SQLiteOpenHelper {
     public static final String KEY_WEIGHT = "weight";
     public static final String KEY_HEIGHT = "height";
     public static final String KEY_LEVEL = "level";
-
+    private static final int DATABASE_VERSION = 10;
+    // Database Name
+    private static final String DATABASE_NAME = "Test";
+    private static final String TABLE_MYCARDS = "myCards";
+    private static final String TABLE_MYPOKEMON = "myPokemon";
+    // Common column names
+    private static final String KEY_ID = "id";
     private static final String CREATE_TABLE_MYCARD = "CREATE TABLE "
             + TABLE_MYCARDS + "(" +
             KEY_ID + " INTEGER PRIMARY KEY," +
@@ -64,7 +59,8 @@ public class DbHelper extends SQLiteOpenHelper {
             KEY_HEIGHT + " INTEGER," +
             KEY_LEVEL + " INTEGER " +
             ")";
-
+    public static DbHelper mDbHelper = null;
+    private Context mContext;
     private PokemonDto myCurrentPokemon = null;
     private PokemonDto mPokemonDto = null;
     private List<PokemonDto> myCardsList = new ArrayList<PokemonDto>();
@@ -72,7 +68,7 @@ public class DbHelper extends SQLiteOpenHelper {
 
     public DbHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
-        mContext=context;
+        mContext = context;
         mDbHelper = this;
     }
 
@@ -92,7 +88,7 @@ public class DbHelper extends SQLiteOpenHelper {
         ExecutorService service = Executors.newSingleThreadExecutor();
         service.execute(r);
         service.shutdown();
-        Log.d("TAG","end time"+System.currentTimeMillis()+"");
+        Log.d("TAG", "end time" + System.currentTimeMillis() + "");
         return true;
     }
 
@@ -107,7 +103,7 @@ public class DbHelper extends SQLiteOpenHelper {
 
     public boolean saveMyCard(PokemonDto cardsDto) {
         myCardsList.add(cardsDto);
-        mPokemonDto=new PokemonDto();
+        mPokemonDto = new PokemonDto();
         mPokemonDto = cardsDto;
         Runnable runnable = new Runnable() {
             @Override
@@ -119,7 +115,7 @@ public class DbHelper extends SQLiteOpenHelper {
                 values.put(KEY_NAME, mPokemonDto.getName());
                 values.put(KEY_HP, mPokemonDto.getHp());
                 values.put(KEY_IMAGE_PATH, mPokemonDto.getImagePath());
-                values.put(KEY_BITMAP_PATH,mPokemonDto.getBitmapPath());
+                values.put(KEY_BITMAP_PATH, mPokemonDto.getBitmapPath());
                 values.put(KEY_TYPE, mPokemonDto.getType());
                 values.put(KEY_DESC, mPokemonDto.getDesc());
                 values.put(KEY_WEIGHT, mPokemonDto.getWeight());
@@ -135,17 +131,17 @@ public class DbHelper extends SQLiteOpenHelper {
 
     public boolean updateMyCard(PokemonDto cardsDto) {
         PokemonDto temp = null;
-        for(PokemonDto dto:myCardsList) {
-            if(dto.getId()==cardsDto.getId()) {
-                temp=dto;
+        for (PokemonDto dto : myCardsList) {
+            if (dto.getId() == cardsDto.getId()) {
+                temp = dto;
                 break;
             }
         }
-        if(temp!=null) {
+        if (temp != null) {
             myCardsList.remove(temp);
         }
         myCardsList.add(cardsDto);
-        mPokemonDto=new PokemonDto();
+        mPokemonDto = new PokemonDto();
         mPokemonDto = cardsDto;
         Runnable runnable = new Runnable() {
             @Override
@@ -157,13 +153,13 @@ public class DbHelper extends SQLiteOpenHelper {
                 values.put(KEY_NAME, mPokemonDto.getName());
                 values.put(KEY_HP, mPokemonDto.getHp());
                 values.put(KEY_IMAGE_PATH, mPokemonDto.getImagePath());
-                values.put(KEY_BITMAP_PATH,mPokemonDto.getBitmapPath());
+                values.put(KEY_BITMAP_PATH, mPokemonDto.getBitmapPath());
                 values.put(KEY_TYPE, mPokemonDto.getType());
                 values.put(KEY_DESC, mPokemonDto.getDesc());
                 values.put(KEY_WEIGHT, mPokemonDto.getWeight());
                 values.put(KEY_HEIGHT, mPokemonDto.getHeight());
                 values.put(KEY_LEVEL, mPokemonDto.getLevel());
-                db.update(TABLE_MYCARDS,values,"id = ?",new String[]{mPokemonDto.getId()+""});
+                db.update(TABLE_MYCARDS, values, "id = ?", new String[]{mPokemonDto.getId() + ""});
 
                 closeDB();
             }
@@ -209,7 +205,7 @@ public class DbHelper extends SQLiteOpenHelper {
     }
 
     public List<PokemonDto> setMyCardsList() {
-         setMyCardsListRunnable = new Runnable() {
+        setMyCardsListRunnable = new Runnable() {
             @Override
             public void run() {
                 myCardsList.clear();
@@ -272,20 +268,20 @@ public class DbHelper extends SQLiteOpenHelper {
     }
 
     public int deleteCard(long id) {
-        Log.d("TAG","deleting"+ id + "");
+        Log.d("TAG", "deleting" + id + "");
         SQLiteDatabase db = this.getReadableDatabase();
-        try{
-            File file=new File(mContext.getFilesDir()+File.separator+id+".png");
-            if(file.exists()) {
+        try {
+            File file = new File(mContext.getFilesDir() + File.separator + id + ".png");
+            if (file.exists()) {
                 file.delete();
             }
-        }catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         int temp = db.delete(TABLE_MYCARDS, KEY_ID + " = ?", new String[]{String.valueOf(id)});
         closeDB();
         if (temp != 0) {
-            if(execInThread(setMyCardsListRunnable)){
+            if (execInThread(setMyCardsListRunnable)) {
                 return temp;
             }
         }

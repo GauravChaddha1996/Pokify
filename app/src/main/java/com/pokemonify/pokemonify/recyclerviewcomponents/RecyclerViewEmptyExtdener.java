@@ -35,14 +35,14 @@ public class RecyclerViewEmptyExtdener extends RecyclerView {
         adapter.registerAdapterDataObserver(new AdapterDataObserver() {
             @Override
             public void onChanged() {
-                Log.d("item count:",adapter.getItemCount()+"");
+                Log.d("item count:", adapter.getItemCount() + "");
                 if (adapter.getItemCount() != 0) {
                     if (view != null) {
                         view.setVisibility(GONE);
                         setVisibility(VISIBLE);
                     }
                 } else {
-                    if(view!=null) {
+                    if (view != null) {
                         setVisibility(GONE);
                         view.setVisibility(VISIBLE);
                     }

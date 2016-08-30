@@ -17,7 +17,7 @@ public class Pokemonify extends Application {
         DbHelper dbHelper = new DbHelper(getApplicationContext());
         dbHelper.setMyCurrentPokemon();
         dbHelper.setMyCardsList();
-        FontOverride.setDefaultFont(getApplicationContext(),"MONOSPACE","archrival.ttf");
+        FontOverride.setDefaultFont(getApplicationContext(), "MONOSPACE", "archrival.ttf");
     }
 
 }

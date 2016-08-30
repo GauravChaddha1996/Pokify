@@ -16,7 +16,7 @@ public class PokemonDto implements Serializable {
     private int weight;
     private int height;
     private int level;
-    private String bitmapPath =null;
+    private String bitmapPath = null;
 
     public PokemonDto() {
     }

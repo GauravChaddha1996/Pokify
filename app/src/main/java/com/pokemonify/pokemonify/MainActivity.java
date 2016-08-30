@@ -454,14 +454,13 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.action_save_myPokemon) {
             MainFragment mainFragment = (MainFragment) currentFragment;
             mainFragment.saveMyPokemon();
-        }
-        else if (id == R.id.action_make_current_pokemon) {
+        } else if (id == R.id.action_make_current_pokemon) {
             PokemonDetailFragment pokemonDetailFragment = (PokemonDetailFragment) currentFragment;
             pokemonDetailFragment.setThisAsCurrentPokemon();
         } else if (id == R.id.action_share) {
             PokemonDetailFragment pokemonDetailFragment = (PokemonDetailFragment) currentFragment;
             pokemonDetailFragment.shareThisPokemon();
-        }else if (id == R.id.action_edit) {
+        } else if (id == R.id.action_edit) {
             PokemonEditFragment pokemonEditFragment = new PokemonEditFragment();
             Bundle bundle = new Bundle();
             bundle.putSerializable("PokemonDto", ((PokemonDetailFragment) currentFragment).getPokemonDto());

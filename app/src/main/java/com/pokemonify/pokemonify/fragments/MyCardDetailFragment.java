@@ -88,20 +88,8 @@ public class MyCardDetailFragment extends Fragment {
         setOnClick();
     }
 
-    public Boolean getPreEdit() {
-        return preEdit;
-    }
-
-    public void setPreEdit(Boolean preEdit) {
-        this.preEdit = preEdit;
-    }
-
     public MaterialDialogCreator getMaterialDialogCreator() {
         return materialDialogCreator;
-    }
-
-    public void setMaterialDialogCreator(MaterialDialogCreator materialDialogCreator) {
-        this.materialDialogCreator = materialDialogCreator;
     }
 
     private void setOnClick() {

@@ -30,12 +30,12 @@ public class PokemonListAdapter extends RecyclerView.Adapter<PokemonListAdapter.
         mContext = c;
     }
 
-    public void setPokeList(List<PokemonDto> pokeList) {
-        this.pokeList = pokeList;
-    }
-
     public List<PokemonDto> getPokeList() {
         return pokeList;
+    }
+
+    public void setPokeList(List<PokemonDto> pokeList) {
+        this.pokeList = pokeList;
     }
 
     @Override
@@ -48,10 +48,10 @@ public class PokemonListAdapter extends RecyclerView.Adapter<PokemonListAdapter.
     public void onBindViewHolder(MyViewHolder holder, int position) {
         holder.name.setText(pokeList.get(position).getName());
         if (pokeList.get(position).getImagePath().equals("-1")) {
-            if(pokeList.get(position).getId()%2==0) {
-                pokeImage = ThumbnailUtils.extractThumbnail(BitmapFactory.decodeFile(pokeList.get(position).getBitmapPath()),350,350);
-            }else {
-                pokeImage = ThumbnailUtils.extractThumbnail(BitmapFactory.decodeFile(pokeList.get(position).getBitmapPath()),500,500);
+            if (pokeList.get(position).getId() % 2 == 0) {
+                pokeImage = ThumbnailUtils.extractThumbnail(BitmapFactory.decodeFile(pokeList.get(position).getBitmapPath()), 350, 350);
+            } else {
+                pokeImage = ThumbnailUtils.extractThumbnail(BitmapFactory.decodeFile(pokeList.get(position).getBitmapPath()), 500, 500);
             }
         } else {
             pokeImage = BitmapFactory.decodeResource(mContext.getResources(), mContext.getResources()
