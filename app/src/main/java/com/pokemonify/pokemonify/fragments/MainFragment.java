@@ -35,7 +35,7 @@ public class MainFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         getActivity().setTitle("Pokify");
-        setMyPokemon();
+        currentMyPokemon = Utils.getRandomPokemon();
         View view = inflater.inflate(R.layout.fragment_main, container, false);
         initViews(view);
         return view;
@@ -97,14 +97,5 @@ public class MainFragment extends Fragment {
         Bitmap bitmap = Bitmap.createBitmap(mMyPokemonScreen.getDrawingCache());
         mMyPokemonScreen.destroyDrawingCache();
         Utils.saveFile(getActivity(), bitmap, currentMyPokemon.getId());
-    }
-
-    public void setMyPokemon() {
-        currentMyPokemon = Utils.getMyPokemon(getActivity());
-        if (currentMyPokemon == null) {
-            currentMyPokemon = new PokemonDto(24, "pikachu", 35, "pikachu", "Electric", "Whenever Pikachu comes" +
-                    " across something new, it blasts it with a jolt of electricity.", "", 60, 4, 112);
-            Utils.setMyPokemon(currentMyPokemon, getActivity());
-        }
     }
 }

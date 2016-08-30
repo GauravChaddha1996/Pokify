@@ -454,9 +454,6 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.action_save_myPokemon) {
             MainFragment mainFragment = (MainFragment) currentFragment;
             mainFragment.saveMyPokemon();
-        } else if (id == R.id.action_make_current_pokemon) {
-            PokemonDetailFragment pokemonDetailFragment = (PokemonDetailFragment) currentFragment;
-            pokemonDetailFragment.setThisAsCurrentPokemon();
         } else if (id == R.id.action_share) {
             PokemonDetailFragment pokemonDetailFragment = (PokemonDetailFragment) currentFragment;
             pokemonDetailFragment.shareThisPokemon();
@@ -466,9 +463,6 @@ public class MainActivity extends AppCompatActivity
             bundle.putSerializable("PokemonDto", ((PokemonDetailFragment) currentFragment).getPokemonDto());
             pokemonEditFragment.setArguments(bundle);
             doFragTransaction(pokemonEditFragment, 1);
-        } else if (id == R.id.action_mycard_make_current_pokemon) {
-            MyCardDetailFragment myCardDetailFragment = (MyCardDetailFragment) currentFragment;
-            myCardDetailFragment.setThisAsCurrentPokemon();
         } else if (id == R.id.action_mycard_share) {
             MyCardDetailFragment myCardDetailFragment = (MyCardDetailFragment) currentFragment;
             myCardDetailFragment.shareThisPokemon();
@@ -492,9 +486,6 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.action_editfrag_share) {
             PokemonEditFragment pokemonEditFragment = (PokemonEditFragment) currentFragment;
             pokemonEditFragment.shareThisPokemon();
-        } else if (id == R.id.action_editfrag_make_current_pokemon) {
-            PokemonEditFragment pokemonEditFragment = (PokemonEditFragment) currentFragment;
-            pokemonEditFragment.setThisAsCurrentPokemon();
         }
         return true;
     }

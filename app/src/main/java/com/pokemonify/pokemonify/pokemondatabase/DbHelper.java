@@ -26,11 +26,10 @@ public class DbHelper extends SQLiteOpenHelper {
     public static final String KEY_WEIGHT = "weight";
     public static final String KEY_HEIGHT = "height";
     public static final String KEY_LEVEL = "level";
-    private static final int DATABASE_VERSION = 10;
+    private static final int DATABASE_VERSION = 11;
     // Database Name
     private static final String DATABASE_NAME = "Test";
     private static final String TABLE_MYCARDS = "myCards";
-    private static final String TABLE_MYPOKEMON = "myPokemon";
     // Common column names
     private static final String KEY_ID = "id";
     private static final String CREATE_TABLE_MYCARD = "CREATE TABLE "
@@ -46,22 +45,8 @@ public class DbHelper extends SQLiteOpenHelper {
             KEY_HEIGHT + " INTEGER," +
             KEY_LEVEL + " INTEGER " +
             ")";
-    private static final String CREATE_TABLE_MYPOKEMON = "CREATE TABLE "
-            + TABLE_MYPOKEMON + "(" +
-            KEY_ID + " INTEGER PRIMARY KEY," +
-            KEY_NAME + " VARCHAR," +
-            KEY_HP + " VARCHAR," +
-            KEY_BITMAP_PATH + " VARCHAR," +
-            KEY_IMAGE_PATH + " VARCHAR," +
-            KEY_TYPE + " VARCHAR," +
-            KEY_DESC + " VARCHAR," +
-            KEY_WEIGHT + " INTEGER," +
-            KEY_HEIGHT + " INTEGER," +
-            KEY_LEVEL + " INTEGER " +
-            ")";
     public static DbHelper mDbHelper = null;
     private Context mContext;
-    private PokemonDto myCurrentPokemon = null;
     private PokemonDto mPokemonDto = null;
     private List<PokemonDto> myCardsList = new ArrayList<PokemonDto>();
     private Runnable setMyCardsListRunnable;
@@ -81,7 +66,6 @@ public class DbHelper extends SQLiteOpenHelper {
 
         // creating required tables
         db.execSQL(CREATE_TABLE_MYCARD);
-        db.execSQL(CREATE_TABLE_MYPOKEMON);
     }
 
     private boolean execInThread(Runnable r) {
@@ -96,7 +80,6 @@ public class DbHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // on upgrade drop older tables
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_MYCARDS);
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_MYPOKEMON);
         // create new tables
         onCreate(db);
     }
@@ -167,35 +150,6 @@ public class DbHelper extends SQLiteOpenHelper {
         return execInThread(runnable);
     }
 
-    public boolean saveMyPokemon(final PokemonDto pokemonDto) {
-
-        myCurrentPokemon = pokemonDto;
-        Runnable runnable = new Runnable() {
-            @Override
-            public void run() {
-                ContentValues values = new ContentValues();
-                values.put(KEY_ID, pokemonDto.getId());
-                values.put(KEY_NAME, pokemonDto.getName());
-                values.put(KEY_HP, pokemonDto.getHp());
-                values.put(KEY_IMAGE_PATH, pokemonDto.getImagePath());
-                values.put(KEY_BITMAP_PATH, pokemonDto.getBitmapPath());
-                values.put(KEY_TYPE, pokemonDto.getType());
-                values.put(KEY_DESC, pokemonDto.getDesc());
-                values.put(KEY_WEIGHT, pokemonDto.getWeight());
-                values.put(KEY_HEIGHT, pokemonDto.getHeight());
-                values.put(KEY_LEVEL, pokemonDto.getLevel());
-
-                SQLiteDatabase db = DbHelper.this.getWritableDatabase();
-                db.delete(TABLE_MYPOKEMON, null, null);
-                db.insert(TABLE_MYPOKEMON, null, values);
-
-                closeDB();
-
-            }
-        };
-        return execInThread(runnable);
-    }
-
     public List<PokemonDto> getAllMyCards() {
         if (myCardsList == null) {
             return setMyCardsList();
@@ -234,37 +188,6 @@ public class DbHelper extends SQLiteOpenHelper {
         };
         execInThread(setMyCardsListRunnable);
         return myCardsList;
-    }
-
-    public PokemonDto getMyPokemon() {
-
-        if (myCurrentPokemon == null) {
-            return setMyCurrentPokemon();
-        } else {
-            return myCurrentPokemon;
-        }
-    }
-
-    public PokemonDto setMyCurrentPokemon() {
-        SQLiteDatabase db = DbHelper.this.getReadableDatabase();
-
-        Cursor c = db.rawQuery("SELECT * FROM " + TABLE_MYPOKEMON, null);
-        // looping through all rows and adding to list
-        if (c.moveToFirst()) {
-            myCurrentPokemon = new PokemonDto();
-            myCurrentPokemon.setId(c.getInt(c.getColumnIndex(KEY_ID)));
-            myCurrentPokemon.setName(c.getString(c.getColumnIndex(KEY_NAME)));
-            myCurrentPokemon.setHp(c.getInt(c.getColumnIndex(KEY_HP)));
-            myCurrentPokemon.setImagePath(c.getString(c.getColumnIndex(KEY_IMAGE_PATH)));
-            myCurrentPokemon.setBitmapPath(c.getString(c.getColumnIndex(KEY_BITMAP_PATH)));
-            myCurrentPokemon.setType(c.getString(c.getColumnIndex(KEY_TYPE)));
-            myCurrentPokemon.setDesc(c.getString(c.getColumnIndex(KEY_DESC)));
-            myCurrentPokemon.setWeight(c.getInt(c.getColumnIndex(KEY_WEIGHT)));
-            myCurrentPokemon.setHeight(c.getInt(c.getColumnIndex(KEY_HEIGHT)));
-            myCurrentPokemon.setLevel(c.getInt(c.getColumnIndex(KEY_LEVEL)));
-        }
-        closeDB();
-        return myCurrentPokemon;
     }
 
     public int deleteCard(long id) {

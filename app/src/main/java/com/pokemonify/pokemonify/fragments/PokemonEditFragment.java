@@ -26,8 +26,6 @@ import com.pokemonify.pokemonify.pokemondatabase.PokemonDto;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 /**
  * Created by gaurav on 25/7/16.
@@ -244,21 +242,4 @@ public class PokemonEditFragment extends Fragment {
         materialDialogCreator.setShouldEdit();
     }
 
-    public void setThisAsCurrentPokemon() {
-        final ProgressDialog progressDialog = new ProgressDialog(getActivity());
-        progressDialog.setTitle("Making this your current pokemon");
-        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        progressDialog.setCancelable(false);
-        progressDialog.show();
-        ExecutorService executorService = Executors.newSingleThreadExecutor();
-        executorService.execute(new Runnable() {
-            @Override
-            public void run() {
-                if (Utils.setMyPokemon(getDtoOfScreen(), getActivity())) {
-                    progressDialog.dismiss();
-                }
-            }
-        });
-        executorService.shutdown();
-    }
 }

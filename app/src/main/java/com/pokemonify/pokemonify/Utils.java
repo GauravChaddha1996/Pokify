@@ -3,7 +3,6 @@ package com.pokemonify.pokemonify;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
@@ -18,54 +17,21 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
 import com.pokemonify.pokemonify.UIComponents.SingleMediaScanner;
-import com.pokemonify.pokemonify.pokemondatabase.DbHelper;
+import com.pokemonify.pokemonify.pokemondatabase.PokemonDatabase;
 import com.pokemonify.pokemonify.pokemondatabase.PokemonDto;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.util.Random;
 
 /**
  * Created by gaurav on 24/7/16.
  */
 public class Utils {
-    public static boolean setMyPokemon(PokemonDto pokemonDto, Context context) {
-        PokemonDto dto = new PokemonDto();
-        dto.setId(131);
-        dto.setName(pokemonDto.getName());
-        dto.setHp(pokemonDto.getHp());
-        dto.setType(pokemonDto.getType());
-        dto.setWeight(pokemonDto.getWeight());
-        dto.setHeight(pokemonDto.getHeight());
-        dto.setDesc(pokemonDto.getDesc());
-        dto.setLevel(pokemonDto.getLevel());
-        dto.setImagePath("-1");
-        OutputStream outStream = null;
-        File file = new File(context.getFilesDir() + File.separator + 131 + ".png");
-        Log.d("file path", file.getAbsolutePath());
-        dto.setBitmapPath(file.getAbsolutePath());
-        if (file.exists()) {
-            file.delete();
-            file = new File(context.getFilesDir() + File.separator + 131 + ".png");
-            Log.e("file exist", "" + file + ",Bitmap= " + file.getAbsolutePath());
-        }
-        try {
-            // make a new bitmap from your file
-            outStream = new FileOutputStream(file);
-            (BitmapFactory.decodeFile(pokemonDto.getBitmapPath())).compress(Bitmap.CompressFormat.PNG, 100, outStream);
-            outStream.flush();
-            outStream.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        Log.e("file", "" + file);
-        return DbHelper.getInstance().saveMyPokemon(dto);
-    }
 
-    public static PokemonDto getMyPokemon(Context context) {
-        return DbHelper.getInstance().getMyPokemon();
+    public static PokemonDto getRandomPokemon() {
+        return PokemonDatabase.getPokemonViaId(Pokemonify.thisTimeRandomId);
     }
 
     public static void hideKeyboard(Activity activity) {

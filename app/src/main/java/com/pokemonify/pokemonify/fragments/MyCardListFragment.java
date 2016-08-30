@@ -69,32 +69,14 @@ public class MyCardListFragment extends Fragment implements CommonAdapter.OnGetV
                 builder.setTitle("Select action");
                 final CommonAdapter<String> commonAdapter = new CommonAdapter<>(MyCardListFragment.this);
                 final List<String> list = new ArrayList<>();
-                list.add("Set as my pokemon");
                 list.add("Delete this card");
                 commonAdapter.setList(list);
                 builder.setAdapter(commonAdapter, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        if (list.get(i).equals("Set as my pokemon")) {
-                            progressDialog2 = new ProgressDialog(getActivity());
-                            progressDialog2.setTitle("Making this your current pokemon");
-                            progressDialog2.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-                            progressDialog2.setCancelable(false);
-                            progressDialog2.show();
-                            ExecutorService executorService = Executors.newSingleThreadExecutor();
-                            executorService.execute(new Runnable() {
-                                @Override
-                                public void run() {
-                                    if (Utils.setMyPokemon(mPokemonListAdapter.getPokeList().get(position)
-                                            , getActivity())) {
-                                        progressDialog2.dismiss();
-                                    }
-                                }
-                            });
-                            executorService.shutdown();
-                        } else {
+                        if (list.get(i).equals("Delete this card")) {
                             progressDialog = new ProgressDialog(getActivity());
-                            progressDialog.setTitle("Making this your current pokemon");
+                            progressDialog.setTitle("Deleting the card");
                             progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
                             progressDialog.setCancelable(false);
                             progressDialog.show();

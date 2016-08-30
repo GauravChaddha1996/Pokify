@@ -7,11 +7,6 @@
         android:title="Edit"
         app:showAsAction="always"/>
     <item
-        android:id="@+id/action_mycard_make_current_pokemon"
-        android:icon="@drawable/create"
-        android:showAsAction="always"
-        android:title="Make this my pokemon"/>
-    <item
         android:id="@+id/action_mycard_delete"
         android:icon="@drawable/delete"
         android:title="Delete"

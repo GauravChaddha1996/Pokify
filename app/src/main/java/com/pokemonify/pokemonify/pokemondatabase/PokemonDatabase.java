@@ -4,9 +4,6 @@ import android.content.Context;
 
 import com.pokemonify.pokemonify.R;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Created by gaurav on 24/7/16.
  */
@@ -40,25 +37,11 @@ public class PokemonDatabase {
     }
 
     public static PokemonDto getPokemonViaId(long id) {
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 150; i++) {
             if (id == sPokemonIds[i]) {
                 return sPokemonDtos[i];
             }
         }
-        return null;
-    }
-
-    public static List<PokemonDto> getPokemonViaAdjective(String s) {
-        List<PokemonDto> pokemonDtoList = new ArrayList<>();
-        String[] arr;
-        for (PokemonDto p : sPokemonDtos) {
-            arr = p.getAdjectives().split(",");
-            for (String tmp : arr) {
-                if (tmp.equals(s)) {
-                    pokemonDtoList.add(p);
-                }
-            }
-        }
-        return pokemonDtoList;
+        return sPokemonDtos[24];
     }
 }

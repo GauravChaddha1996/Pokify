@@ -1,13 +1,9 @@
 package com.pokemonify.pokemonify.fragments;
 
-import android.app.AlertDialog;
-import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -62,34 +58,6 @@ public class PokemonListFragment extends Fragment {
         mPokemonListAdapter = new PokemonListAdapter(getActivity(), nameList);
         mRecyclerView.setAdapter(mPokemonListAdapter);
         mRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
-        ItemClickSupport.addTo(mRecyclerView).setOnItemLongClickListener(new ItemClickSupport.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClicked(RecyclerView recyclerView, final int position, View v) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                builder.setTitle("Set " + mPokemonListAdapter.getPokeList().get(position).getName() + " as my pokemon?");
-                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-
-                    }
-                });
-                builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        ProgressDialog progressDialog = new ProgressDialog(getActivity());
-                        progressDialog.setTitle("Making this your current pokemon");
-                        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-                        progressDialog.setCancelable(false);
-                        progressDialog.show();
-                        if (Utils.setMyPokemon(mPokemonListAdapter.getPokeList().get(position), getActivity())) {
-                            progressDialog.dismiss();
-                        }
-                    }
-                });
-                builder.show();
-                return true;
-            }
-        });
         ItemClickSupport.addTo(mRecyclerView).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
             @Override
             public void onItemClicked(RecyclerView recyclerView, int position, View v) {
@@ -109,13 +77,9 @@ public class PokemonListFragment extends Fragment {
     public void search(String query) {
         mSeachedText.setText(query);
         Set<PokemonDto> newSet = new HashSet<>();
-        String[] strings = query.toString().split(",");
-        for (String s : strings) {
-            for (PokemonDto p : nameList) {
-                if (p.getName().toLowerCase().contains(s.toLowerCase())) {
-                    Log.d("asjhas", p.getName());
-                    newSet.add(p);
-                }
+        for (PokemonDto p : nameList) {
+            if (p.getName().toLowerCase().contains(query.toLowerCase())) {
+                newSet.add(p);
             }
         }
         mPokemonListAdapter.setPokeList(new ArrayList<PokemonDto>(newSet));

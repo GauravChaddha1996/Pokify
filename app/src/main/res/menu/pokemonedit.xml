@@ -13,10 +13,5 @@
         android:title="Share"
         android:icon="@drawable/share"
         app:showAsAction="always"/>
-    <item
-        android:id="@+id/action_editfrag_make_current_pokemon"
-        android:showAsAction="always"
-        android:icon="@drawable/create"
-        android:title="Make this my pokemon"/>
 
 </menu>

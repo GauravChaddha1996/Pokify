@@ -361,17 +361,4 @@ public class MyCardDetailFragment extends Fragment {
         return materialDialogCreator.getShouldEdit();
     }
 
-    public void setThisAsCurrentPokemon() {
-        startProgressDialog("Making this your current pokemon");
-        ExecutorService executorService = Executors.newSingleThreadExecutor();
-        executorService.execute(new Runnable() {
-            @Override
-            public void run() {
-                if (Utils.setMyPokemon(getDtoOfScreenData(), getActivity())) {
-                    progressDialog.dismiss();
-                }
-            }
-        });
-        executorService.shutdown();
-    }
 }
