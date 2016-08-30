@@ -20,6 +20,7 @@ import com.pokemonify.pokemonify.pokemondatabase.PokemonDatabase;
 import com.pokemonify.pokemonify.pokemondatabase.PokemonDto;
 import com.pokemonify.pokemonify.recyclerviewcomponents.ItemClickSupport;
 import com.pokemonify.pokemonify.recyclerviewcomponents.PokemonListAdapter;
+import com.pokemonify.pokemonify.recyclerviewcomponents.RecyclerViewEmptyExtdener;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -30,7 +31,8 @@ import java.util.Set;
 
 public class PokemonListFragment extends Fragment {
     PokemonListAdapter mPokemonListAdapter;
-    RecyclerView mRecyclerView;
+    RecyclerViewEmptyExtdener mRecyclerView;
+    TextView mEmptyView;
     List<PokemonDto> nameList;
     TextView mSeachedText;
 
@@ -48,7 +50,14 @@ public class PokemonListFragment extends Fragment {
 
     private void initViews(View v) {
         mSeachedText = (TextView) v.findViewById(R.id.searchedItem);
-        mRecyclerView = (RecyclerView) v.findViewById(R.id.pokemonRecyclerView);
+        mEmptyView = (TextView) v.findViewById(R.id.emptyRecyclerView);
+        mEmptyView.setText("No pokemon found :( \n Search again !!");
+        mRecyclerView = (RecyclerViewEmptyExtdener) v.findViewById(R.id.pokemonRecyclerView);
+        mRecyclerView.setEmptyView(mEmptyView);
+        if(nameList.isEmpty()) {
+            mEmptyView.setVisibility(View.VISIBLE);
+            mRecyclerView.setVisibility(View.GONE);
+        }
         mPokemonListAdapter = new PokemonListAdapter(getActivity(), nameList);
         mRecyclerView.setAdapter(mPokemonListAdapter);
         mRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));

@@ -23,6 +23,7 @@ import com.pokemonify.pokemonify.pokemondatabase.DbHelper;
 import com.pokemonify.pokemonify.pokemondatabase.PokemonDto;
 import com.pokemonify.pokemonify.recyclerviewcomponents.ItemClickSupport;
 import com.pokemonify.pokemonify.recyclerviewcomponents.PokemonListAdapter;
+import com.pokemonify.pokemonify.recyclerviewcomponents.RecyclerViewEmptyExtdener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +33,8 @@ import java.util.concurrent.Executors;
 
 public class MyCardListFragment extends Fragment implements CommonAdapter.OnGetViewListener<String> {
     PokemonListAdapter mPokemonListAdapter;
-    RecyclerView mRecyclerView;
+    RecyclerViewEmptyExtdener mRecyclerView;
+    TextView mEmptyView;
     List<PokemonDto> nameList;
     ProgressDialog progressDialog;
     ProgressDialog progressDialog2;
@@ -49,7 +51,14 @@ public class MyCardListFragment extends Fragment implements CommonAdapter.OnGetV
     }
 
     private void initViews(View v) {
-        mRecyclerView = (RecyclerView) v.findViewById(R.id.pokemonRecyclerView);
+        mRecyclerView = (RecyclerViewEmptyExtdener) v.findViewById(R.id.pokemonRecyclerView);
+        mEmptyView= (TextView) v.findViewById(R.id.emptyRecyclerView);
+        mEmptyView.setText("No Cards :( \n Click on create card to make a new one :)");
+        mRecyclerView.setEmptyView(mEmptyView);
+        if(nameList.isEmpty()) {
+            mEmptyView.setVisibility(View.VISIBLE);
+            mRecyclerView.setVisibility(View.GONE);
+        }
         mPokemonListAdapter = new PokemonListAdapter(getActivity(), nameList);
         mRecyclerView.setAdapter(mPokemonListAdapter);
         mRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
