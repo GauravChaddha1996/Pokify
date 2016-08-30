@@ -356,6 +356,7 @@ public class MainActivity extends AppCompatActivity
                     .setGuidelines(CropImageView.Guidelines.ON)
                     .setAspectRatio(4, 3)
                     .setFixAspectRatio(true)
+                    .setMaxCropResultSize(800,600)
                     .setOutputCompressQuality(30)
                     .start(this);
         }

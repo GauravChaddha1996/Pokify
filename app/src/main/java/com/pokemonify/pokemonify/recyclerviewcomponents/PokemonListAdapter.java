@@ -3,7 +3,6 @@ package com.pokemonify.pokemonify.recyclerviewcomponents;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.media.ThumbnailUtils;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -49,9 +48,9 @@ public class PokemonListAdapter extends RecyclerView.Adapter<PokemonListAdapter.
         holder.name.setText(pokeList.get(position).getName());
         if (pokeList.get(position).getImagePath().equals("-1")) {
             if (pokeList.get(position).getId() % 2 == 0) {
-                pokeImage = ThumbnailUtils.extractThumbnail(BitmapFactory.decodeFile(pokeList.get(position).getBitmapPath()),250,250);
+                pokeImage = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(pokeList.get(position).getBitmapPath()),320,250,false);
             } else {
-                pokeImage = ThumbnailUtils.extractThumbnail(BitmapFactory.decodeFile(pokeList.get(position).getBitmapPath()),300, 300);
+                pokeImage = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(pokeList.get(position).getBitmapPath()),360,285,false);
             }
         } else {
             pokeImage = BitmapFactory.decodeResource(mContext.getResources(), mContext.getResources()
