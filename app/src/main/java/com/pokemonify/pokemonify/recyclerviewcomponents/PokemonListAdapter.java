@@ -49,9 +49,9 @@ public class PokemonListAdapter extends RecyclerView.Adapter<PokemonListAdapter.
         holder.name.setText(pokeList.get(position).getName());
         if (pokeList.get(position).getImagePath().equals("-1")) {
             if (pokeList.get(position).getId() % 2 == 0) {
-                pokeImage = ThumbnailUtils.extractThumbnail(BitmapFactory.decodeFile(pokeList.get(position).getBitmapPath()), 350, 350);
+                pokeImage = ThumbnailUtils.extractThumbnail(BitmapFactory.decodeFile(pokeList.get(position).getBitmapPath()),250,250);
             } else {
-                pokeImage = ThumbnailUtils.extractThumbnail(BitmapFactory.decodeFile(pokeList.get(position).getBitmapPath()), 500, 500);
+                pokeImage = ThumbnailUtils.extractThumbnail(BitmapFactory.decodeFile(pokeList.get(position).getBitmapPath()),300, 300);
             }
         } else {
             pokeImage = BitmapFactory.decodeResource(mContext.getResources(), mContext.getResources()
