@@ -11,13 +11,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.pokemonify.pokemonify.MainActivity;
 import com.pokemonify.pokemonify.R;
 import com.pokemonify.pokemonify.Utils;
 import com.pokemonify.pokemonify.pokemondatabase.PokemonDto;
-
-import java.io.File;
 
 public class MainFragment extends Fragment {
 
@@ -62,9 +61,16 @@ public class MainFragment extends Fragment {
         mMyPokemonImage.getLayoutParams().height = (int) (Utils.getDisplayHeight(getActivity()) * 0.40);
         Bitmap bitmap = null;
         if (currentMyPokemon.getImagePath().equals("-1")) {
-            Log.d("file path stored is", getActivity().getFilesDir() + File.separator + currentMyPokemon.getBitmapPath());
+            Log.d("file path stored is",currentMyPokemon.getBitmapPath());
             bitmap = BitmapFactory.decodeFile(currentMyPokemon.getBitmapPath());
-            bitmap = Utils.getRoundedCornerBitmap(bitmap);
+            if(bitmap != null) {
+                bitmap = Utils.getRoundedCornerBitmap(bitmap);
+            }else {
+                Toast.makeText(getActivity(),"Something went wrong.Please set your pokemon again." +
+                        "We're really sorry.",Toast.LENGTH_LONG).show();
+                bitmap =Utils.getRoundedCornerBitmap(BitmapFactory.decodeResource(getResources(), getResources()
+                        .getIdentifier("exeggutor", "drawable", getActivity().getPackageName())));
+            }
         } else {
             bitmap = BitmapFactory.decodeResource(getResources(), getResources()
                     .getIdentifier(currentMyPokemon.getImagePath(), "drawable", getActivity().getPackageName()));
@@ -98,6 +104,7 @@ public class MainFragment extends Fragment {
         if (currentMyPokemon == null) {
             currentMyPokemon = new PokemonDto(24, "pikachu", 35, "pikachu", "Electric", "Whenever Pikachu comes" +
                     " across something new, it blasts it with a jolt of electricity.", "", 60, 4, 112);
+            Utils.setMyPokemon(currentMyPokemon,getActivity());
         }
     }
 }

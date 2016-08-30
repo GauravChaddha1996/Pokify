@@ -40,9 +40,10 @@
                 android:id="@+id/emptyRecyclerView"
                 android:visibility="gone"
                 android:gravity="center"
-                android:textSize="40sp"
+                android:textStyle="bold"
+                android:textSize="48sp"
                 android:layout_centerInParent="true"
-                android:textColor="#FFD81D28"/>
+                android:textColor="#FFB71C1C"/>
         </RelativeLayout>
     </RelativeLayout>
 
