@@ -75,29 +75,42 @@ public class MyCardListFragment extends Fragment implements CommonAdapter.OnGetV
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         if (list.get(i).equals("Delete this card")) {
-                            progressDialog = new ProgressDialog(getActivity());
-                            progressDialog.setTitle("Deleting the card");
-                            progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-                            progressDialog.setCancelable(false);
-                            progressDialog.show();
-
-                            ExecutorService executorService = Executors.newSingleThreadExecutor();
-                            executorService.execute(new Runnable() {
+                            AlertDialog.Builder builder=new AlertDialog.Builder(getActivity());
+                            builder.setTitle("Are you sure??");
+                            builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                                 @Override
-                                public void run() {
-                                    progressDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    progressDialog = new ProgressDialog(getActivity());
+                                    progressDialog.setTitle("Deleting the card");
+                                    progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                                    progressDialog.setCancelable(false);
+                                    progressDialog.show();
+                                    ExecutorService executorService = Executors.newSingleThreadExecutor();
+                                    executorService.execute(new Runnable() {
                                         @Override
-                                        public void onDismiss(DialogInterface dialogInterface) {
-                                            dismissListener();
+                                        public void run() {
+                                            progressDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                                                @Override
+                                                public void onDismiss(DialogInterface dialogInterface) {
+                                                    dismissListener();
+                                                }
+                                            });
+                                            temp = DbHelper.getInstance().deleteCard(mPokemonListAdapter.
+                                                    getPokeList().get(position).getId());
+                                            Log.d("TAG", "temp" + temp + "");
+                                            progressDialog.dismiss();
                                         }
                                     });
-                                    temp = DbHelper.getInstance().deleteCard(mPokemonListAdapter.
-                                            getPokeList().get(position).getId());
-                                    Log.d("TAG", "temp" + temp + "");
-                                    progressDialog.dismiss();
+                                    executorService.shutdown();
                                 }
                             });
-                            executorService.shutdown();
+                            builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+
+                                }
+                            });
+                            builder.show();
                         }
                     }
                 });
@@ -126,8 +139,6 @@ public class MyCardListFragment extends Fragment implements CommonAdapter.OnGetV
             Toast.makeText(getActivity(), "Oops we couldn't delete the pokemon.", Toast.LENGTH_SHORT).show();
         } else {
             mPokemonListAdapter.notifyDataSetChanged();
-            /*mPokemonListAdapter.setPokeList(DbHelper.getInstance().getAllMyCards());
-            mPokemonListAdapter.notifyDataSetChanged();*/
         }
     }
 
@@ -143,13 +154,8 @@ public class MyCardListFragment extends Fragment implements CommonAdapter.OnGetV
         } else {
             myDialogViewHolder = (MyDialogViewHolder) convertView.getTag();
         }
-        if (item.equals("Set as my pokemon")) {
-            myDialogViewHolder.mTextView.setText("Set as my pokemon");
-            myDialogViewHolder.mImageView.setImageDrawable(getResources().getDrawable(R.drawable.create));
-        } else {
-            myDialogViewHolder.mTextView.setText("Delete this card");
-            myDialogViewHolder.mImageView.setImageDrawable(getResources().getDrawable(R.drawable.delete));
-        }
+        myDialogViewHolder.mTextView.setText("Delete this card");
+        myDialogViewHolder.mImageView.setImageDrawable(getResources().getDrawable(R.drawable.delete));
         return convertView;
     }
 

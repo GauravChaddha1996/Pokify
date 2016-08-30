@@ -6,8 +6,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
@@ -206,41 +204,68 @@ public class MyCardDetailFragment extends Fragment {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 startProgressDialog("Saving your pokemon");
-                Handler handler = new Handler() {
+                ExecutorService executorService = Executors.newSingleThreadExecutor();
+                executorService.execute(new Runnable() {
                     @Override
-                    public void handleMessage(Message msg) {
-                        Log.d("TAG", "time start:" + System.currentTimeMillis() + "");
-                        if (DbHelper.getInstance().saveMyCard(getDtoOfScreenData())) {
-                            toggleShouldEdit();
-                            getActivity().supportInvalidateOptionsMenu();
-                            progressDialog.dismiss();
-                            if (fragment != null) {
-                                ((MainActivity) getActivity()).changeFrag(fragment);
+                    public void run() {
+                        ExecutorService executorService = Executors.newSingleThreadExecutor();
+                        executorService.execute(new Runnable() {
+                            @Override
+                            public void run() {
+                                Log.d("TAG", "time start:" + System.currentTimeMillis() + "");
+                                if (DbHelper.getInstance().saveMyCard(getDtoOfScreenData())) {
+                                    toggleShouldEdit();
+                                    getActivity().supportInvalidateOptionsMenu();
+                                    progressDialog.dismiss();
+                                    getActivity().runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            if (fragment != null) {
+                                                ((MainActivity) getActivity()).changeFrag(fragment);
+                                            }
+                                        }
+                                    });
+                                }
                             }
-                        }
+                        });
+                        executorService.shutdown();
                     }
-                };
-                handler.sendEmptyMessageDelayed(0, 800);
+                });
+                executorService.shutdown();
             }
         });
         builder.setNegativeButton("Existing", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 startProgressDialog("Saving your pokemon");
-                Handler handler = new Handler() {
+                ExecutorService executorService = Executors.newSingleThreadExecutor();
+                executorService.execute(new Runnable() {
                     @Override
-                    public void handleMessage(Message msg) {
-                        if (DbHelper.getInstance().updateMyCard(getDtoOfScreenDataWithId(mPokemonDto.getId()))) {
-                            toggleShouldEdit();
-                            getActivity().supportInvalidateOptionsMenu();
-                            progressDialog.dismiss();
-                            if (fragment != null) {
-                                ((MainActivity) getActivity()).doFragTransaction(fragment, 0);
+                    public void run() {
+                        ExecutorService executorService = Executors.newSingleThreadExecutor();
+                        executorService.execute(new Runnable() {
+                            @Override
+                            public void run() {
+                                if (DbHelper.getInstance().updateMyCard(getDtoOfScreenDataWithId(mPokemonDto.getId()))) {
+                                    toggleShouldEdit();
+                                    getActivity().supportInvalidateOptionsMenu();
+                                    progressDialog.dismiss();
+                                    getActivity().runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            if (fragment != null) {
+                                                ((MainActivity) getActivity()).doFragTransaction(fragment, 0);
+                                            }
+                                        }
+                                    });
+                                }
+
                             }
-                        }
+                        });
+                        executorService.shutdown();
                     }
-                };
-                handler.sendEmptyMessageDelayed(0, 800);
+                });
+                executorService.shutdown();
             }
         });
         builder.setNeutralButton("Don't Save", new DialogInterface.OnClickListener() {
@@ -307,24 +332,48 @@ public class MyCardDetailFragment extends Fragment {
     }
 
     public void deleteCard() {
-        startProgressDialog("Deleting the pokemon");
-
-        ExecutorService executorService = Executors.newSingleThreadExecutor();
-        executorService.execute(new Runnable() {
+        android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(getActivity());
+        builder.setTitle("Are you sure??");
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
-            public void run() {
-                progressDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            public void onClick(DialogInterface dialogInterface, int i) {
+                progressDialog = new ProgressDialog(getActivity());
+                progressDialog.setTitle("Deleting the card");
+                progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                progressDialog.setCancelable(false);
+                progressDialog.show();
+                ExecutorService executorService = Executors.newSingleThreadExecutor();
+                executorService.execute(new Runnable() {
                     @Override
-                    public void onDismiss(DialogInterface dialogInterface) {
-                        dismissListener();
+                    public void run() {
+                        ExecutorService executorService = Executors.newSingleThreadExecutor();
+                        executorService.execute(new Runnable() {
+                            @Override
+                            public void run() {
+                                progressDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                                    @Override
+                                    public void onDismiss(DialogInterface dialogInterface) {
+                                        dismissListener();
+                                    }
+                                });
+                                temp = DbHelper.getInstance().deleteCard(mPokemonDto.getId());
+                                Log.d("TAG", "temp" + temp + "");
+                                progressDialog.dismiss();
+                            }
+                        });
+                        executorService.shutdown();
                     }
                 });
-                temp = DbHelper.getInstance().deleteCard(mPokemonDto.getId());
-                Log.d("TAG", "temp" + temp + "");
-                progressDialog.dismiss();
+                executorService.shutdown();
             }
         });
-        executorService.shutdown();
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+        builder.show();
 
     }
 

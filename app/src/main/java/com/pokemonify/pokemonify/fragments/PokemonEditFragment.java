@@ -5,8 +5,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -26,6 +24,8 @@ import com.pokemonify.pokemonify.pokemondatabase.PokemonDto;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * Created by gaurav on 25/7/16.
@@ -184,21 +184,33 @@ public class PokemonEditFragment extends Fragment {
         progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         progressDialog.setCancelable(false);
         progressDialog.show();
-        Handler handler = new Handler() {
+        ExecutorService executorService = Executors.newSingleThreadExecutor();
+        executorService.execute(new Runnable() {
             @Override
-            public void handleMessage(Message msg) {
-                Log.d("TAG", "time start:" + System.currentTimeMillis() + "");
-                if (DbHelper.getInstance().saveMyCard(getDtoOfScreen())) {
-                    progressDialog.dismiss();
-                    toggleShouldEdit();
-                    if (fragment != null) {
-                        ((MainActivity) getActivity()).doFragTransaction(fragment, 0);
-                    }
+            public void run() {
+                ExecutorService executorService = Executors.newSingleThreadExecutor();
+                executorService.execute(new Runnable() {
+                    @Override
+                    public void run() {
+                        Log.d("TAG", "time start:" + System.currentTimeMillis() + "");
+                        if (DbHelper.getInstance().saveMyCard(getDtoOfScreen())) {
+                            progressDialog.dismiss();
+                            getActivity().runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    if (fragment != null) {
+                                        ((MainActivity) getActivity()).doFragTransaction(fragment, 0);
+                                    }
+                                }
+                            });
+                        }
 
-                }
+                    }
+                });
+                executorService.shutdown();
             }
-        };
-        handler.sendEmptyMessageDelayed(0, 800);
+        });
+        executorService.shutdown();
     }
 
     private PokemonDto getDtoOfScreen() {
@@ -236,10 +248,6 @@ public class PokemonEditFragment extends Fragment {
         }
         Log.e("file", "" + file);
         return file;
-    }
-
-    public void toggleShouldEdit() {
-        materialDialogCreator.setShouldEdit();
     }
 
 }
