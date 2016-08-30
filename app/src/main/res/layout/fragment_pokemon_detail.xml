@@ -56,6 +56,7 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="Mouse"
+                    android:layout_margin="1dp"
                     android:textSize="20dp"/>
 
                 <TextView
@@ -63,6 +64,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:layout_margin="1dp"
                     android:gravity="center"
                     android:text="150 g"
                     android:textSize="20dp"/>
@@ -72,6 +74,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:layout_margin="1dp"
                     android:gravity="center"
                     android:text="300 cm"
                     android:textSize="20dp"/>
