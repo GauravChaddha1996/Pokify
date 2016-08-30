@@ -5,6 +5,8 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -178,21 +180,27 @@ public class PokemonEditFragment extends Fragment {
         ((MainActivity) getActivity()).shareImage(savedScreen);
     }
 
-    public void saveMyCard(Fragment fragment) {
+    public void saveMyCard(final Fragment fragment) {
         progressDialog = new ProgressDialog(getActivity());
         progressDialog.setTitle("Saving the pokemon");
         progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         progressDialog.setCancelable(false);
         progressDialog.show();
-        Log.d("TAG", "time start:" + System.currentTimeMillis() + "");
-        if (DbHelper.getInstance().saveMyCard(getDtoOfScreen())) {
-            progressDialog.dismiss();
-            toggleShouldEdit();
-            if (fragment != null) {
-                ((MainActivity) getActivity()).doFragTransaction(fragment,0);
-            }
+        Handler handler=new Handler(){
+            @Override
+            public void handleMessage(Message msg) {
+                Log.d("TAG", "time start:" + System.currentTimeMillis() + "");
+                if (DbHelper.getInstance().saveMyCard(getDtoOfScreen())) {
+                    progressDialog.dismiss();
+                    toggleShouldEdit();
+                    if (fragment != null) {
+                        ((MainActivity) getActivity()).doFragTransaction(fragment,0);
+                    }
 
-        }
+                }
+            }
+        };
+        handler.sendEmptyMessageDelayed(0,800);
     }
 
     private PokemonDto getDtoOfScreen() {

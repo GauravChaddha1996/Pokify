@@ -6,6 +6,8 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
@@ -185,12 +187,12 @@ public class MyCardDetailFragment extends Fragment {
 
 
     private void setMyScreenBackGround() {
-        Log.d("Type:",pokemonType.getText().toString().toLowerCase());
-        if(Utils.isTypePresent(pokemonType.getText().toString().toLowerCase())) {
+        Log.d("Type:", pokemonType.getText().toString().toLowerCase());
+        if (Utils.isTypePresent(pokemonType.getText().toString().toLowerCase())) {
             detailScreen.setBackground(new BitmapDrawable(BitmapFactory.decodeResource(getResources(),
-                    getResources().getIdentifier(pokemonType.getText().toString().toLowerCase(),"drawable",
+                    getResources().getIdentifier(pokemonType.getText().toString().toLowerCase(), "drawable",
                             getActivity().getPackageName()))));
-        }else{
+        } else {
             detailScreen.setBackground(getResources().getDrawable(R.drawable.standardbackground));
         }
     }
@@ -216,36 +218,48 @@ public class MyCardDetailFragment extends Fragment {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 startProgressDialog("Saving your pokemon");
-                Log.d("TAG", "time start:" + System.currentTimeMillis() + "");
-                if (DbHelper.getInstance().saveMyCard(getDtoOfScreenData())) {
-                    progressDialog.dismiss();
-                    toggleShouldEdit();
-                    getActivity().supportInvalidateOptionsMenu();
-                    if (fragment != null) {
-                        ((MainActivity) getActivity()).changeFrag(fragment);
+                Handler handler = new Handler() {
+                    @Override
+                    public void handleMessage(Message msg) {
+                        Log.d("TAG", "time start:" + System.currentTimeMillis() + "");
+                        if (DbHelper.getInstance().saveMyCard(getDtoOfScreenData())) {
+                            toggleShouldEdit();
+                            getActivity().supportInvalidateOptionsMenu();
+                            progressDialog.dismiss();
+                            if (fragment != null) {
+                                ((MainActivity) getActivity()).changeFrag(fragment);
+                            }
+                        }
                     }
-                }
+                };
+                handler.sendEmptyMessageDelayed(0, 800);
             }
         });
         builder.setNegativeButton("Existing", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 startProgressDialog("Saving your pokemon");
-                if (DbHelper.getInstance().updateMyCard(getDtoOfScreenDataWithId(mPokemonDto.getId()))) {
-                    progressDialog.dismiss();
-                    toggleShouldEdit();
-                    getActivity().supportInvalidateOptionsMenu();
-                    if (fragment != null) {
-                        ((MainActivity) getActivity()).doFragTransaction(fragment,0);
+                Handler handler = new Handler() {
+                    @Override
+                    public void handleMessage(Message msg) {
+                        if (DbHelper.getInstance().updateMyCard(getDtoOfScreenDataWithId(mPokemonDto.getId()))) {
+                            toggleShouldEdit();
+                            getActivity().supportInvalidateOptionsMenu();
+                            progressDialog.dismiss();
+                            if (fragment != null) {
+                                ((MainActivity) getActivity()).doFragTransaction(fragment, 0);
+                            }
+                        }
                     }
-                }
+                };
+                handler.sendEmptyMessageDelayed(0, 800);
             }
         });
         builder.setNeutralButton("Don't Save", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 if (fragment != null) {
-                    ((MainActivity) getActivity()).doFragTransaction(fragment,0);
+                    ((MainActivity) getActivity()).doFragTransaction(fragment, 0);
                 }
             }
         });
@@ -329,9 +343,9 @@ public class MyCardDetailFragment extends Fragment {
     private void dismissListener() {
         if (temp == 0) {
             Toast.makeText(getActivity(), "Oops we couldn't delete the pokemon.", Toast.LENGTH_SHORT).show();
-            ((MainActivity)getActivity()).doFragTransaction(new MyCardListFragment(),0);
+            ((MainActivity) getActivity()).doFragTransaction(new MyCardListFragment(), 0);
         } else {
-            ((MainActivity)getActivity()).doFragTransaction(new MyCardListFragment(),0);
+            ((MainActivity) getActivity()).doFragTransaction(new MyCardListFragment(), 0);
         }
     }
 
