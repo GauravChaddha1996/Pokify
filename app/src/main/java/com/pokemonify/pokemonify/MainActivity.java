@@ -73,42 +73,11 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         askPermissions();
-        setToolbar();
-        setNavigationView();
-        setSearch();
-        currentFragment = new MainFragment();
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.mainFrameLayout, currentFragment);
-        fragmentTransaction.commitAllowingStateLoss();
-        supportInvalidateOptionsMenu();
-    }
 
-    private void askPermissions() {
-        if (ContextCompat.checkSelfPermission(MainActivity.this,
-                Manifest.permission.READ_EXTERNAL_STORAGE)
-                != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(MainActivity.this,
-                    new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, READ_WRITE);
-        }
-        if (ContextCompat.checkSelfPermission(MainActivity.this,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                != PackageManager.PERMISSION_GRANTED) {
-        }
-    }
-
-    private void setToolbar() {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-    }
-
-    @Override
-    public void setTitle(CharSequence title) {
-        getSupportActionBar().setTitle(title);
-    }
-
-    private void setNavigationView() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -119,10 +88,6 @@ public class MainActivity extends AppCompatActivity
         navigationView.setItemTextAppearance(R.style.textStyleArchRival);
         navigationView.setItemTextColor(ColorStateList.valueOf(Color.WHITE));
         navigationView.setNavigationItemSelectedListener(this);
-    }
-
-    public void setSearch() {
-
         searchView = (MaterialSearchView) findViewById(R.id.search_view);
         searchView.setSuggestions(getResources().getStringArray(R.array.pokemon_name));
         searchView.setOnQueryTextListener(new MaterialSearchView.OnQueryTextListener() {
@@ -147,7 +112,7 @@ public class MainActivity extends AppCompatActivity
         searchView.setOnSearchViewListener(new MaterialSearchView.SearchViewListener() {
             @Override
             public void onSearchViewShown() {
-                if(currentFragment instanceof MyCardListFragment) {
+                if (currentFragment instanceof MyCardListFragment) {
                     searchView.setSuggestions(new String[]{});
                     supportInvalidateOptionsMenu();
                 } else if (!(currentFragment instanceof PokemonListFragment)) {
@@ -163,6 +128,30 @@ public class MainActivity extends AppCompatActivity
             public void onSearchViewClosed() {
             }
         });
+        currentFragment = new MainFragment();
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.mainFrameLayout, currentFragment);
+        fragmentTransaction.commitAllowingStateLoss();
+        supportInvalidateOptionsMenu();
+    }
+
+    private void askPermissions() {
+        if (ContextCompat.checkSelfPermission(MainActivity.this,
+                Manifest.permission.READ_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(MainActivity.this,
+                    new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, READ_WRITE);
+        }
+        if (ContextCompat.checkSelfPermission(MainActivity.this,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED) {
+        }
+    }
+
+    @Override
+    public void setTitle(CharSequence title) {
+        getSupportActionBar().setTitle(title);
     }
 
     public void search(String query) {
@@ -170,9 +159,9 @@ public class MainActivity extends AppCompatActivity
             searchString = query;
             PokemonListFragment pokemonListFragment = (PokemonListFragment) currentFragment;
             pokemonListFragment.search(query);
-        } else if(currentFragment instanceof MyCardListFragment){
+        } else if (currentFragment instanceof MyCardListFragment) {
             searchString = query;
-            ((MyCardListFragment)currentFragment).search(searchString);
+            ((MyCardListFragment) currentFragment).search(searchString);
         }
     }
 
@@ -183,11 +172,11 @@ public class MainActivity extends AppCompatActivity
     public void changeFrag(Fragment fragment) {
         if (currentFragment instanceof PokemonEditFragment) {
             checkAndSaveCard(fragment);
-        } else if(currentFragment instanceof PokemonDetailFragment) {
-            PokemonListFragment pokemonListFragment=new PokemonListFragment();
-            pokemonListFragment.setPreScrollName(((PokemonDetailFragment)currentFragment).getPokemonDto().getName());
-            doFragTransaction(pokemonListFragment,0);
-        }else if (currentFragment instanceof MyCardDetailFragment) {
+        } else if (currentFragment instanceof PokemonDetailFragment) {
+            PokemonListFragment pokemonListFragment = new PokemonListFragment();
+            pokemonListFragment.setPreScrollName(((PokemonDetailFragment) currentFragment).getPokemonDto().getName());
+            doFragTransaction(pokemonListFragment, 0);
+        } else if (currentFragment instanceof MyCardDetailFragment) {
             MyCardDetailFragment myCardDetailFragment = (MyCardDetailFragment) currentFragment;
             if (myCardDetailFragment.getEditing()) {
                 ((MyCardDetailFragment) currentFragment).saveAndToggleAndChange(fragment);
@@ -365,7 +354,7 @@ public class MainActivity extends AppCompatActivity
                 Bitmap bitmap = null;
                 try {
                     bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), result.getUri());
-                    bitmap= Bitmap.createScaledBitmap(bitmap,900,700,false);
+                    bitmap = Bitmap.createScaledBitmap(bitmap, 900, 700, false);
                     if (currentFragment instanceof PokemonEditFragment) {
                         ((PokemonEditFragment) currentFragment).setPokemonImage(Utils.getRoundedCornerBitmap(bitmap));
                     } else {

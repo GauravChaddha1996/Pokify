@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="wrap_content"
+                android:background="@android:color/holo_red_dark"
                 android:layout_height="wrap_content">
 
-    <RelativeLayout
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/aboutus"/>
+    <!--<RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
@@ -137,7 +143,7 @@
             android:textColor="@color/colorPrimary"
             android:textSize="21dp"/>
 
-    </RelativeLayout>
+    </RelativeLayout>-->
 
 
 </RelativeLayout>

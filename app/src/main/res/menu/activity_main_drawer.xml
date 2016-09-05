@@ -25,7 +25,7 @@
         <item
             android:id="@+id/nav_about"
             android:checkable="false"
-            android:title="About"/>
+            android:title="About Us"/>
         <item
             android:id="@+id/nav_rate_us"
             android:checkable="false"
