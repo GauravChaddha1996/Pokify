@@ -1,4 +1,4 @@
-package com.pokemonify.pokemonify.fragments;
+package com.pokify.pokify.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -9,14 +9,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.pokemonify.pokemonify.MainActivity;
-import com.pokemonify.pokemonify.R;
-import com.pokemonify.pokemonify.Utils;
-import com.pokemonify.pokemonify.pokemondatabase.PokemonDatabase;
-import com.pokemonify.pokemonify.pokemondatabase.PokemonDto;
-import com.pokemonify.pokemonify.recyclerviewcomponents.ItemClickSupport;
-import com.pokemonify.pokemonify.recyclerviewcomponents.PokemonListAdapter;
-import com.pokemonify.pokemonify.recyclerviewcomponents.RecyclerViewEmptyExtdener;
+import com.pokify.pokify.MainActivity;
+import com.pokify.pokify.R;
+import com.pokify.pokify.Utils;
+import com.pokify.pokify.pokemondatabase.PokemonDatabase;
+import com.pokify.pokify.pokemondatabase.PokemonDto;
+import com.pokify.pokify.recyclerviewcomponents.ItemClickSupport;
+import com.pokify.pokify.recyclerviewcomponents.PokemonListAdapter;
+import com.pokify.pokify.recyclerviewcomponents.RecyclerViewEmptyExtdener;
 
 import java.util.ArrayList;
 import java.util.Arrays;

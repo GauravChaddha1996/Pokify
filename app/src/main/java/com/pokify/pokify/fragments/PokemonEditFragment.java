@@ -1,4 +1,4 @@
-package com.pokemonify.pokemonify.fragments;
+package com.pokify.pokify.fragments;
 
 import android.app.ProgressDialog;
 import android.graphics.Bitmap;
@@ -14,12 +14,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.pokemonify.pokemonify.MainActivity;
-import com.pokemonify.pokemonify.R;
-import com.pokemonify.pokemonify.UIComponents.MaterialDialogCreator;
-import com.pokemonify.pokemonify.Utils;
-import com.pokemonify.pokemonify.pokemondatabase.DbHelper;
-import com.pokemonify.pokemonify.pokemondatabase.PokemonDto;
+import com.pokify.pokify.MainActivity;
+import com.pokify.pokify.R;
+import com.pokify.pokify.UIComponents.MaterialDialogCreator;
+import com.pokify.pokify.Utils;
+import com.pokify.pokify.pokemondatabase.DbHelper;
+import com.pokify.pokify.pokemondatabase.PokemonDto;
 
 import java.io.File;
 import java.io.FileOutputStream;

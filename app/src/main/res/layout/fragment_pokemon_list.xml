@@ -28,7 +28,7 @@
                     android:visibility="gone"
                     android:textSize="25sp"/>
 
-                <com.pokemonify.pokemonify.recyclerviewcomponents.RecyclerViewEmptyExtdener
+                <com.pokify.pokify.recyclerviewcomponents.RecyclerViewEmptyExtdener
                     android:id="@+id/pokemonRecyclerView"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"

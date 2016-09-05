@@ -1,4 +1,4 @@
-package com.pokemonify.pokemonify;
+package com.pokify.pokify;
 
 import android.app.Activity;
 import android.content.Context;
@@ -16,9 +16,9 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
-import com.pokemonify.pokemonify.UIComponents.SingleMediaScanner;
-import com.pokemonify.pokemonify.pokemondatabase.PokemonDatabase;
-import com.pokemonify.pokemonify.pokemondatabase.PokemonDto;
+import com.pokify.pokify.UIComponents.SingleMediaScanner;
+import com.pokify.pokify.pokemondatabase.PokemonDatabase;
+import com.pokify.pokify.pokemondatabase.PokemonDto;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -31,7 +31,7 @@ import java.util.Random;
 public class Utils {
 
     public static PokemonDto getRandomPokemon() {
-        return PokemonDatabase.getPokemonViaId(Pokemonify.thisTimeRandomId);
+        return PokemonDatabase.getPokemonViaId(Pokify.thisTimeRandomId);
     }
 
     public static void hideKeyboard(Activity activity) {

@@ -1,4 +1,4 @@
-package com.pokemonify.pokemonify.pokemondatabase;
+package com.pokify.pokify.pokemondatabase;
 
 import java.io.Serializable;
 

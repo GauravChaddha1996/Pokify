@@ -1,17 +1,17 @@
-package com.pokemonify.pokemonify;
+package com.pokify.pokify;
 
 import android.app.Application;
 
-import com.pokemonify.pokemonify.UIComponents.FontOverride;
-import com.pokemonify.pokemonify.pokemondatabase.DbHelper;
-import com.pokemonify.pokemonify.pokemondatabase.PokemonDatabase;
+import com.pokify.pokify.UIComponents.FontOverride;
+import com.pokify.pokify.pokemondatabase.DbHelper;
+import com.pokify.pokify.pokemondatabase.PokemonDatabase;
 
 import java.util.Random;
 
 /**
  * Created by gaurav on 24/7/16.
  */
-public class Pokemonify extends Application {
+public class Pokify extends Application {
     public static int thisTimeRandomId=24;
     @Override
     public void onCreate() {

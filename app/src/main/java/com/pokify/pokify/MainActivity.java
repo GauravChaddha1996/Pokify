@@ -1,4 +1,4 @@
-package com.pokemonify.pokemonify;
+package com.pokify.pokify;
 
 import android.Manifest;
 import android.content.ActivityNotFoundException;
@@ -37,14 +37,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
-import com.pokemonify.pokemonify.UIComponents.CommonAdapter;
-import com.pokemonify.pokemonify.fragments.MainFragment;
-import com.pokemonify.pokemonify.fragments.MyCardDetailFragment;
-import com.pokemonify.pokemonify.fragments.MyCardListFragment;
-import com.pokemonify.pokemonify.fragments.PokemonDetailFragment;
-import com.pokemonify.pokemonify.fragments.PokemonEditFragment;
-import com.pokemonify.pokemonify.fragments.PokemonListFragment;
-import com.pokemonify.pokemonify.pokemondatabase.PokemonDto;
+import com.pokify.pokify.UIComponents.CommonAdapter;
+import com.pokify.pokify.fragments.MainFragment;
+import com.pokify.pokify.fragments.MyCardDetailFragment;
+import com.pokify.pokify.fragments.MyCardListFragment;
+import com.pokify.pokify.fragments.PokemonDetailFragment;
+import com.pokify.pokify.fragments.PokemonEditFragment;
+import com.pokify.pokify.fragments.PokemonListFragment;
+import com.pokify.pokify.pokemondatabase.PokemonDto;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 

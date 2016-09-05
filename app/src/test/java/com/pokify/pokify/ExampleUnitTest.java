@@ -1,4 +1,4 @@
-package com.pokemonify.pokemonify;
+package com.pokify.pokify;
 
 import org.junit.Test;
 
