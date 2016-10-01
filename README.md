@@ -2,7 +2,7 @@
 A Pokémon-themed Card Maker and Pokédex App
 
 <p align="center">
-<a href="https://github.com/GauravChaddha1996/Pokify/blob/master/gitfeature1.jpg"><img src="/gitfeature1.jpg" height="473" width="357"></a>
+<a href="https://github.com/GauravChaddha1996/Pokify/blob/master/gitfeature1.jpg"><img src="/gitfeature1.jpg" height="521" width="333"></a>
 </p>
 
 **Pokify** is a cool Pokémon-Themed Card Maker that lets you make new Pokémon cards or edit the first 
@@ -29,10 +29,10 @@ We made this app on the peak popularity of Pokémon go mobile app to make our fr
 childhood cartoons and also making funny card memes of them :)
 We also learnt a lot of stuff while making this.
 Things we used or learned:
-* We used scraped data from [PokeApi](http://www.pokeapi.co/) about the Pokémons.
-* We used the images from (insert link here).
+* We used scraped data from [PokeApi](http://www.pokeapi.co/) about the Pokémonsn under fair use.
+* We used the pokemon images under fair use from [Pokestadium.com](http://www.pokestadium.com/).
 * Implementation of custom fonts and Action Bar titles for Views and Activities.
-* Backgrounds was made by tiru(insert  link here) while icons are from [Flaticon](http://www.flaticon.com/).
+* Backgrounds was made by [Saurav Tiru](https://github.com/anonyxcali) while icons are from [Flaticon](http://www.flaticon.com/).
 * It uses a SQLlite Db to store data about the Pokémon cards.
 * We learned a lot about Android Db management,cropping images,saving to gallery,sharing it and oh of course
 python scripts that can be found under the folder scripts here.
@@ -48,9 +48,9 @@ intellectual property for a fan-made nonprofit educational/learning reference is
 that the application is significantly deprecated without said property included.
 No copyright or trademark infringement is intended in using Pokémon content on Pokify.
 
-The backgrounds used for this application were designed,created, and distributed for use by tiru(link him here).
+The backgrounds used for this application were designed,created, and distributed for use by [Saurav Tiru](https://github.com/anonyxcali).
 All app icons were consumed from the site [Flaticon](http://www.flaticon.com/).
 
 ##Special Thanks
-To the PokeApi guys,great job for the API and a special thanks to Tanmay gupta(insert link here) for helping 
+To the PokeApi guys,great job for the API and a special thanks to [Tanmay gupta](https://github.com/tanmaytat11) for helping 
 us scrape the API to act as DB data for educational/learning purposes.
