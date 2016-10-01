@@ -1,4 +1,4 @@
-package com.pokemonify.pokemonify.UIComponents;
+package com.pokify.pokify.UIComponents;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -12,7 +12,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.pokemonify.pokemonify.R;
+import com.pokify.pokify.R;
 
 import java.util.ArrayList;
 import java.util.List;

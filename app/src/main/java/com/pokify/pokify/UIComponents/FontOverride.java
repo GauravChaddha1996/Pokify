@@ -1,4 +1,4 @@
-package com.pokemonify.pokemonify.UIComponents;
+package com.pokify.pokify.UIComponents;
 
 /**
  * Created by gaurav on 28/8/16.

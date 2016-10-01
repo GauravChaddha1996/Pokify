@@ -1,4 +1,4 @@
-package com.pokemonify.pokemonify.recyclerviewcomponents;
+package com.pokify.pokify.recyclerviewcomponents;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -10,8 +10,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.pokemonify.pokemonify.R;
-import com.pokemonify.pokemonify.pokemondatabase.PokemonDto;
+import com.pokify.pokify.R;
+import com.pokify.pokify.pokemondatabase.PokemonDto;
 
 import java.util.List;
 

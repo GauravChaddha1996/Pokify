@@ -1,4 +1,4 @@
-package com.pokemonify.pokemonify.recyclerviewcomponents;
+package com.pokify.pokify.recyclerviewcomponents;
 
 import android.content.Context;
 import android.support.annotation.Nullable;

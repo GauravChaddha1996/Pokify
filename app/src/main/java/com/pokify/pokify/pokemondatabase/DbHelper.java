@@ -1,4 +1,4 @@
-package com.pokemonify.pokemonify.pokemondatabase;
+package com.pokify.pokify.pokemondatabase;
 
 import android.content.ContentValues;
 import android.content.Context;

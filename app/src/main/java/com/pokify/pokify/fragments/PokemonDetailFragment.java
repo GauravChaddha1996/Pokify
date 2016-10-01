@@ -1,4 +1,4 @@
-package com.pokemonify.pokemonify.fragments;
+package com.pokify.pokify.fragments;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -12,11 +12,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.pokemonify.pokemonify.MainActivity;
-import com.pokemonify.pokemonify.R;
-import com.pokemonify.pokemonify.UIComponents.MaterialDialogCreator;
-import com.pokemonify.pokemonify.Utils;
-import com.pokemonify.pokemonify.pokemondatabase.PokemonDto;
+import com.pokify.pokify.MainActivity;
+import com.pokify.pokify.R;
+import com.pokify.pokify.UIComponents.MaterialDialogCreator;
+import com.pokify.pokify.Utils;
+import com.pokify.pokify.pokemondatabase.PokemonDto;
 
 /**
  * Created by gaurav on 25/7/16.

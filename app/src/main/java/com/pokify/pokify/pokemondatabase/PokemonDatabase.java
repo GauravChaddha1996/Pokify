@@ -1,8 +1,8 @@
-package com.pokemonify.pokemonify.pokemondatabase;
+package com.pokify.pokify.pokemondatabase;
 
 import android.content.Context;
 
-import com.pokemonify.pokemonify.R;
+import com.pokify.pokify.R;
 
 /**
  * Created by gaurav on 24/7/16.
