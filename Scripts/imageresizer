@@ -1,0 +1,25 @@
+ype "help", "copyright", "credits" or "license" for more information.
+>>> from PIL import Image
+>>> import os
+>>> imgx=os.listdir('.')
+>>> for i in imgx:
+...  print i
+... 
+type_fighting.png
+type_ghost.png
+type_fire.png
+type_bug.png
+type_dragon.png
+type_water.png
+type_psychic.png
+type_electric.png
+type_flying.png
+type_grass.png
+type_ground.png
+type_poison.png
+type_fairy.png
+>>> for i in imgx:
+...  img=Image.open(i)
+...  new_img=img.resize((56,56))
+...  new_img.save(str(i),'png')
+
