@@ -1,8 +1,7 @@
-ype "help", "copyright", "credits" or "license" for more information.
 >>> from PIL import Image
 >>> import os
 >>> imgx=os.listdir('.')
->>> for i in imgx:
+for i in imgx:
 ...  print i
 ... 
 type_fighting.png
