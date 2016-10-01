@@ -19,17 +19,9 @@
             android:checkable="false"
             android:title="My cards"/>
         <item
-            android:id="@+id/nav_how_to"
-            android:checkable="false"
-            android:title="How to?"/>
-        <item
             android:id="@+id/nav_about"
             android:checkable="false"
             android:title="About Us"/>
-        <item
-            android:id="@+id/nav_rate_us"
-            android:checkable="false"
-            android:title="Rate us"/>
     </group>
 
 </menu>
