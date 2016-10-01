@@ -1,6 +1,10 @@
 # Pokify
 A Pokémon-themed Card Maker and Pokédex App
-###Put Image here
+
+<p align="center">
+<a href="https://github.com/GauravChaddha1996/Pokify/blob/master/gitfeature1.jpg"><img src="/gitfeature1.jpg" height="473" width="357"></a>
+</p>
+
 **Pokify** is a cool Pokémon-Themed Card Maker that lets you make new Pokémon cards or edit the first 
 generation Pokémons.You can also save the cards you make and share them with your friends and have a good time and 
 have some memorable meme moments.
