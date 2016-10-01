@@ -11,7 +11,7 @@ have some memorable meme moments.
 
 Everytime you open the app it gives you a new Pokémon for you to see and increase your Poke-knowledge.
 The user interface of the app is intuitive and Pokémon fans will love using this app.
-Grab your Apk file here(insert link here)
+Grab your Apk file [here](https://github.com/GauravChaddha1996/Pokify/blob/master/app-release.apk?raw=true).
 
 ## Features
 * First Generation Pokémons are available.
