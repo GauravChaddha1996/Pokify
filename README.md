@@ -24,7 +24,7 @@ Grab your Apk file [here](https://github.com/GauravChaddha1996/Pokify/blob/maste
 
 
 
-##Developer notes
+## Developer notes
 We made this app on the peak popularity of Pokémon go mobile app to make our friends learn more about our 
 childhood cartoons and also making funny card memes of them :)
 We also learnt a lot of stuff while making this.
@@ -37,10 +37,10 @@ Things we used or learned:
 * We learned a lot about Android Db management,cropping images,saving to gallery,sharing it and oh of course
 python scripts that can be found under the folder scripts here.
 
-##Clone Guide
+## Clone Guide
 To open this project in Android Studio simply clone this no extra json or download are required.
 
-##Legal Disclaimer
+## Legal Disclaimer
 This application includes data, images, and terms from the Pokémon trademark. 
 This is all the intellectual property of Nintendo, Creatures Inc., and GAME FREAK inc. and is 
 protected by various copyrights and trademarks. The developer believes that the use of this 
@@ -51,6 +51,6 @@ No copyright or trademark infringement is intended in using Pokémon content on 
 The backgrounds used for this application were designed,created, and distributed for use by [Saurav Tiru](https://github.com/anonyxcali).
 All app icons were consumed from the site [Flaticon](http://www.flaticon.com/).
 
-##Special Thanks
+## Special Thanks
 To the PokeApi guys,great job for the API and a special thanks to [Tanmay gupta](https://github.com/tanmaytat11) for helping 
 us scrape the API to act as DB data for educational/learning purposes.
